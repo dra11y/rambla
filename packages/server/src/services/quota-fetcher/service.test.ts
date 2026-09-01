@@ -841,28 +841,40 @@ describe("real provider usage fetchers", () => {
     fetchApi = mockFetch(
       new Map([
         [
-          "https://api.z.ai/api/biz/subscription/list",
+          "https://api.z.ai/api/monitor/usage/quota/limit",
           () =>
             jsonResponse({
-              data: [
-                {
-                  productName: "GLM Coding Max",
-                  status: "VALID",
-                  purchaseTime: "2026-01-12 16:55:13",
-                  valid: "2026-02-12 16:55:13-2026-03-12 16:55:13",
-                },
-              ],
+              data: {
+                level: "max",
+                limits: [
+                  {
+                    type: "CREDIT_LIMIT",
+                    unit: 3,
+                    number: 5,
+                    percentage: 40.5,
+                    nextResetTime: 1799000000000,
+                  },
+                  {
+                    type: "TOKENS_LIMIT",
+                    unit: 6,
+                    number: 1,
+                    percentage: 52.0,
+                  },
+                ],
+              },
             }),
         ],
       ]),
     );
 
-    const zai = findProvider(await service().listUsage(), "zai");
+    const zai = findProvider(await service().listUsage(), "glm-acp-agent");
 
     expect(zai).toMatchObject({
       status: "available",
-      planLabel: "GLM Coding Max",
-      details: expect.arrayContaining([{ id: "status", label: "Status", value: "VALID" }]),
+      windows: expect.arrayContaining([
+        expect.objectContaining({ id: "five_hour", label: "5-hour", usedPct: 40.5 }),
+        expect.objectContaining({ id: "weekly", label: "Weekly", usedPct: 52.0 }),
+      ]),
     });
   });
 
