@@ -1,0 +1,58 @@
+name: Merge upstream
+
+# Daily merge-only sync from getpaseo/paseo. The merge must be conflict-free
+# and the server must build, or nothing is pushed. Never rebases.
+
+on:
+  schedule:
+    # 08:00 America/Denver (14:00 UTC); GitHub schedules are approximate.
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: merge-upstream
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  ONNXRUNTIME_NODE_INSTALL: skip
+
+jobs:
+  merge-upstream:
+    name: merge upstream
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Merge upstream/main
+        id: merge
+        run: |
+          git config user.name "rambla-merge-bot"
+          git config user.email "rambla-merge-bot@users.noreply.github.com"
+          git remote add upstream https://github.com/getpaseo/paseo.git
+          git fetch upstream main
+
+          if ! git merge upstream/main --no-edit; then
+          {
+            echo "::error::Upstream merge conflicts — resolve locally with 'just merge-upstream'. Conflicted files:"
+            git diff --name-only --diff-filter=U
+          } | tee /dev/stderr
+            git merge --abort
+            exit 1
+          fi
+
+      - name: Build server (gate before push)
+        run: |
+          npm ci
+          npm run build:server
+
+      - name: Push
+        run: git push origin main
