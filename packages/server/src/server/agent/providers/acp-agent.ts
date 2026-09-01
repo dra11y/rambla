@@ -2841,7 +2841,15 @@ export class ACPAgentSession implements AgentSession, ACPClient {
   }
 
   private handleUsageUpdate(update: UsageUpdate): void {
-    void update;
+    const usage: AgentUsage = {
+      contextWindowUsedTokens: update.used,
+      contextWindowMaxTokens: update.size,
+    };
+    this.pushEvent({
+      type: "usage_updated",
+      provider: this.provider,
+      usage,
+    });
   }
 
   private handlePromptResponse(response: PromptResponse, turnId: string): void {
