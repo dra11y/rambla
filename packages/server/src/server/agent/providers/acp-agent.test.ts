@@ -2651,6 +2651,69 @@ describe("ACPAgentSession", () => {
     ]);
   });
 
+  test("labels whole-file write_file calls as Write with old/new for the diff", async () => {
+    const session = createSession();
+    const events: Array<{ type: string; item?: { type: string } }> = [];
+    asInternals<ACPSessionInternals>(session).sessionId = "session-1";
+    session.subscribe((event) => events.push(event as { type: string; item?: { type: string } }));
+
+    await session.sessionUpdate({
+      sessionId: "session-1",
+      update: {
+        sessionUpdate: "tool_call",
+        toolCallId: "tw1",
+        title: "Write file: a.ts",
+        kind: "edit",
+        status: "completed",
+        rawInput: { path: "a.ts", content: "new full content", overwrite: true },
+        content: [
+          {
+            type: "diff",
+            path: "/tmp/a.ts",
+            oldText: "old full content",
+            newText: "new full content",
+          },
+        ],
+      } as unknown as SessionUpdate,
+    });
+
+    const item = events.find((e) => e.item?.type === "tool_call")?.item as unknown as {
+      name: string;
+      detail: { type: string; filePath: string; oldString?: string; newString?: string };
+    };
+    expect(item.detail.type).toBe("write");
+    expect(item.detail.filePath).toBe("a.ts");
+    expect(item.detail.oldString).toBe("old full content");
+    expect(item.detail.newString).toBe("new full content");
+  });
+
+  test("labels surgical edit_file calls as Edit", async () => {
+    const session = createSession();
+    const events: Array<{ type: string; item?: { type: string } }> = [];
+    asInternals<ACPSessionInternals>(session).sessionId = "session-1";
+    session.subscribe((event) => events.push(event as { type: string; item?: { type: string } }));
+
+    await session.sessionUpdate({
+      sessionId: "session-1",
+      update: {
+        sessionUpdate: "tool_call",
+        toolCallId: "te1",
+        title: "Edit file: b.ts",
+        kind: "edit",
+        status: "completed",
+        rawInput: { path: "b.ts", old_string: "old", new_string: "new" },
+        content: [{ type: "diff", path: "/tmp/b.ts", oldText: "old", newText: "new" }],
+      } as unknown as SessionUpdate,
+    });
+
+    const item = events.find((e) => e.item?.type === "tool_call")?.item as unknown as {
+      detail: { type: string; oldString?: string; newString?: string };
+    };
+    expect(item.detail.type).toBe("edit");
+    expect(item.detail.oldString).toBe("old");
+    expect(item.detail.newString).toBe("new");
+  });
+
   test("assigns one fallback ID per contiguous assistant message", async () => {
     const session = createSession();
     const assistantMessages: Array<{ text: string; messageId?: string }> = [];

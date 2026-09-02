@@ -223,6 +223,10 @@ export type ToolCallDetail =
       type: "write";
       filePath: string;
       content?: string;
+      /** Present when the agent reported what the file replaced (overwrite). */
+      oldString?: string;
+      newString?: string;
+      unifiedDiff?: string;
     }
   | {
       type: "search";

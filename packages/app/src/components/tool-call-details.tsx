@@ -665,6 +665,36 @@ function buildPaseoUnknownSections(
   return sections.map((section) => <PaseoDetailSection key={section.title} section={section} />);
 }
 
+function buildWriteDetailSections(
+  detail: Extract<ToolCallDetail, { type: "write" }>,
+  ds: DetailStyles,
+): ReactNode[] {
+  if (detail.oldString !== undefined || detail.newString !== undefined) {
+    return [
+      <EditDetailSection
+        key="write"
+        diffLines={highlightDiffLines(
+          buildLineDiff(detail.oldString ?? "", detail.newString ?? ""),
+          detail.filePath,
+        )}
+        ds={ds}
+      />,
+    ];
+  }
+  return [
+    <View key="write" style={ds.sectionFillStyle}>
+      {detail.content ? (
+        <ScrollableTextSection
+          content={detail.content}
+          ds={ds}
+          wrapInSectionFill={false}
+          filePath={detail.filePath}
+        />
+      ) : null}
+    </View>,
+  ];
+}
+
 function buildDetailSections(
   toolName: string | undefined,
   detail: ToolCallDetail | undefined,
@@ -705,18 +735,7 @@ function buildDetailSections(
     return [<EditDetailSection key="edit" diffLines={diffLines} ds={ds} />];
   }
   if (detail.type === "write") {
-    return [
-      <View key="write" style={ds.sectionFillStyle}>
-        {detail.content ? (
-          <ScrollableTextSection
-            content={detail.content}
-            ds={ds}
-            wrapInSectionFill={false}
-            filePath={detail.filePath}
-          />
-        ) : null}
-      </View>,
-    ];
+    return buildWriteDetailSections(detail, ds);
   }
   if (detail.type === "read") {
     if (!detail.content) return [];

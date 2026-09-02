@@ -3348,6 +3348,13 @@ function mapToolDetail(
       return buildReadToolDetail(context);
     case "edit":
     case "delete":
+      // ACP has no "write" kind, so whole-file writes are declared as edits
+      // by every agent. Refine by input shape — a write carries the full new
+      // content and no old/new pair — mirroring what the Claude provider
+      // derives from tool names (Write vs Edit).
+      if (isWholeFileWriteShape(context.rawInput)) {
+        return buildWriteToolDetail(context);
+      }
       return buildEditToolDetail(context);
     case "search":
       return buildSearchAcpToolDetail(context);
@@ -3395,6 +3402,30 @@ function buildEditToolDetail(context: MapToolDetailContext): ToolCallDetail {
       snapshot.kind === "delete"
         ? ""
         : (diffContent?.newText ?? readString(rawInput, ["newText", "newString"])),
+    unifiedDiff: textContent ?? undefined,
+  };
+}
+
+function isWholeFileWriteShape(rawInput: Record<string, unknown> | null): boolean {
+  return (
+    typeof rawInput?.["content"] === "string" &&
+    rawInput["old_string"] === undefined &&
+    rawInput["new_string"] === undefined
+  );
+}
+
+function buildWriteToolDetail(context: MapToolDetailContext): ToolCallDetail {
+  const { snapshot, firstLocation, textContent, diffContent, rawInput } = context;
+  return {
+    type: "write",
+    filePath: firstLocation ?? readString(rawInput, ["path", "filePath", "file"]) ?? snapshot.title,
+    content: diffContent?.newText ?? readString(rawInput, ["content"]),
+    // Overwrites carry what they replaced so the UI can render a diff;
+    // creations have no oldText and render as additions.
+    ...(diffContent?.oldText !== undefined && diffContent?.oldText !== null
+      ? { oldString: diffContent.oldText }
+      : {}),
+    ...(diffContent?.newText !== undefined ? { newString: diffContent.newText } : {}),
     unifiedDiff: textContent ?? undefined,
   };
 }
