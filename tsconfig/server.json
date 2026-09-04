@@ -1,0 +1,34 @@
+{
+  "extends": "../packages/server/tsconfig.server.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "../node_modules/.cache/rambla/server.tsbuildinfo"
+  },
+  "include": [
+    "../packages/server/src/server/**/*",
+    "../packages/server/src/services/**/*",
+    "../packages/server/src/terminal/**/*",
+    "../packages/server/src/utils/**/*",
+    "../packages/server/src/executable-resolution/**/*"
+  ],
+  "exclude": [
+    "../packages/server/node_modules",
+    "../packages/server/dist",
+    "../packages/server/src/server/**/test-utils/**",
+    "../packages/server/src/server/daemon-e2e/**",
+    "../packages/server/src/server/**/*.e2e.ts",
+    "../packages/server/src/server/**/*.e2e.tsx",
+    "../packages/server/src/**/*.test.ts",
+    "../packages/server/src/**/*.test.tsx",
+    "../packages/server/src/**/*.spec.ts",
+    "../packages/server/src/**/*.spec.tsx"
+  ],
+  "references": [
+    {
+      "path": "protocol.json"
+    },
+    {
+      "path": "client.json"
+    }
+  ]
+}

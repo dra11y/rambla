@@ -1,0 +1,7 @@
+{
+  "extends": "../packages/highlight/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "../node_modules/.cache/rambla/highlight.tsbuildinfo"
+  }
+}

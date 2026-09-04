@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "protocol.json" },
+    { "path": "client.json" },
+    { "path": "highlight.json" },
+    { "path": "relay.json" },
+    { "path": "plugin.json" },
+    { "path": "server.json" },
+    { "path": "server-scripts.json" },
+    { "path": "cli.json" },
+    { "path": "desktop.json" }
+  ]
+}

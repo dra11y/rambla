@@ -1,0 +1,15 @@
+{
+  "extends": "../packages/plugin/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "../node_modules/.cache/rambla/plugin.tsbuildinfo"
+  },
+  "references": [
+    {
+      "path": "protocol.json"
+    },
+    {
+      "path": "client.json"
+    }
+  ]
+}

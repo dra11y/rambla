@@ -1,0 +1,27 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "../../node_modules/.cache/rambla/desktop.tsbuildinfo",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "outDir": "../packages/desktop/dist",
+    "rootDir": "../packages/desktop/src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true
+  },
+  "include": ["../packages/desktop/src/**/*"],
+  "exclude": [
+    "../packages/desktop/node_modules",
+    "../packages/desktop/dist",
+    "../packages/desktop/src/**/*.test.ts"
+  ]
+}

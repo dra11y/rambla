@@ -1,0 +1,19 @@
+{
+  "extends": "../packages/server/tsconfig.scripts.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "../node_modules/.cache/rambla/server-scripts.tsbuildinfo",
+    "declaration": true
+  },
+  "include": [
+    "../packages/server/scripts/supervisor-entrypoint.ts",
+    "../packages/server/scripts/dev-runner.ts",
+    "../packages/server/scripts/supervisor.ts",
+    "../packages/server/scripts/supervisor-log-config.ts"
+  ],
+  "references": [
+    {
+      "path": "server.json"
+    }
+  ]
+}

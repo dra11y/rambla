@@ -1,0 +1,7 @@
+{
+  "extends": "../packages/relay/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "../node_modules/.cache/rambla/relay.tsbuildinfo"
+  }
+}
