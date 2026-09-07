@@ -192,6 +192,9 @@ const MutableRelayConfigSchema = z
   .passthrough();
 
 export const PluginIdSchema = z.string().regex(/^[a-z][a-z0-9-]*$/);
+// Semver validation belongs at the manifest/runtime boundary, not on the wire.
+export const PluginRequirementsSchema = z.object({ paseo: z.string().optional() });
+export type PluginRequirements = z.infer<typeof PluginRequirementsSchema>;
 
 export const DirectoryPluginSourceSchema = z
   .object({
@@ -5874,6 +5877,7 @@ export const GetProvidersSnapshotResponseMessageSchema = z.object({
     entries: z.array(ProviderSnapshotEntrySchema),
     compactSnapshot: CompactProviderSnapshotSchema.optional(),
     snapshotHash: z.string().optional(),
+    fetchedAt: z.record(z.string(), z.string()).optional(),
     notModified: z.boolean().optional(),
     generatedAt: z.string(),
     requestId: z.string(),
@@ -5888,6 +5892,7 @@ export const ProvidersSnapshotUpdateMessageSchema = z.object({
     entries: z.array(ProviderSnapshotEntrySchema),
     compactSnapshot: CompactProviderSnapshotSchema.optional(),
     snapshotHash: z.string().optional(),
+    fetchedAt: z.record(z.string(), z.string()).optional(),
     generatedAt: z.string(),
   }),
 });
@@ -6260,6 +6265,7 @@ export const PluginCatalogGetResponseSchema = z.object({
       z.object({
         id: PluginIdSchema,
         clientBundle: z.string(),
+        requirements: PluginRequirementsSchema.optional(),
       }),
     ),
   }),
@@ -7100,6 +7106,7 @@ export const WSHelloMessageSchema = z.object({
       [CLIENT_CAPS.providerSubagents]: z.boolean().optional(),
       [CLIENT_CAPS.projectUpdates]: z.boolean().optional(),
       [CLIENT_CAPS.compactProviderSnapshots]: z.boolean().optional(),
+      [CLIENT_CAPS.providerSnapshotReferences]: z.boolean().optional(),
       [CLIENT_CAPS.timelineReplacementInvalidation]: z.boolean().optional(),
       [CLIENT_CAPS.timelineNotifications]: z.boolean().optional(),
       [CLIENT_CAPS.browserHost]: BrowserAutomationHostCapabilitySchema.optional(),
