@@ -81,7 +81,7 @@ install:
         echo "RestartSec=5"
         echo ""
         echo "[Install]"
-        echo "WantedBy=default.target"
+        echo "WantedBy=graphical-session.target"
     } > "$unit"
 
     systemctl --user daemon-reload
