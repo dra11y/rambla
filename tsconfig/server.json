@@ -1,8 +1,7 @@
 {
   "extends": "../packages/server/tsconfig.server.json",
   "compilerOptions": {
-    "composite": true,
-    "tsBuildInfoFile": "../node_modules/.cache/rambla/server.tsbuildinfo"
+    "composite": true
   },
   "include": [
     "../packages/server/src/server/**/*",

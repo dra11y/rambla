@@ -2,6 +2,5 @@
   "extends": "../packages/protocol/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "tsBuildInfoFile": "../node_modules/.cache/rambla/protocol.tsbuildinfo"
   }
 }

@@ -2,7 +2,6 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "tsBuildInfoFile": "../../node_modules/.cache/rambla/desktop.tsbuildinfo",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ES2022",

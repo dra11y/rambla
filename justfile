@@ -1,8 +1,12 @@
+set unstable
+
+unit := home_dir() / ".config/systemd/user/rambla.service"
+
 # List recipes.
 @list:
     just --list
 
-# Incremental build.
+# Build rambla
 [script]
 build:
     set -euo pipefail
@@ -14,17 +18,21 @@ build:
     eval "$(mise env -s bash)"
     ./tsconfig/build.sh
 
+# Uninstall systemd unit.
+uninstall: stop systemctl-reload
+    systemctl --user disable rambla.service
+    rm -f "{{unit}}"
+
 # Clean build outputs.
 [script]
-clean:
+clean: stop
     set -euo pipefail
-    rm -rf packages/*/dist tsconfig/*.tsbuildinfo
+    rm -rf **/node_modules
+    rm -rf packages/desktop/release packages/*/dist
+    find . -name '*.tsbuildinfo' -not -path './node_modules/*' -delete
     echo "cleaned: all dist outputs and build state removed"
 
-# Check whether CI on getrambla/rambla is green. On failure: the error lines in red,
-# plus (yellow) any upstream workflow changes GitHub refused to let the
-# auto-merge push. Intentionally no fix, no retry — upstream CI changes should
-# break the merge loudly until reviewed by hand.
+# Check whether CI is green.
 [script]
 ci-status:
     set -euo pipefail
@@ -75,53 +83,30 @@ ci-status:
         echo "${OFF}"
     fi
 
-# Install dependencies, build, and install the rambla user service.
+start:
+    systemctl --user start rambla
+
+stop:
+    systemctl --user stop rambla || true
+
+systemctl-reload:
+    systemctl --user daemon-reload
+
+restart:
+    systemctl --user enable rambla
+    systemctl --user restart rambla
+
+status:
+    systemctl --user status rambla
+
 [script]
-install:
-    set -euo pipefail
-    if ! command -v mise >/dev/null 2>&1; then
-        echo "error: 'mise' is required (it pins the Node version this repo builds with)."
-        echo "  install: https://mise.jdx.dev/installing-mise.html  (then: mise install)"
-        exit 1
-    fi
+install-daemon: && install-service
     eval "$(mise env -s bash)"
+    npm run build:server
 
-    if ! command -v systemctl >/dev/null 2>&1; then
-        if [ "$(uname)" = "Darwin" ]; then
-            echo ""
-            echo "macOS: dependencies install and the build runs, but the launchd"
-            echo "user service is not wired up yet (TODO). For now, start the"
-            echo "daemon manually:"
-            echo ""
-            echo "    ./packages/cli/bin/paseo daemon start"
-            echo ""
-        else
-            echo "error: systemd not found — this install path currently supports Linux only." >&2
-        fi
-        exit 0
-    fi
-
-    have_systemd=$(command -v systemctl >/dev/null 2>&1 && echo yes || echo no)
-
-    # npm ci only when node_modules is missing or the lockfile changed.
-    lock_hash=$(sha256sum package-lock.json | cut -d' ' -f1)
-    if [ ! -d node_modules ] || ! [ -f .dev/lock-hash ] || [ "$(cat .dev/lock-hash)" != "$lock_hash" ]; then
-        echo "[install] installing dependencies (missing or lockfile changed)"
-        npm ci
-        mkdir -p .dev && printf '%s' "$lock_hash" > .dev/lock-hash
-    else
-        echo "[install] dependencies up to date, skipping npm ci"
-    fi
-
-    ./tsconfig/build.sh
-
-    if [ "$have_systemd" != "yes" ]; then
-        echo "[install] done (build only — no service installed on this platform)"
-        exit 0
-    fi
-
-    unit="$HOME/.config/systemd/user/rambla.service"
-    mkdir -p "$(dirname "$unit")"
+[script]
+install-service: systemctl-reload restart
+    mkdir -p "$(dirname "{{unit}}")"
     {
         echo "[Unit]"
         echo "Description=Rambla daemon"
@@ -129,46 +114,72 @@ install:
         echo "[Service]"
         echo "Type=simple"
         echo "WorkingDirectory={{justfile_dir()}}"
-        echo "Environment=\"PASEO_LOG_LEVEL=info\""
         echo "ExecStart={{justfile_dir()}}/packages/cli/bin/paseo start --foreground"
         echo "Restart=always"
         echo "RestartSec=5"
         echo ""
         echo "[Install]"
         echo "WantedBy=graphical-session.target"
-    } > "$unit"
+    } > "{{unit}}"
 
-    systemctl --user daemon-reload
-    systemctl --user enable rambla
-    if systemctl --user list-unit-files 2>/dev/null | grep -q "^paseo\.service"; then
-        echo "[install] legacy 'paseo' service found — disabling it so it cannot fight rambla for the port"
-        systemctl --user disable --now paseo 2>/dev/null || true
-    fi
-    systemctl --user restart rambla
-    sleep 2
-    if systemctl --user is-active --quiet rambla; then
-        echo "[install] rambla.service installed and running."
-        echo "  logs:      just log"
-        echo "  rebuild:   just restart"
-    else
-        echo "error: rambla.service did not come up. Check:" >&2
-        echo "  journalctl --user -u rambla -n 50 --no-pager" >&2
-        exit 1
-    fi
 
-# Rebuild and restart the daemon.
+# # Incremental - Broken - Install dependencies, build, install rambla service unit.
+# [script]
+# install:
+#     set -euo pipefail
+#     if ! command -v mise >/dev/null 2>&1; then
+#         echo "error: 'mise' is required (it pins the Node version this repo builds with)."
+#         echo "  install: https://mise.jdx.dev/installing-mise.html  (then: mise install)"
+#         exit 1
+#     fi
+#     eval "$(mise env -s bash)"
+
+#     npm install
+#     ./tsconfig/build.sh
+
+#     if [ "$have_systemd" != "yes" ]; then
+#         echo "[install] done (build only — no service installed on this platform)"
+#         exit 0
+#     fi
+
+#     systemctl --user restart rambla
+#     sleep 2
+#     if systemctl --user is-active --quiet rambla; then
+#         echo "[install] rambla.service installed and running."
+#         echo "  logs:      just log"
+#         echo "  rebuild:   just restart"
+#     else
+#         echo "error: rambla.service did not come up. Check:" >&2
+#         echo "  journalctl --user -u rambla -n 50 --no-pager" >&2
+#         exit 1
+#     fi
+
+# Build the desktop app.
 [script]
-restart: build
+install-app: && install-desktop
     set -euo pipefail
-    if [ "$(uname)" = "Darwin" ]; then
-        echo "TODO: macOS launchd service not set up yet. Rebuild done; start manually:"
-        echo "  ./packages/cli/bin/paseo daemon start"
-        exit 0
-    fi
-    systemctl --user restart rambla
-    sleep 2
-    systemctl --user --no-pager status rambla | head -5 || true
+    eval "$(mise env -s bash)"
+    # SKIP linux packages with -- --dir
+    npm run build:desktop -- --dir
+
+# Write the desktop launcher (XDG .desktop entry).
+[script]
+install-desktop:
+    set -euo pipefail
+    mkdir -p ~/.local/share/applications
+    cat > ~/.local/share/applications/rambla.desktop <<EOF
+    [Desktop Entry]
+    Type=Application
+    Name=Rambla
+    Exec={{justfile_dir()}}/packages/desktop/release/linux-unpacked/Paseo
+    Icon={{justfile_dir()}}/packages/desktop/assets/icon.png
+    Categories=Development;
+    Terminal=false
+    EOF
 
 # Show the daemon log tail.
-log lines="40":
+daemon-log lines="40":
     tail -n {{lines}} ~/.paseo/daemon.log
+
+logs lines="40":
+    journalctl --user -n {{lines}} -u rambla
