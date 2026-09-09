@@ -2,6 +2,8 @@ set unstable
 
 unit := home_dir() / ".config/systemd/user/rambla.service"
 
+e2e_skip := "03-daemon 15-provider"
+
 # List recipes.
 @list:
     just --list
@@ -82,6 +84,21 @@ ci-status:
         git --no-pager diff origin/main...upstream/main -- .github/workflows/
         echo "${OFF}"
     fi
+
+# Headless e2e suites (no device). Stops at the first failure.
+e2e: e2e-server e2e-cli e2e-app e2e-desktop
+
+e2e-server:
+    npm run test:integration -w @getpaseo/server
+
+e2e-cli:
+    npm run test:local -w @getpaseo/cli
+
+e2e-app:
+    npm run test:e2e -w @getpaseo/app
+
+e2e-desktop:
+    npm run test:e2e:renderer -w @getpaseo/desktop
 
 start:
     systemctl --user start rambla
