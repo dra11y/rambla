@@ -21,7 +21,7 @@ clean:
     rm -rf packages/*/dist tsconfig/*.tsbuildinfo
     echo "cleaned: all dist outputs and build state removed"
 
-# Check whether CI on dra11y/rambla is green. On failure: the error lines in red,
+# Check whether CI on getrambla/rambla is green. On failure: the error lines in red,
 # plus (yellow) any upstream workflow changes GitHub refused to let the
 # auto-merge push. Intentionally no fix, no retry — upstream CI changes should
 # break the merge loudly until reviewed by hand.
@@ -30,12 +30,12 @@ ci-status:
     set -euo pipefail
     RED=$(tput -T xterm-256color setaf 1) YEL=$(tput -T xterm-256color setaf 3) GRN=$(tput -T xterm-256color setaf 2) OFF=$(tput -T xterm-256color sgr0)
 
-    echo "Latest workflow runs on dra11y/rambla:"
-    gh run list -R dra11y/rambla --limit 5 \
+    echo "Latest workflow runs on getrambla/rambla:"
+    gh run list -R getrambla/rambla --limit 5 \
         --json workflowName,conclusion,status,createdAt,displayTitle,databaseId \
         --jq '.[] | "  \(.createdAt[0:10])  \(.conclusion // .status)  \(.workflowName)  \(.displayTitle)  (\(.databaseId))"'
 
-    failed="$(gh run list -R dra11y/rambla --limit 15 \
+    failed="$(gh run list -R getrambla/rambla --limit 15 \
         --json databaseId,conclusion \
         --jq '[.[] | select(.conclusion == "failure")][0].databaseId // ""')"
 
@@ -43,9 +43,9 @@ ci-status:
         echo "${GRN}All recent runs passed.${OFF}"
     else
         echo
-        echo "${RED}FAILED run $failed — https://github.com/dra11y/rambla/actions/runs/$failed${OFF}"
+        echo "${RED}FAILED run $failed — https://github.com/getrambla/rambla/actions/runs/$failed${OFF}"
         echo "Error lines from the failing step:"
-        errs="$(gh run view "$failed" -R dra11y/rambla --log-failed 2>/dev/null \
+        errs="$(gh run view "$failed" -R getrambla/rambla --log-failed 2>/dev/null \
             | grep -E '##\[error\]|refusing to allow|CONFLICT|error TS|npm error|fatal:' \
             | sed 's/^[^ ]* [^ ]* [0-9T:.Z-]*Z //' \
             | sort -u | head -15 || true)"
@@ -54,7 +54,7 @@ ci-status:
         else
             # No step log exists (run died before any step started, or GitHub
             # pruned it). Facts only: what jobs exist and how they ended.
-            jobs="$(gh api "repos/dra11y/rambla/actions/runs/$failed/jobs" \
+            jobs="$(gh api "repos/getrambla/rambla/actions/runs/$failed/jobs" \
                 --jq '.jobs[] | "  \(.name): \(.conclusion)"' || true)"
             if [ -n "$jobs" ]; then
                 printf 'Jobs:\n%s\n' "$jobs"
