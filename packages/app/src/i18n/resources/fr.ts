@@ -2,6 +2,21 @@ import { en, type TranslationResources } from "./en";
 import { pluginSettings } from "./plugin-settings";
 
 export const fr: TranslationResources = {
+  paneFind: {
+    title: "Rechercher",
+    placeholder: "Rechercher dans le panneau",
+    close: "Fermer la recherche",
+    matches: "Résultats de recherche",
+    previous: "Résultat précédent",
+    next: "Résultat suivant",
+    toggleReplace: "Afficher le remplacement",
+    replaceWith: "Remplacer par",
+    replace: "Remplacer",
+    replaceAll: "Tout remplacer",
+    noMatches: "Aucun résultat",
+    position: "{{current}} sur {{total}}",
+    total: "{{total}} résultats",
+  },
   common: {
     back: "Dos",
     loading: "Chargement...",
@@ -1075,6 +1090,16 @@ export const fr: TranslationResources = {
       updateHost: "Mettez à jour cet hôte pour gérer les étiquettes.",
     },
   },
+  changelog: {
+    title: "Nouveautés",
+    installed: "Installée",
+    showMore: "Afficher plus",
+    openWebsite: "Journal des modifications complet",
+    error: {
+      title: "Impossible de charger le journal des modifications",
+      description: "Vérifiez votre connexion et réessayez.",
+    },
+  },
   sidebar: {
     display: {
       trigger: "Préférences d'affichage",
@@ -2120,6 +2145,7 @@ export const fr: TranslationResources = {
     about: {
       title: "À propos",
       appVersion: "Version de l'application",
+      whatsNewHint: "Notes de version pour chaque release",
       thisDevice: "Cet appareil",
       connectedHosts: "Hôtes connectés",
       offline: "Hors ligne",

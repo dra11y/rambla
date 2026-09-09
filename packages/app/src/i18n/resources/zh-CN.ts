@@ -2,6 +2,21 @@ import { en, type TranslationResources } from "./en";
 import { pluginSettings } from "./plugin-settings";
 
 export const zhCN: TranslationResources = {
+  paneFind: {
+    title: "查找",
+    placeholder: "在窗格中查找",
+    close: "关闭查找",
+    matches: "查找结果",
+    previous: "上一个匹配项",
+    next: "下一个匹配项",
+    toggleReplace: "切换替换",
+    replaceWith: "替换为",
+    replace: "替换",
+    replaceAll: "全部替换",
+    noMatches: "无匹配项",
+    position: "{{current}} / {{total}}",
+    total: "{{total}} 个匹配项",
+  },
   common: {
     back: "返回",
     loading: "加载中...",
@@ -1034,6 +1049,16 @@ export const zhCN: TranslationResources = {
       updateHost: "请更新此主机以管理标签。",
     },
   },
+  changelog: {
+    title: "新功能",
+    installed: "已安装",
+    showMore: "显示更多",
+    openWebsite: "完整更新日志",
+    error: {
+      title: "无法加载更新日志",
+      description: "请检查网络连接后重试。",
+    },
+  },
   sidebar: {
     display: {
       trigger: "显示偏好",
@@ -2043,6 +2068,7 @@ export const zhCN: TranslationResources = {
     about: {
       title: "关于",
       appVersion: "应用版本",
+      whatsNewHint: "每个版本的发布说明",
       thisDevice: "此设备",
       connectedHosts: "已连接的 Host",
       offline: "离线",

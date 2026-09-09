@@ -2,6 +2,21 @@ import { en, type TranslationResources } from "./en";
 import { pluginSettings } from "./plugin-settings";
 
 export const ar: TranslationResources = {
+  paneFind: {
+    title: "بحث",
+    placeholder: "بحث في اللوحة",
+    close: "إغلاق البحث",
+    matches: "نتائج البحث",
+    previous: "التطابق السابق",
+    next: "التطابق التالي",
+    toggleReplace: "إظهار الاستبدال",
+    replaceWith: "استبدال بـ",
+    replace: "استبدال",
+    replaceAll: "استبدال الكل",
+    noMatches: "لا توجد تطابقات",
+    position: "{{current}} من {{total}}",
+    total: "{{total}} تطابقات",
+  },
   common: {
     back: "خلف",
     loading: "تحميل...",
@@ -1042,6 +1057,16 @@ export const ar: TranslationResources = {
       updateHost: "حدّث هذا المضيف لإدارة التسميات.",
     },
   },
+  changelog: {
+    title: "ما الجديد",
+    installed: "مثبّت",
+    showMore: "عرض المزيد",
+    openWebsite: "سجل التغييرات الكامل",
+    error: {
+      title: "تعذّر تحميل سجل التغييرات",
+      description: "تحقق من اتصالك وحاول مرة أخرى.",
+    },
+  },
   sidebar: {
     display: {
       trigger: "تفضيلات العرض",
@@ -2067,6 +2092,7 @@ export const ar: TranslationResources = {
     about: {
       title: "عن",
       appVersion: "نسخة التطبيق",
+      whatsNewHint: "ملاحظات الإصدار لكل نسخة",
       thisDevice: "هذا الجهاز",
       connectedHosts: "المضيفين المتصلين",
       offline: "غير متصل",

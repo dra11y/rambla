@@ -2,6 +2,21 @@ import { en, type TranslationResources } from "./en";
 import { pluginSettings } from "./plugin-settings";
 
 export const ru: TranslationResources = {
+  paneFind: {
+    title: "Найти",
+    placeholder: "Найти в панели",
+    close: "Закрыть поиск",
+    matches: "Совпадения",
+    previous: "Предыдущее совпадение",
+    next: "Следующее совпадение",
+    toggleReplace: "Показать замену",
+    replaceWith: "Заменить на",
+    replace: "Заменить",
+    replaceAll: "Заменить всё",
+    noMatches: "Нет совпадений",
+    position: "{{current}} из {{total}}",
+    total: "Совпадений: {{total}}",
+  },
   common: {
     back: "Назад",
     loading: "Загрузка...",
@@ -1057,6 +1072,16 @@ export const ru: TranslationResources = {
       updateHost: "Обновите этот хост для управления метками.",
     },
   },
+  changelog: {
+    title: "Что нового",
+    installed: "Установлена",
+    showMore: "Показать ещё",
+    openWebsite: "Полный список изменений",
+    error: {
+      title: "Не удалось загрузить список изменений",
+      description: "Проверьте подключение и попробуйте снова.",
+    },
+  },
   sidebar: {
     display: {
       trigger: "Настройки отображения",
@@ -2102,6 +2127,7 @@ export const ru: TranslationResources = {
     about: {
       title: "О приложении",
       appVersion: "Версия приложения",
+      whatsNewHint: "Заметки о выпуске для каждой версии",
       thisDevice: "Это устройство",
       connectedHosts: "Подключенные хосты",
       offline: "Оффлайн",

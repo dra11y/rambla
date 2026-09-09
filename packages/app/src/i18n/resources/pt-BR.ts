@@ -2,6 +2,21 @@ import { en, type TranslationResources } from "./en";
 import { pluginSettings } from "./plugin-settings";
 
 export const ptBR: TranslationResources = {
+  paneFind: {
+    title: "Buscar",
+    placeholder: "Buscar no painel",
+    close: "Fechar busca",
+    matches: "Correspondências",
+    previous: "Correspondência anterior",
+    next: "Próxima correspondência",
+    toggleReplace: "Mostrar substituição",
+    replaceWith: "Substituir por",
+    replace: "Substituir",
+    replaceAll: "Substituir tudo",
+    noMatches: "Nenhuma correspondência",
+    position: "{{current}} de {{total}}",
+    total: "{{total}} correspondências",
+  },
   common: {
     back: "Voltar",
     loading: "Carregando...",
@@ -1067,6 +1082,16 @@ export const ptBR: TranslationResources = {
       updateHost: "Atualize este host para gerenciar etiquetas.",
     },
   },
+  changelog: {
+    title: "Novidades",
+    installed: "Instalada",
+    showMore: "Mostrar mais",
+    openWebsite: "Changelog completo",
+    error: {
+      title: "Não foi possível carregar o changelog",
+      description: "Verifique sua conexão e tente novamente.",
+    },
+  },
   sidebar: {
     display: {
       trigger: "Preferências de exibição",
@@ -2101,6 +2126,7 @@ export const ptBR: TranslationResources = {
     about: {
       title: "Sobre",
       appVersion: "Versão do app",
+      whatsNewHint: "Notas de versão de cada release",
       thisDevice: "Este dispositivo",
       connectedHosts: "Hosts conectados",
       offline: "Offline",
