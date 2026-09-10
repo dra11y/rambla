@@ -56,7 +56,7 @@ linux:
   category: Development
   icon: assets
   artifactName: "Paseo-${version}-${arch}.${ext}"
-  maintainer: "Mohamed Boudra <hello@moboudra.com>"
+  maintainer: "Tom Grushka <tom@dra11y.com>"
   vendor: "Paseo"
   extraResources:
     - from: bin/paseo

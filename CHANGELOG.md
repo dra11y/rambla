@@ -4,7 +4,7 @@
 
 Paseo 0.8 adds plugin header buttons, custom providers, and richer chat components, alongside fixes for desktop updates and mobile keyboards.
 
-**Before upgrading:** desktop now requires macOS 13 or newer. Plugins written for 0.7 need the [0.8 migration guide](https://rambla.sh/docs/plugins/v0.8/migration), including separate client/server entries and the revised composer pill API.
+**Before upgrading:** desktop now requires macOS 13 or newer. Plugins written for 0.7 need the [0.8 migration guide](https://paseo.sh/docs/plugins/v0.8/migration), including separate client/server entries and the revised composer pill API.
 
 ### Added
 
@@ -624,7 +624,7 @@ Paseo 0.8 adds plugin header buttons, custom providers, and richer chat componen
 
 > **Important update notice**
 >
-> If you installed Paseo Desktop 0.1.108, you need to [download and reinstall Paseo manually](https://rambla.sh/download) to get this fix. The bug in 0.1.108 prevents its automatic updater from installing 0.1.109. Users on 0.1.107 or earlier can update normally.
+> If you installed Paseo Desktop 0.1.108, you need to [download and reinstall Paseo manually](https://paseo.sh/download) to get this fix. The bug in 0.1.108 prevents its automatic updater from installing 0.1.109. Users on 0.1.107 or earlier can update normally.
 
 ### Fixed
 
@@ -1734,8 +1734,8 @@ _This release only fixes an Android issue — desktop users don't need to update
 
 ### Added
 
-- `additionalModels` option in provider config lets you add or relabel models without replacing the full list — entries merge with runtime-discovered models (ACP) or your static `models` list. See the [Providers docs](https://rambla.sh/docs/providers)
-- New [Providers docs page](https://rambla.sh/docs/providers) covering first-class providers and every custom provider config pattern in one place
+- `additionalModels` option in provider config lets you add or relabel models without replacing the full list — entries merge with runtime-discovered models (ACP) or your static `models` list. See the [Providers docs](https://paseo.sh/docs/providers)
+- New [Providers docs page](https://paseo.sh/docs/providers) covering first-class providers and every custom provider config pattern in one place
 
 ### Improved
 
@@ -1747,7 +1747,7 @@ _This release only fixes an Android issue — desktop users don't need to update
 
 ### Added
 
-- Scripts and services per worktree — define named commands in `paseo.json`, and long-running services get supervised with their own ports and nice proxy URLs like `http://web.my-app.localhost:6767`. See the [worktrees guide](https://rambla.sh/docs/worktrees)
+- Scripts and services per worktree — define named commands in `paseo.json`, and long-running services get supervised with their own ports and nice proxy URLs like `http://web.my-app.localhost:6767`. See the [worktrees guide](https://paseo.sh/docs/worktrees)
 - Launch scripts and services for a worktree directly from the workspace header
 - New Setup tab in every workspace showing setup, teardown, and script progress live
 - GitHub checks and PR reviews in the explorer sidebar, with a hover card for the full breakdown
@@ -2034,7 +2034,7 @@ _This release only fixes an Android issue — desktop users don't need to update
 - Desktop Integrations settings — install the Paseo CLI and orchestration skills directly from the app without touching the terminal
 - Daemon status dialog in desktop settings for quick health checks
 - Auto-restart daemon on version mismatch — the desktop app detects when the running daemon is outdated and restarts it automatically
-- Setup hint and rambla.sh link on the mobile welcome screen so new App Store users know what to do next
+- Setup hint and paseo.sh link on the mobile welcome screen so new App Store users know what to do next
 
 ### Improved
 
@@ -2333,7 +2333,7 @@ _This release only fixes an Android issue — desktop users don't need to update
 
 ### Improved
 
-- Improved desktop runtime behavior on Windows by suppressing console windows and defaulting app data to `~/.rambla`
+- Improved desktop runtime behavior on Windows by suppressing console windows and defaulting app data to `~/.paseo`
 - Added a Discord link to the website navigation
 
 ### Fixed

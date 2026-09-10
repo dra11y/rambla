@@ -24,15 +24,10 @@ export function LegalPage({ title, lastUpdated, children }: LegalPageProps) {
 export function PaseoLegalIdentity() {
   return (
     <address className="not-italic">
-      <strong className="font-medium text-white">Mohamed Boudra Ziani</strong>, operating as Paseo
+      <strong className="font-medium text-white">Dr. Accessibility, LLC</strong>, operating as
+      Rambla
       <br />
-      NIF/VAT ID: ES26617095T
-      <br />
-      Roc Boronat 48, Bajos 2
-      <br />
-      08005 Barcelona, Spain
-      <br />
-      Email: <a href="mailto:hello@moboudra.com">hello@moboudra.com</a>
+      Email: <a href="mailto:tom@dra11y.com">tom@dra11y.com</a>
     </address>
   );
 }

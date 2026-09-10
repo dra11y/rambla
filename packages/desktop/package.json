@@ -6,9 +6,15 @@
   "homepage": "https://rambla.sh",
   "license": "Apache-2.0",
   "author": {
-    "name": "Mohamed Boudra",
-    "email": "hello@moboudra.com"
+    "name": "Tom Grushka",
+    "email": "tom@dra11y.com"
   },
+  "contributors": [
+    {
+      "name": "Mohamed Boudra",
+      "email": "hello@moboudra.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/getpaseo/paseo.git"

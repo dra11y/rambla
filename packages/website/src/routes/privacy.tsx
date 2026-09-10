@@ -5,8 +5,8 @@ import { pageMeta } from "~/meta";
 export const Route = createFileRoute("/privacy")({
   head: () =>
     pageMeta(
-      "Privacy Policy - Paseo",
-      "What stays on your machines, what the encrypted relay can see, and what Paseo Hub stores.",
+      "Privacy Policy - Rambla",
+      "What stays on your machines, what the encrypted relay can see, and what Rambla Hub stores.",
       "/privacy",
     ),
   component: Privacy,
@@ -14,28 +14,28 @@ export const Route = createFileRoute("/privacy")({
 
 function Privacy() {
   return (
-    <LegalPage title="Privacy Policy" lastUpdated="August 29, 2026">
+    <LegalPage title="Privacy Policy" lastUpdated="September 10, 2026">
       <p>
-        Paseo is local-first. Installing or using the open-source software does not send us your
+        Rambla is local-first. Installing or using the open-source software does not send us your
         code, prompts, files, terminal output, or agent conversations. This policy explains the
-        separate data boundaries for local Paseo, the optional official relay, the hosted Paseo Hub,
-        and rambla.sh.
+        separate data boundaries for local Rambla, the optional official relay, the hosted Rambla
+        Hub, and rambla.sh.
       </p>
 
       <section>
         <h2>Who is responsible</h2>
         <PaseoLegalIdentity />
         <p>
-          Mohamed Boudra Ziani is the data controller for personal data processed through the
-          official Paseo website, relay, and hosted Hub. Independently self-hosted daemons, Hubs,
+          Dr. Accessibility, LLC is the data controller for personal data processed through the
+          official Rambla website, relay, and hosted Hub. Independently self-hosted daemons, Hubs,
           and relays are controlled by their operators and are not covered by this policy.
         </p>
       </section>
 
       <section>
-        <h2>Local Paseo apps and daemons</h2>
+        <h2>Local Rambla apps and daemons</h2>
         <p>
-          Paseo runs on your machines. It does not send us analytics, telemetry, advertising
+          Rambla runs on your machines. It does not send us analytics, telemetry, advertising
           identifiers, or crash reports.
         </p>
         <p>
@@ -44,7 +44,7 @@ function Privacy() {
         </p>
         <p>
           Agents such as Claude Code, Codex, and OpenCode communicate with their providers using
-          credentials on your machine. Paseo does not manage or intercept those provider API calls.
+          credentials on your machine. Rambla does not manage or intercept those provider API calls.
         </p>
       </section>
 
@@ -67,7 +67,7 @@ function Privacy() {
       </section>
 
       <section>
-        <h2>Paseo Hub</h2>
+        <h2>Rambla Hub</h2>
         <p>When you create or use a hosted Hub account, we process:</p>
         <ul>
           <li>Your name, email, account credentials, sessions, IP address, and user agent</li>
@@ -93,9 +93,9 @@ function Privacy() {
       <section>
         <h2>Who controls workflow data</h2>
         <p>
-          Paseo controls account, billing, security, and service-operation data. When an
+          Rambla controls account, billing, security, and service-operation data. When an
           organization uses Hub to process personal data in its workflows, that organization decides
-          why the data is processed and Paseo processes it on the organization&apos;s behalf.
+          why the data is processed and Rambla processes it on the organization&apos;s behalf.
         </p>
       </section>
 
@@ -159,11 +159,7 @@ function Privacy() {
         <p>
           Depending on applicable law, you may request access, correction, deletion, restriction,
           objection, or portability of your personal data. Email{" "}
-          <a href="mailto:hello@moboudra.com">hello@moboudra.com</a>. You may also complain to the{" "}
-          <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">
-            Spanish Data Protection Agency
-          </a>
-          .
+          <a href="mailto:tom@dra11y.com">tom@dra11y.com</a>.
         </p>
       </section>
 
@@ -171,16 +167,15 @@ function Privacy() {
         <h2>Security</h2>
         <p>
           We use access controls, encrypted transport, and limited service permissions. No online
-          service can guarantee absolute security. Read Paseo&apos;s{" "}
+          service can guarantee absolute security. Read Rambla&apos;s{" "}
           <a
-            href="https://github.com/getpaseo/paseo/blob/main/SECURITY.md"
+            href="https://github.com/getrambla/rambla/blob/main/SECURITY.md"
             target="_blank"
             rel="noopener noreferrer"
           >
             security model
           </a>{" "}
-          or report a vulnerability privately to{" "}
-          <a href="mailto:hello@moboudra.com">hello@moboudra.com</a>.
+          or report a vulnerability privately to <a href="mailto:tom@dra11y.com">tom@dra11y.com</a>.
         </p>
       </section>
 
