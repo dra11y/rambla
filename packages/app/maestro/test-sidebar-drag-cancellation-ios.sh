@@ -70,7 +70,7 @@ render_flow() {
   local source="$1"
   local target="$2"
   perl -0pe '
-    s/^appId: sh\.paseo$/appId: $ENV{PASEO_MAESTRO_APP_ID}/m;
+    s/^appId: sh\.rambla$/appId: $ENV{PASEO_MAESTRO_APP_ID}/m;
     s/\$\{PASEO_MAESTRO_APP_ID\}/$ENV{PASEO_MAESTRO_APP_ID}/g;
     s/\$\{PASEO_MAESTRO_DIRECT_ENDPOINT\}/$ENV{PASEO_MAESTRO_DIRECT_ENDPOINT}/g;
     s/\$\{PASEO_MAESTRO_DRAG_A_NAME\}/$ENV{PASEO_MAESTRO_DRAG_A_NAME}/g;
