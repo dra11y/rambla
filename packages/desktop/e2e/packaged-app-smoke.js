@@ -653,7 +653,7 @@ async function smokeCliShim({ appPath, env }) {
 
 async function smokeColdCliDaemonStart({ appPath }) {
   const home = createTempDir("paseo-smoke-cli-daemon-home-");
-  const pidPath = path.join(home, "paseo.pid");
+  const pidPath = path.join(home, "rambla.pid");
   const port = await reserveLocalTcpPort();
   const listen = `127.0.0.1:${port}`;
   const env = createDefaultDaemonEnv();
