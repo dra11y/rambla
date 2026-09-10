@@ -413,7 +413,7 @@ process.on("message", (rawMessage: unknown) => {
   void registered.contract.input
     .parseAsync(message.input)
     .then((input) => {
-      if (!paseo) throw new Error("Plugin Paseo API is unavailable");
+      if (!paseo) throw new Error("Plugin Rambla API is unavailable");
       return registered.handler(input, { paseo });
     })
     .then((output) => registered.contract.output.parseAsync(output))
@@ -435,7 +435,7 @@ function handleHookMessage(
       send({
         type: "error",
         requestId: message.requestId,
-        error: "Plugin Paseo API is unavailable",
+        error: "Plugin Rambla API is unavailable",
       });
       return;
     }

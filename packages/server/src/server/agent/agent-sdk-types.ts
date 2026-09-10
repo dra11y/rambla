@@ -633,7 +633,7 @@ export interface AgentLaunchContext {
   agentId?: string;
   env?: Record<string, string>;
   /**
-   * Runtime-only internal Paseo tools. This must never be persisted into
+   * Runtime-only internal Rambla tools. This must never be persisted into
    * AgentSessionConfig; providers may adapt it to their native tool surface.
    */
   paseoTools?: PaseoToolCatalog;
@@ -790,12 +790,12 @@ export interface AgentClient {
   getDiagnostic?(): Promise<{ diagnostic: string }>;
   /**
    * Archive a durable native session (best-effort). Runtime release belongs to AgentSession.close().
-   * Called when Paseo archives an agent so the provider's own UI reflects the same state.
+   * Called when Rambla archives an agent so the provider's own UI reflects the same state.
    */
   archiveNativeSession?(handle: AgentPersistenceHandle): Promise<void>;
   /**
    * Unarchive a durable native session in the provider.
-   * Called before Paseo clears its archived flag so provider resume can succeed.
+   * Called before Rambla clears its archived flag so provider resume can succeed.
    */
   unarchiveNativeSession?(handle: AgentPersistenceHandle): Promise<void>;
   /**

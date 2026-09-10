@@ -1437,7 +1437,7 @@ export class AgentManager {
   // config swaps). When `rehydrateFromDisk` is set, the timeline is wiped so a
   // new epoch is minted and provider history is re-streamed — this is what the
   // user-facing "Reload agent" action wants when the on-disk session was
-  // mutated outside Paseo.
+  // mutated outside Rambla.
   reloadAgentSession(
     agentId: string,
     overrides?: Partial<AgentSessionConfig>,

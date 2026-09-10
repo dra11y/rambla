@@ -260,7 +260,7 @@ async function resolveEntryPaths(directory: string): Promise<{
   const legacyEntry = await findEntry(directory, ["index.ts", "index.tsx"]);
   if (legacyEntry) {
     throw new Error(
-      "This plugin was made for an older version of Paseo and cannot run on Paseo v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
+      "This plugin was made for an older version of Rambla and cannot run on Rambla v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
     );
   }
   throw new Error(
@@ -560,7 +560,7 @@ export class PluginRuntime {
       };
     }
     const sessionHost = this.sessionHost;
-    if (!sessionHost) throw new Error("Plugin Paseo session host is not attached");
+    if (!sessionHost) throw new Error("Plugin Rambla session host is not attached");
     const child = this.spawnChild();
     const outputCapture = new PluginOutputCapture(child, (stream, message) => {
       this.appendLog(pluginId, stream, message);

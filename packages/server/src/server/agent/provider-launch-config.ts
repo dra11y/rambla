@@ -201,7 +201,7 @@ export function migrateProviderSettings(
 }
 
 // Env vars that indicate a running Claude Code session. If the daemon itself is
-// launched from inside Claude Code (e.g. by a Paseo agent), these leak into
+// launched from inside Claude Code (e.g. by a Rambla agent), these leak into
 // child processes and cause "cannot be launched inside another session" errors.
 const PARENT_SESSION_ENV_VARS = [
   "CLAUDECODE",

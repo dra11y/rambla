@@ -1414,7 +1414,7 @@ export const ar: TranslationResources = {
     integrations: {
       cli: {
         statusFailed: "غير قادر على التحقق من حالة تثبيت CLI.",
-        installFailed: "غير قادر على تثبيت PaseoCLI.",
+        installFailed: "غير قادر على تثبيت Rambla CLI.",
       },
     },
   },

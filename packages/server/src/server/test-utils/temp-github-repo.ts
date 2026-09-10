@@ -1,4 +1,4 @@
-// Single namespace for temporary GitHub repos created by Paseo tests.
+// Single namespace for temporary GitHub repos created by Rambla tests.
 // Bulk cleanup relies on this prefix being unmistakable — never reuse `paseo-`
 // (collides with real repos like `paseo`, `paseo-website`).
 export const TEMP_GITHUB_REPO_PREFIX = "paseotmp-";

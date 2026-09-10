@@ -1167,7 +1167,7 @@ function ownConnectorStream(source: Stream): {
       if (closed) return;
       closed = true;
       await Promise.allSettled([
-        reader.cancel(new Error("Paseo closed the ACP connector")),
+        reader.cancel(new Error("Rambla closed the ACP connector")),
         writer.close(),
       ]);
     },
