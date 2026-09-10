@@ -37,60 +37,9 @@ clean: stop
     rm -rf packages/app/.expo/types
     echo "cleaned: all dist outputs and build state removed"
 
-# Check whether CI is green.
+# CI status for the current commit, per job. Answers now; does not wait for slow jobs.
 [script]
-ci-status:
-    set -euo pipefail
-    RED=$(tput -T xterm-256color setaf 1) YEL=$(tput -T xterm-256color setaf 3) GRN=$(tput -T xterm-256color setaf 2) OFF=$(tput -T xterm-256color sgr0)
-
-    echo "Latest workflow runs on getrambla/rambla:"
-    gh run list -R getrambla/rambla --limit 5 \
-        --json workflowName,conclusion,status,createdAt,displayTitle,databaseId \
-        --jq '.[] | "  \(.createdAt[0:10])  \(.conclusion // .status)  \(.workflowName)  \(.displayTitle)  (\(.databaseId))"'
-
-    failed="$(gh run list -R getrambla/rambla --limit 15 \
-        --json databaseId,conclusion \
-        --jq '[.[] | select(.conclusion == "failure")][0].databaseId // ""')"
-
-    if [ -z "$failed" ]; then
-        echo "${GRN}All recent runs passed.${OFF}"
-    else
-        echo
-        echo "${RED}FAILED run $failed — https://github.com/getrambla/rambla/actions/runs/$failed${OFF}"
-        echo "Error lines from the failing step:"
-        errs="$(gh run view "$failed" -R getrambla/rambla --log-failed 2>/dev/null \
-            | grep -E '##\[error\]|refusing to allow|CONFLICT|error TS|npm error|fatal:' \
-            | sed 's/^[^ ]* [^ ]* [0-9T:.Z-]*Z //' \
-            | sort -u | head -15 || true)"
-        if [ -n "$errs" ]; then
-            printf '%s\n' "$errs"
-        else
-            # No step log exists (run died before any step started, or GitHub
-            # pruned it). Facts only: what jobs exist and how they ended.
-            jobs="$(gh api "repos/getrambla/rambla/actions/runs/$failed/jobs" \
-                --jq '.jobs[] | "  \(.name): \(.conclusion)"' || true)"
-            if [ -n "$jobs" ]; then
-                printf 'Jobs:\n%s\n' "$jobs"
-            else
-                echo "no jobs were created — the run failed before any step ran"
-            fi
-        fi
-    fi
-
-    echo
-    echo "Upstream workflow changes not yet on origin/main (what the auto-merge would try to push):"
-    git fetch upstream main -q
-    if git diff --quiet origin/main...upstream/main -- .github/workflows/; then
-        echo "${GRN}none — .github/workflows/ matches upstream${OFF}"
-    else
-        echo "${YEL}"
-        git --no-pager diff origin/main...upstream/main -- .github/workflows/
-        echo "${OFF}"
-    fi
-
-# Per-job status for the current commit. Answers now, does not wait for slow jobs.
-[script]
-ci-jobs:
+ci:
     set -euo pipefail
     RED=$(tput -T xterm-256color setaf 1) YEL=$(tput -T xterm-256color setaf 3) GRN=$(tput -T xterm-256color setaf 2) OFF=$(tput -T xterm-256color sgr0)
 
@@ -119,6 +68,17 @@ ci-jobs:
 
     echo
     echo "${GRN}$passed passed${OFF}, ${RED}$failed failed${OFF}, ${YEL}$running still running${OFF}"
+
+    echo
+    echo "Upstream workflow changes not yet on origin/main (what the auto-merge would try to push):"
+    git fetch upstream main -q
+    if git diff --quiet origin/main...upstream/main -- .github/workflows/; then
+        echo "${GRN}none — .github/workflows/ matches upstream${OFF}"
+    else
+        echo "${YEL}"
+        git --no-pager diff origin/main...upstream/main -- .github/workflows/
+        echo "${OFF}"
+    fi
 
     if [ "$failed" -gt 0 ]; then
         echo

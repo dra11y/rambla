@@ -1,5 +1,11 @@
 # CLAUDE.md
 
+## Rambla
+
+Rules for this fork. These override everything below.
+
+- **Never touch the `paseo` bin alias in `packages/cli/package.json`.** Do not remove it, do not rename it, do not "clean it up". Both `paseo` and `rambla` stay mapped to `bin/rambla`. This is not part of any rename, sweep, or refactor. If a task seems to require changing it, stop and ask.
+
 Paseo is a mobile app for monitoring and controlling your local AI coding agents from anywhere. Your dev environment, in your pocket. Connects directly to your actual development environment — your code stays on your machine.
 
 **Supported agents:** Claude Code, Codex, GitHub Copilot, OpenCode, and Pi.

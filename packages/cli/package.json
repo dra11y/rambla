@@ -3,6 +3,7 @@
   "version": "0.8.0",
   "description": "Rambla CLI - control your AI coding agents from the command line",
   "bin": {
+    "paseo": "bin/rambla",
     "rambla": "bin/rambla"
   },
   "files": [
