@@ -54,7 +54,7 @@ describe("Hub guided setup continuation", () => {
     assert.deepEqual(calls, [{ operation: "token", origin: "https://hub.test" }]);
     assert.equal(daemon.connections, 1);
     assert.deepEqual(daemon.snapshotCwds, []);
-    await assert.rejects(readFile(path.join(cwd, ".paseo", "hub.yml")), { code: "ENOENT" });
+    await assert.rejects(readFile(path.join(cwd, ".rambla", "hub.yml")), { code: "ENOENT" });
   });
 
   it("prints exact actionable resume commands for login continuation declines", async () => {
@@ -133,8 +133,8 @@ describe("Hub guided setup continuation", () => {
 
   it("preserves an existing legacy bundle while adding the organization trigger", async () => {
     const cwd = await temporaryDirectory();
-    await mkdir(path.join(cwd, ".paseo"));
-    await writeFile(path.join(cwd, ".paseo", "hub.yml"), "legacy: bundle\n");
+    await mkdir(path.join(cwd, ".rambla"));
+    await writeFile(path.join(cwd, ".rambla", "hub.yml"), "legacy: bundle\n");
     const credentials = new MemoryCredentials();
     credentials.save({ origin: "https://hub.test", credential: "secret" });
     const prompts = new PromptAnswers([], ["codex", "gpt-5", "full-access"], ["U123"]);
@@ -145,9 +145,9 @@ describe("Hub guided setup continuation", () => {
       deploy: false,
     });
 
-    assert.equal(await readFile(path.join(cwd, ".paseo", "hub.yml"), "utf8"), "legacy: bundle\n");
+    assert.equal(await readFile(path.join(cwd, ".rambla", "hub.yml"), "utf8"), "legacy: bundle\n");
     assert.match(
-      await readFile(path.join(cwd, ".paseo", "triggers", "slack-help.yml"), "utf8"),
+      await readFile(path.join(cwd, ".rambla", "triggers", "slack-help.yml"), "utf8"),
       /name: slack-help/u,
     );
     assert.deepEqual(prompts.confirmations, []);
@@ -155,7 +155,7 @@ describe("Hub guided setup continuation", () => {
 
   it("asks before replacing only the selected trigger file", async () => {
     const cwd = await temporaryDirectory();
-    const triggerPath = path.join(cwd, ".paseo", "triggers", "slack-help.yml");
+    const triggerPath = path.join(cwd, ".rambla", "triggers", "slack-help.yml");
     await mkdir(path.dirname(triggerPath), { recursive: true });
     await writeFile(triggerPath, "name: keep-me\n");
     const credentials = new MemoryCredentials();
@@ -169,7 +169,7 @@ describe("Hub guided setup continuation", () => {
         daemonId: "daemon-1",
         deploy: true,
       }),
-      /.paseo\/triggers\/slack-help.yml left unchanged/u,
+      /.rambla\/triggers\/slack-help.yml left unchanged/u,
     );
 
     assert.equal(await readFile(triggerPath, "utf8"), "name: keep-me\n");
@@ -185,8 +185,8 @@ describe("Hub guided setup continuation", () => {
   it("rejects a symlinked trigger directory without writing outside the project", async () => {
     const cwd = await temporaryDirectory();
     const outside = await temporaryDirectory();
-    await mkdir(path.join(cwd, ".paseo"));
-    await symlink(outside, path.join(cwd, ".paseo", "triggers"));
+    await mkdir(path.join(cwd, ".rambla"));
+    await symlink(outside, path.join(cwd, ".rambla", "triggers"));
     const credentials = new MemoryCredentials();
     credentials.save({ origin: "https://hub.test", credential: "secret" });
     const prompts = new PromptAnswers([], ["codex", "gpt-5", "full-access"], ["U123"]);
@@ -232,7 +232,7 @@ describe("Hub guided setup continuation", () => {
       ["Sonnet (suggested)"],
       ["Auto"],
     ]);
-    const trigger = await readFile(path.join(cwd, ".paseo", "triggers", "slack-help.yml"), "utf8");
+    const trigger = await readFile(path.join(cwd, ".rambla", "triggers", "slack-help.yml"), "utf8");
     assert.match(trigger, /provider: claude\n    model: sonnet\n    mode: auto/u);
     assert.deepEqual(
       calls.slice(-2).map(({ operation }) => operation),
@@ -266,7 +266,7 @@ describe("Hub guided setup continuation", () => {
     );
 
     assert.equal(daemon.snapshotCwds.length, 0);
-    await assert.rejects(readFile(path.join(cwd, ".paseo", "triggers", "slack-help.yml")), {
+    await assert.rejects(readFile(path.join(cwd, ".rambla", "triggers", "slack-help.yml")), {
       code: "ENOENT",
     });
   });

@@ -56,7 +56,7 @@ test("openProject preserves a worktree's exact-root project without rehoming it"
       stdio: "pipe",
     });
 
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const projectsPath = path.join(paseoHome, "projects", "projects.json");
     const workspacesPath = path.join(paseoHome, "projects", "workspaces.json");
     const timestamp = "2026-04-24T09:46:43.146Z";

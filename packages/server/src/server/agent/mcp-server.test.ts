@@ -1784,7 +1784,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage, spies } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-worktree-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const createdWorkspaceIds: string[] = [];
     const setupContinuations: Array<"workspace" | "agent" | undefined> = [];
@@ -1874,7 +1874,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage, spies } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-agent-worktree-name-context-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const workspaceGitService = {
       getSnapshot: vi.fn(async () => {
@@ -1952,7 +1952,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage, spies } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-agent-worktree-auto-title-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const createdWorkspaceIds: string[] = [];
     const workspaceRecords = new Map<string, PersistedWorkspaceRecord>();
@@ -2045,7 +2045,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage, spies } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-agent-worktree-manual-title-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const createdWorkspaceIds: string[] = [];
     const workspaceRecords = new Map<string, PersistedWorkspaceRecord>();
@@ -2144,7 +2144,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage, spies } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-agent-title-workspace-title-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const createdWorkspaceIds: string[] = [];
     const workspaceRecords = new Map<string, PersistedWorkspaceRecord>();
@@ -2231,7 +2231,7 @@ describe("create_agent MCP tool", () => {
     const broadcasts: string[] = [];
     const workspaceGitService = new WorkspaceGitServiceImpl({
       logger: createTestLogger(),
-      paseoHome: join(tempDir, ".paseo"),
+      paseoHome: join(tempDir, ".rambla"),
       deps: { github: createGitHubServiceStub() },
     });
     const workspaceAutoName = new WorkspaceAutoName({
@@ -2338,7 +2338,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage, spies } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-agent-checkout-name-context-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const createdWorkspaceIds: string[] = [];
     const workspaceRecords = new Map<string, PersistedWorkspaceRecord>();
@@ -2548,7 +2548,7 @@ describe("create_agent MCP tool", () => {
     const { agentManager, agentStorage } = createTestDeps();
     const tempDir = await mkdtemp(join(tmpdir(), "paseo-mcp-create-worktree-"));
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
     const broadcasts: string[] = [];
     const setupContinuations: Array<"workspace" | "agent" | undefined> = [];
 
@@ -2759,7 +2759,7 @@ describe("create_agent MCP tool", () => {
       await mkdtemp(join(tmpdir(), "paseo-mcp-archive-worktree-")),
     );
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
 
     try {
       execFileSync("git", ["init", repoDir], { stdio: "pipe" });
@@ -2866,7 +2866,7 @@ describe("create_agent MCP tool", () => {
       await mkdtemp(join(tmpdir(), "paseo-mcp-archive-worktree-multi-")),
     );
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
 
     try {
       execFileSync("git", ["init", repoDir], { stdio: "pipe" });
@@ -2954,7 +2954,7 @@ describe("create_agent MCP tool", () => {
       await mkdtemp(join(tmpdir(), "paseo-mcp-archive-worktree-slug-")),
     );
     const repoDir = join(tempDir, "repo");
-    const paseoHome = join(tempDir, ".paseo");
+    const paseoHome = join(tempDir, ".rambla");
 
     try {
       execFileSync("git", ["init", repoDir], { stdio: "pipe" });

@@ -137,7 +137,7 @@ describe("resolveLogConfig", () => {
 describe("loadConfig logger config", () => {
   it("applies log format env at the config boundary", async () => {
     const root = await mkdtemp(path.join(tmpdir(), "paseo-logger-config-"));
-    const paseoHome = path.join(root, ".paseo");
+    const paseoHome = path.join(root, ".rambla");
     await mkdir(paseoHome, { recursive: true });
     await writeFile(
       path.join(paseoHome, "config.json"),

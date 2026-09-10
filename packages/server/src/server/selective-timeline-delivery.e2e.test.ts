@@ -561,7 +561,7 @@ test("real WebSocket sessions enforce selective delivery, retained resets, downg
 test("blocked setup remains readable on mixed-capability sockets sharing a session", async () => {
   await daemon.close();
   const root = await mkdtemp(path.join(os.tmpdir(), "paseo-blocked-compat-"));
-  const projects = path.join(root, ".paseo", "projects");
+  const projects = path.join(root, ".rambla", "projects");
   await mkdir(projects, { recursive: true });
   const workspace = createPersistedWorkspaceRecord({
     workspaceId: "blocked-workspace",

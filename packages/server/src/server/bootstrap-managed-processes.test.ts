@@ -29,7 +29,7 @@ describe("daemon managed process bootstrap", () => {
   test("reaps stale helper process records during daemon bootstrap", async () => {
     tempRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-managed-bootstrap-"));
     staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
-    const paseoHome = path.join(tempRoot, ".paseo");
+    const paseoHome = path.join(tempRoot, ".rambla");
     const managedProcesses = new FakeManagedProcesses();
     const daemon = await createPaseoDaemon(
       {

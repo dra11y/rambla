@@ -194,7 +194,7 @@ install-desktop:
 
 # Show the daemon log tail.
 daemon-log lines="40":
-    tail -n {{lines}} ~/.paseo/daemon.log
+    tail -n {{lines}} ~/.rambla/daemon.log
 
 logs lines="40":
     journalctl --user -n {{lines}} -u rambla

@@ -2551,14 +2551,14 @@ test("normalizes workspace_setup_progress into a workspace-scoped daemon event",
         status: "running",
         detail: {
           type: "worktree_setup",
-          worktreePath: "/tmp/project/.paseo/worktrees/feature-a",
+          worktreePath: "/tmp/project/.rambla/worktrees/feature-a",
           branchName: "feature-a",
           log: "phase-one\n",
           commands: [
             {
               index: 1,
               command: "npm install",
-              cwd: "/tmp/project/.paseo/worktrees/feature-a",
+              cwd: "/tmp/project/.rambla/worktrees/feature-a",
               log: "phase-one\n",
               status: "running",
               exitCode: null,
@@ -2578,14 +2578,14 @@ test("normalizes workspace_setup_progress into a workspace-scoped daemon event",
       status: "running",
       detail: {
         type: "worktree_setup",
-        worktreePath: "/tmp/project/.paseo/worktrees/feature-a",
+        worktreePath: "/tmp/project/.rambla/worktrees/feature-a",
         branchName: "feature-a",
         log: "phase-one\n",
         commands: [
           {
             index: 1,
             command: "npm install",
-            cwd: "/tmp/project/.paseo/worktrees/feature-a",
+            cwd: "/tmp/project/.rambla/worktrees/feature-a",
             log: "phase-one\n",
             status: "running",
             exitCode: null,
@@ -2617,7 +2617,7 @@ test("sends create_agent_request with workspace and caller identity", async () =
   const createPromise = client.createAgent({
     idempotencyKey: "one-creation",
     provider: "codex",
-    cwd: "/tmp/project/.paseo/worktrees/feature-a",
+    cwd: "/tmp/project/.rambla/worktrees/feature-a",
     workspaceId: "ws-feature-a",
     callerAgentId: "parent-agent",
     title: "Compat agent",

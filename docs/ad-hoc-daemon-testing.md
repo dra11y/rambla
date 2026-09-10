@@ -18,7 +18,7 @@ import { DaemonClient } from "./test-utils/daemon-client.js";
 
 const logger = pino({ level: "warn" });
 const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-test-"));
-const paseoHome = path.join(paseoHomeRoot, ".paseo");
+const paseoHome = path.join(paseoHomeRoot, ".rambla");
 await mkdir(paseoHome, { recursive: true });
 const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
 

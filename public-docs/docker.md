@@ -36,7 +36,7 @@ The image:
 - installs the Paseo daemon and CLI
 - serves the bundled web UI
 - listens on `0.0.0.0:6767` inside the container
-- stores daemon state under `/home/paseo/.paseo`
+- stores daemon state under `/home/paseo/.rambla`
 - runs the daemon and launched agents as the non-root `paseo` user
 
 The image does not bundle agent CLIs such as Claude Code, Codex, OpenCode, Copilot, or Pi. Add the agents you use with a small child image.
@@ -161,4 +161,4 @@ See [Security](/docs/security) for the full daemon trust model.
 - **403 Host not allowed:** set `PASEO_HOSTNAMES` to the DNS names you use.
 - **Provider not available:** install that agent CLI in a child image or make sure the binary is on `PATH`.
 - **Permission errors in `/workspace`:** make the mounted directory writable by uid/gid `1000:1000`, or run the container as the host uid/gid.
-- **Logs:** run `docker logs paseo`, or inspect `/home/paseo/.paseo/daemon.log` inside the container.
+- **Logs:** run `docker logs paseo`, or inspect `/home/paseo/.rambla/daemon.log` inside the container.

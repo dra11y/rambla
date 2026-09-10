@@ -36,7 +36,7 @@ const server = createServer((request, response) => {
 });
 
 try {
-  const workflows = path.join(cwd, ".paseo", "workflows");
+  const workflows = path.join(cwd, ".rambla", "workflows");
   await mkdir(path.join(workflows, "partials"), { recursive: true });
   const files = [
     {

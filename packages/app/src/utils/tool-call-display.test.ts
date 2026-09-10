@@ -81,14 +81,14 @@ describe("tool-call-display", () => {
       error: null,
       detail: {
         type: "worktree_setup",
-        worktreePath: "/tmp/repo/.paseo/worktrees/repo/branch",
+        worktreePath: "/tmp/repo/.rambla/worktrees/repo/branch",
         branchName: "feature-branch",
         log: "==> [1/1] Running: npm install\n",
         commands: [
           {
             index: 1,
             command: "npm install",
-            cwd: "/tmp/repo/.paseo/worktrees/repo/branch",
+            cwd: "/tmp/repo/.rambla/worktrees/repo/branch",
             log: "",
             status: "running",
             exitCode: null,

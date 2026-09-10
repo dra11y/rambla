@@ -15,7 +15,7 @@ import {
 console.log("=== Daemon Set Password Command ===\n");
 
 const root = await mkdtemp(join(tmpdir(), "paseo-set-password-"));
-const paseoHome = join(root, ".paseo");
+const paseoHome = join(root, ".rambla");
 
 function promptSequence(values: string[]): PromptPassword {
   return async () => {

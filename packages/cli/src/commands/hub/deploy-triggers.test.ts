@@ -15,9 +15,9 @@ afterEach(async () => {
 describe("Hub trigger deployment discovery", () => {
   it("discovers self-contained triggers in deterministic order", async () => {
     const cwd = await temporaryDirectory();
-    await mkdir(path.join(cwd, ".paseo", "triggers"), { recursive: true });
-    await writeFile(path.join(cwd, ".paseo", "triggers", "z.yml"), "name: z\n");
-    await writeFile(path.join(cwd, ".paseo", "triggers", "a.yml"), "name: a\n");
+    await mkdir(path.join(cwd, ".rambla", "triggers"), { recursive: true });
+    await writeFile(path.join(cwd, ".rambla", "triggers", "z.yml"), "name: z\n");
+    await writeFile(path.join(cwd, ".rambla", "triggers", "a.yml"), "name: a\n");
 
     await expect(discoverHubTriggers(cwd)).resolves.toEqual([
       { path: ".paseo/triggers/a.yml", yaml: "name: a\n" },
@@ -27,7 +27,7 @@ describe("Hub trigger deployment discovery", () => {
 
   it("rejects unsupported and unsafe trigger paths", async () => {
     const cwd = await temporaryDirectory();
-    const directory = path.join(cwd, ".paseo", "triggers");
+    const directory = path.join(cwd, ".rambla", "triggers");
     await mkdir(directory, { recursive: true });
     await writeFile(path.join(cwd, "outside.yml"), "name: outside\n");
     await symlink(path.join(cwd, "outside.yml"), path.join(directory, "linked.yml"));
@@ -39,15 +39,15 @@ describe("Hub trigger deployment discovery", () => {
 
   it("requires at least one trigger", async () => {
     const cwd = await temporaryDirectory();
-    await mkdir(path.join(cwd, ".paseo", "triggers"), { recursive: true });
+    await mkdir(path.join(cwd, ".rambla", "triggers"), { recursive: true });
 
     await expect(discoverHubTriggers(cwd)).rejects.toMatchObject({ code: "HUB_TRIGGER_MISSING" });
   });
 
   it("directs legacy bundles to the explicit project deployment path", async () => {
     const cwd = await temporaryDirectory();
-    await mkdir(path.join(cwd, ".paseo"));
-    await writeFile(path.join(cwd, ".paseo", "hub.yml"), "environments: {}\n");
+    await mkdir(path.join(cwd, ".rambla"));
+    await writeFile(path.join(cwd, ".rambla", "hub.yml"), "environments: {}\n");
 
     await expect(discoverHubTriggers(cwd)).rejects.toMatchObject({
       code: "HUB_PROJECT_REQUIRED",

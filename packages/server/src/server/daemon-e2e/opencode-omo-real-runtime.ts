@@ -154,7 +154,7 @@ export async function createOpenCodeOmoRealRuntime(): Promise<OpenCodeOmoRealRun
   let daemon: TestPaseoDaemon | null = null;
   let client: DaemonClient | null = null;
   try {
-    process.env.PASEO_HOME = path.join(paths.paseoHomeRoot, ".paseo");
+    process.env.PASEO_HOME = path.join(paths.paseoHomeRoot, ".rambla");
     traceDestination = pino.destination({
       dest: path.join(paths.artifacts, "daemon.log"),
       sync: true,
@@ -273,7 +273,7 @@ function buildRuntimeEnv(paths: RuntimePaths, openRouterApiKey: string | null): 
     SSL_CERT_DIR: process.env.SSL_CERT_DIR,
     HOME: paths.home,
     ...(process.platform === "win32" ? resolveWindowsHomeEnv(paths.home, paths.temporary) : {}),
-    PASEO_HOME: path.join(paths.paseoHomeRoot, ".paseo"),
+    PASEO_HOME: path.join(paths.paseoHomeRoot, ".rambla"),
     XDG_CONFIG_HOME: paths.xdgConfig,
     XDG_DATA_HOME: paths.xdgData,
     XDG_CACHE_HOME: paths.xdgCache,

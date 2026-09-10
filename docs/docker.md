@@ -120,11 +120,11 @@ or `compose.environment`; Paseo passes them to launched agents.
 
 The image defaults:
 
-| Variable       | Default              |
-| -------------- | -------------------- |
-| `HOME`         | `/home/paseo`        |
-| `PASEO_HOME`   | `/home/paseo/.paseo` |
-| `PASEO_LISTEN` | `0.0.0.0:6767`       |
+| Variable       | Default               |
+| -------------- | --------------------- |
+| `HOME`         | `/home/paseo`         |
+| `PASEO_HOME`   | `/home/paseo/.rambla` |
+| `PASEO_LISTEN` | `0.0.0.0:6767`        |
 
 If you bind-mount host directories on Linux, make sure the container user can
 write them. The built-in `paseo` user has uid/gid `1000:1000`. For a different
@@ -236,4 +236,4 @@ The published image is multi-arch for `linux/amd64` and `linux/arm64`.
 - **Permission errors in `/workspace`**: make the mounted directory writable by
   uid/gid `1000:1000`, or run the container as the host uid/gid.
 - **Logs**: inspect `docker logs paseo` or
-  `/home/paseo/.paseo/daemon.log` inside the container.
+  `/home/paseo/.rambla/daemon.log` inside the container.

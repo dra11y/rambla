@@ -94,7 +94,7 @@ describe("Hub deployment contract", () => {
   it("reports triggers installed before a later deployment failure", async () => {
     const cwd = await triggerProject();
     const secondTrigger = trigger.replace("slack-help", "z-help");
-    await writeFile(path.join(cwd, ".paseo", "triggers", "z-help.yml"), secondTrigger);
+    await writeFile(path.join(cwd, ".rambla", "triggers", "z-help.yml"), secondTrigger);
     const hub = await captureHubRequests(4, (url, requestNumber) => {
       if (url === "/api/v1/triggers/validate") {
         return { status: 200, body: { name: "valid", valid: true } };
@@ -276,9 +276,9 @@ function canonicalFiles() {
 async function canonicalProject(): Promise<string> {
   const cwd = await mkdtemp(path.join(tmpdir(), "paseo-hub-deploy-"));
   temporaryDirectories.push(cwd);
-  const workflows = path.join(cwd, ".paseo", "workflows");
+  const workflows = path.join(cwd, ".rambla", "workflows");
   await mkdir(path.join(workflows, "partials"), { recursive: true });
-  await writeFile(path.join(cwd, ".paseo", "hub.yml"), resource);
+  await writeFile(path.join(cwd, ".rambla", "hub.yml"), resource);
   await writeFile(path.join(workflows, "answer.yml"), workflow);
   await writeFile(path.join(workflows, "partials", "safety.md"), partial);
   return cwd;
@@ -287,7 +287,7 @@ async function canonicalProject(): Promise<string> {
 async function triggerProject(): Promise<string> {
   const cwd = await mkdtemp(path.join(tmpdir(), "paseo-hub-trigger-deploy-"));
   temporaryDirectories.push(cwd);
-  const triggers = path.join(cwd, ".paseo", "triggers");
+  const triggers = path.join(cwd, ".rambla", "triggers");
   await mkdir(triggers, { recursive: true });
   await writeFile(path.join(triggers, "slack-help.yml"), trigger);
   return cwd;

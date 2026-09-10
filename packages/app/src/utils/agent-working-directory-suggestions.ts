@@ -4,7 +4,7 @@ export interface AgentWorkingDirectorySource {
   lastActivityAt?: Date | null;
 }
 
-const PASEO_WORKTREE_PATH_PATTERN = /(^|\/)\.paseo\/worktrees(\/|$)/;
+const PASEO_WORKTREE_PATH_PATTERN = /(^|\/)\.rambla\/worktrees(\/|$)/;
 
 export function collectAgentWorkingDirectorySuggestions(
   sources: Iterable<AgentWorkingDirectorySource>,

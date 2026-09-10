@@ -1378,7 +1378,7 @@ describe.skipIf(isPlatform("win32"))("worktree POSIX-only", () => {
       expect(repoBWorktrees.map((entry) => entry.path)).toEqual([fromRepoB.worktreePath]);
     });
 
-    it("lists and deletes paseo worktrees under ~/.paseo/worktrees/{hash}", async () => {
+    it("lists and deletes paseo worktrees under ~/.rambla/worktrees/{hash}", async () => {
       const first = await createLegacyWorktreeForTest({
         branchName: "main",
         cwd: repoDir,

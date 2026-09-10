@@ -78,7 +78,7 @@ function seedStaleAgentFixture(): StaleAgentFixture {
   const healthyCwd = mkdtempSync(path.join(os.tmpdir(), "paseo-healthy-agent-"));
   const orphanCwd = mkdtempSync(path.join(os.tmpdir(), "paseo-orphan-agent-"));
   const paseoHomeRoot = mkdtempSync(path.join(os.tmpdir(), "paseo-orphan-agent-home-"));
-  const paseoHome = path.join(paseoHomeRoot, ".paseo");
+  const paseoHome = path.join(paseoHomeRoot, ".rambla");
   const projectsDir = path.join(paseoHome, "projects");
   const agentsDir = path.join(paseoHome, "agents");
   const healthyProjectId = "proj-healthy-agent-rpc";

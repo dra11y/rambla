@@ -57,7 +57,7 @@ paseo daemon status --json
 paseo provider diagnostic <provider> --json
 ```
 
-Use the status-reported home, listen address, and log path for further checks. Probe `http://127.0.0.1:6767/api/health` or read `~/.paseo/daemon.log` only when those values match the affected daemon. Do not restart the daemon, edit config, update software, or expose a network listener without the user's explicit permission. A daemon restart can interrupt the agent doing the diagnosis.
+Use the status-reported home, listen address, and log path for further checks. Probe `http://127.0.0.1:6767/api/health` or read `~/.rambla/daemon.log` only when those values match the affected daemon. Do not restart the daemon, edit config, update software, or expose a network listener without the user's explicit permission. A daemon restart can interrupt the agent doing the diagnosis.
 
 For a missing provider or `command not found`, run `paseo provider diagnostic <provider>` against the affected host, or open **Settings → your host → Providers → provider → Diagnostic**. Compare its resolved binary, daemon `PATH`, and provider version with a brand-new login shell. Shell aliases and functions are not executable paths.
 
@@ -65,15 +65,15 @@ For a missing provider or `command not found`, run `paseo provider diagnostic <p
 
 Use these defaults on the machine where the daemon or Desktop app actually runs. Do not look for a remote daemon's files on the client device.
 
-- Daemon config: `~/.paseo/config.json`
-- Daemon log: `~/.paseo/daemon.log`
-- Agent state directory: `~/.paseo/agents/`
-- Default managed worktree root: `~/.paseo/worktrees/`
+- Daemon config: `~/.rambla/config.json`
+- Daemon log: `~/.rambla/daemon.log`
+- Agent state directory: `~/.rambla/agents/`
+- Default managed worktree root: `~/.rambla/worktrees/`
 - macOS desktop log: `~/Library/Logs/Paseo/main.log`
 - Linux desktop log: `~/.config/Paseo/logs/main.log`
 - Windows desktop log: `%APPDATA%\Paseo\logs\main.log`
 
-Substitute the status-reported `PASEO_HOME` for `~/.paseo`. In the official Docker image, the default is `/home/paseo/.paseo`; its host path depends on the volume mount, and container stdout is available through Docker. Desktop app logs describe the Desktop process; daemon logs describe the selected daemon. Read the narrowest useful slice and redact credentials, pairing offers, tokens, passwords, and user code before sharing logs.
+Substitute the status-reported `PASEO_HOME` for `~/.rambla`. In the official Docker image, the default is `/home/paseo/.rambla`; its host path depends on the volume mount, and container stdout is available through Docker. Desktop app logs describe the Desktop process; daemon logs describe the selected daemon. Read the narrowest useful slice and redact credentials, pairing offers, tokens, passwords, and user code before sharing logs.
 
 If diagnosing the bundled daemon on a computer with Paseo Desktop installed, but `paseo` is not on `PATH`, the bundled CLI is at:
 

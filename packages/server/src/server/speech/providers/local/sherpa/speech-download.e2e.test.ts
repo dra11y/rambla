@@ -88,7 +88,7 @@ downloadTest(
     const logger = pino({ level: "silent" });
 
     const paseoHomeRoot = mkdtempSync(path.join(tmpdir(), "paseo-speech-download-"));
-    const modelsDir = path.join(paseoHomeRoot, ".paseo", "models", "local-speech");
+    const modelsDir = path.join(paseoHomeRoot, ".rambla", "models", "local-speech");
 
     await ensureSherpaOnnxModels({
       modelsDir,

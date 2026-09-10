@@ -43,7 +43,7 @@ async function createWorkspaceJourney() {
   run(repoDir, ["add", "README.md"]);
   run(repoDir, ["-c", "commit.gpgsign=false", "commit", "-m", "initial"]);
 
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const worktree = await createWorktree({
     cwd: repoDir,
     worktreeSlug: "workspace",

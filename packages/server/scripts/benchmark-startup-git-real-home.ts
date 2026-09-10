@@ -40,7 +40,7 @@ interface BenchmarkResult {
 }
 
 function parseArgs(): { sourceHome: string; frozenHomeRoot: string | null; scenario: Scenario } {
-  let sourceHome = process.env.PASEO_BENCHMARK_SOURCE_HOME ?? path.join(os.homedir(), ".paseo");
+  let sourceHome = process.env.PASEO_BENCHMARK_SOURCE_HOME ?? path.join(os.homedir(), ".rambla");
   let frozenHomeRoot = process.env.PASEO_BENCHMARK_FROZEN_HOME_ROOT ?? null;
   let scenario = (process.env.PASEO_BENCHMARK_SCENARIO ?? "snapshotOnly") as Scenario;
 
@@ -81,7 +81,7 @@ async function freezeHome(sourceHome: string, requestedRoot: string | null): Pro
   if (process.env.PASEO_BENCHMARK_REUSE_FROZEN_HOME === "1") {
     return frozenHomeRoot;
   }
-  const frozenHome = path.join(frozenHomeRoot, ".paseo");
+  const frozenHome = path.join(frozenHomeRoot, ".rambla");
   rmSync(frozenHome, { recursive: true, force: true });
   mkdirSync(frozenHome, { recursive: true });
 

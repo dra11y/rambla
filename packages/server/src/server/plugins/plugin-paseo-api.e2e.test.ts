@@ -142,7 +142,7 @@ export default function contribute(server: PluginServerContext) {
 test("daemon config reload enables and disables configured plugins without restarting", async () => {
   const pluginDirectory = await mkdtemp(path.join(tmpdir(), "paseo-reload-plugin-"));
   const paseoHomeRoot = await mkdtemp(path.join(tmpdir(), "paseo-reload-home-"));
-  const paseoHome = path.join(paseoHomeRoot, ".paseo");
+  const paseoHome = path.join(paseoHomeRoot, ".rambla");
   roots.push(pluginDirectory, paseoHomeRoot);
   await writeFile(
     path.join(pluginDirectory, "paseo-plugin.json"),

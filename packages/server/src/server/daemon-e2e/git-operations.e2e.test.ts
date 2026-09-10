@@ -392,7 +392,7 @@ test("runs paseo.json setup asynchronously and reports status via timeline tool_
     label: "createAgent should not block on setup",
   });
 
-  expect(agent.cwd).toContain(path.join(".paseo", "worktrees"));
+  expect(agent.cwd).toContain(path.join(".rambla", "worktrees"));
   expect(existsSync(path.join(agent.cwd, "setup-done.txt"))).toBe(false);
 
   writeFileSync(path.join(agent.cwd, "allow-setup"), "ok\n");
@@ -480,7 +480,7 @@ test("bootstraps configured worktree terminals after setup succeeds", async () =
       label: "createAgent should not block on setup",
     });
 
-    expect(agent.cwd).toContain(path.join(".paseo", "worktrees"));
+    expect(agent.cwd).toContain(path.join(".rambla", "worktrees"));
     expect(existsSync(path.join(agent.cwd, "setup-done.txt"))).toBe(false);
     expect(existsSync(path.join(agent.cwd, "dev-terminal.txt"))).toBe(false);
     expect(existsSync(path.join(agent.cwd, "lint-terminal.txt"))).toBe(false);
@@ -618,7 +618,7 @@ test("reports failures via timeline tool_call without deleting the created workt
     label: "createAgent should not block on failing setup",
   });
 
-  expect(agent.cwd).toContain(path.join(".paseo", "worktrees"));
+  expect(agent.cwd).toContain(path.join(".rambla", "worktrees"));
   expect(existsSync(agent.cwd)).toBe(true);
 
   const started = await waitForTimelineToolCall(
@@ -652,7 +652,7 @@ test("reports failures via timeline tool_call without deleting the created workt
   rmSync(repoRoot, { recursive: true, force: true });
 }, 60000);
 
-test("creates agent in ~/.paseo/worktrees/{hash} when worktree is requested", async () => {
+test("creates agent in ~/.rambla/worktrees/{hash} when worktree is requested", async () => {
   const cwd = tmpCwd();
   const projectHash = await deriveWorktreeProjectHash(cwd);
 

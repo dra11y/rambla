@@ -155,7 +155,7 @@ function collectProviderSnapshotUpdateBytes(client: DaemonClient): {
 function seedSameCwdWorkspaces(): { paseoHomeRoot: string; cwd: string } {
   const paseoHomeRoot = mkdtempSync(path.join(tmpdir(), "paseo-same-cwd-home-"));
   const cwd = mkdtempSync(path.join(tmpdir(), "paseo-same-cwd-dir-"));
-  const projectsDir = path.join(paseoHomeRoot, ".paseo", "projects");
+  const projectsDir = path.join(paseoHomeRoot, ".rambla", "projects");
   mkdirSync(projectsDir, { recursive: true });
 
   const project = createPersistedProjectRecord({
@@ -199,7 +199,7 @@ function seedSameCwdWorkspaces(): { paseoHomeRoot: string; cwd: string } {
 async function seedWorkspaceWithLegacyAgent(): Promise<{ paseoHomeRoot: string; cwd: string }> {
   const paseoHomeRoot = mkdtempSync(path.join(tmpdir(), "paseo-legacy-agent-home-"));
   const cwd = mkdtempSync(path.join(tmpdir(), "paseo-legacy-agent-dir-"));
-  const paseoHome = path.join(paseoHomeRoot, ".paseo");
+  const paseoHome = path.join(paseoHomeRoot, ".rambla");
   const projectsDir = path.join(paseoHome, "projects");
   mkdirSync(projectsDir, { recursive: true });
 

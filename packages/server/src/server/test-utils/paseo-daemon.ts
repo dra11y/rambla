@@ -164,7 +164,7 @@ async function prepareTestDaemonConfig(
 ): Promise<PreparedTestDaemonConfig> {
   const paseoHomeRoot =
     options.paseoHomeRoot ?? (await mkdtemp(path.join(os.tmpdir(), "paseo-home-")));
-  const paseoHome = path.join(paseoHomeRoot, ".paseo");
+  const paseoHome = path.join(paseoHomeRoot, ".rambla");
   await mkdir(paseoHome, { recursive: true });
   const staticDir = options.staticDir ?? (await mkdtemp(path.join(os.tmpdir(), "paseo-static-")));
   const listenHost = options.listen ?? "127.0.0.1";

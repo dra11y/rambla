@@ -5,7 +5,8 @@
 .playwright-mcp
 **/.playwright-mcp
 .paseo
-**/.paseo-provider-history
+.rambla
+**/.rambla-provider-history
 .plans
 .tasks
 .valknut

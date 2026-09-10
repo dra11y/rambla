@@ -41,12 +41,12 @@ describe("resolveFilePreviewReadTarget", () => {
   it("uses the home root for tilde paths", () => {
     expect(
       resolveFilePreviewReadTarget({
-        path: "~/.paseo/plans/file-preview.md",
+        path: "~/.rambla/plans/file-preview.md",
         workspaceRoot: "/Users/test/project",
       }),
     ).toEqual({
       cwd: "~",
-      path: "~/.paseo/plans/file-preview.md",
+      path: "~/.rambla/plans/file-preview.md",
     });
   });
 

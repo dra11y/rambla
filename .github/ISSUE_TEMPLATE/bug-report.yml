@@ -91,7 +91,7 @@ body:
         Claude Code v1.2.3 with Anthropic API
         Codex CLI v0.5.0 with OpenAI API
         OpenCode v0.3.1
-        (or paste the relevant section of ~/.paseo/config.json for custom providers)
+        (or paste the relevant section of ~/.rambla/config.json for custom providers)
 
   - type: textarea
     id: logs
@@ -100,7 +100,7 @@ body:
       description: |
         Paste relevant log output. Strongly preferred for crashes and daemon issues.
 
-        - **Daemon log:** `~/.paseo/daemon.log` (override with `$PASEO_HOME`)
+        - **Daemon log:** `~/.rambla/daemon.log` (override with `$PASEO_HOME`)
         - **Electron log (macOS):** `~/Library/Logs/Paseo/main.log`
         - **Electron log (Windows):** `%APPDATA%\Paseo\logs\main.log`
         - **Electron log (Linux):** `~/.config/Paseo/logs/main.log`

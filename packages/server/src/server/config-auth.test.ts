@@ -12,7 +12,7 @@ const CONFIG_PASSWORD_HASH = "$2b$12$OLxyuuP9uLK30Uzc4wQX0O6liuU/Q1t5P2b0Ebf36mU
 async function createPaseoHome(config: unknown): Promise<string> {
   const root = await mkdtemp(path.join(os.tmpdir(), "paseo-config-auth-"));
   roots.push(root);
-  const paseoHome = path.join(root, ".paseo");
+  const paseoHome = path.join(root, ".rambla");
   await mkdir(paseoHome, { recursive: true });
   await writeFile(path.join(paseoHome, "config.json"), JSON.stringify(config, null, 2));
   return paseoHome;

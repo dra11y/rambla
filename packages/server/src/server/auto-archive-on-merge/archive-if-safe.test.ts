@@ -505,7 +505,7 @@ describe("archiveIfSafe", () => {
 
   test("real outcome: keeps sibling workspace and directory on last reference", async () => {
     const { tempDir, repoDir } = createGitRepo();
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
     const worktree = await createPaseoOwnedWorktree(repoDir, paseoHome, "merged-with-sibling");
     const workspaceA = "ws-merged-with-sibling-a";
     const workspaceB = "ws-merged-with-sibling-b";
@@ -536,7 +536,7 @@ describe("archiveIfSafe", () => {
 
   test("real outcome: removes directory when no sibling workspace remains", async () => {
     const { tempDir, repoDir } = createGitRepo();
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
     const worktree = await createPaseoOwnedWorktree(repoDir, paseoHome, "merged-last-ref");
     const workspaceA = "ws-merged-last-ref";
     const archivedWorkspaceIds = new Set<string>();
@@ -562,7 +562,7 @@ describe("archiveIfSafe", () => {
 
   test("real outcome: an unarchived workspace is not archived again for the same merged PR", async () => {
     const { tempDir, repoDir } = createGitRepo();
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
     const worktree = await createPaseoOwnedWorktree(repoDir, paseoHome, "merged-then-unarchived");
     const workspace = {
       workspaceId: "ws-merged-then-unarchived",

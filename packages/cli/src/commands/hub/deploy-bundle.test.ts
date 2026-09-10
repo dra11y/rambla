@@ -16,7 +16,7 @@ describe("Hub deployment bundle discovery", () => {
   it("discovers the canonical bundle in deterministic path order", async () => {
     const cwd = await canonicalProject();
     await writeFile(
-      path.join(cwd, ".paseo", "workflows", "z-last.yml"),
+      path.join(cwd, ".rambla", "workflows", "z-last.yml"),
       workflow("z-last", "codex-safe"),
     );
 
@@ -42,7 +42,7 @@ describe("Hub deployment bundle discovery", () => {
     {
       name: "missing hub.yml",
       arrange: async (cwd: string) => {
-        await mkdir(path.join(cwd, ".paseo", "workflows"), { recursive: true });
+        await mkdir(path.join(cwd, ".rambla", "workflows"), { recursive: true });
       },
       code: "HUB_RESOURCE_MISSING",
       message: ".paseo/hub.yml does not exist",
@@ -50,8 +50,8 @@ describe("Hub deployment bundle discovery", () => {
     {
       name: "missing workflow directory",
       arrange: async (cwd: string) => {
-        await mkdir(path.join(cwd, ".paseo"), { recursive: true });
-        await writeFile(path.join(cwd, ".paseo", "hub.yml"), hubResource);
+        await mkdir(path.join(cwd, ".rambla"), { recursive: true });
+        await writeFile(path.join(cwd, ".rambla", "hub.yml"), hubResource);
       },
       code: "HUB_WORKFLOW_DIRECTORY_MISSING",
       message: ".paseo/workflows does not exist",
@@ -59,8 +59,8 @@ describe("Hub deployment bundle discovery", () => {
     {
       name: "empty workflow directory",
       arrange: async (cwd: string) => {
-        await mkdir(path.join(cwd, ".paseo", "workflows"), { recursive: true });
-        await writeFile(path.join(cwd, ".paseo", "hub.yml"), hubResource);
+        await mkdir(path.join(cwd, ".rambla", "workflows"), { recursive: true });
+        await writeFile(path.join(cwd, ".rambla", "hub.yml"), hubResource);
       },
       code: "HUB_WORKFLOW_MISSING",
       message: ".paseo/workflows must contain at least one direct-child .yml workflow",
@@ -68,9 +68,9 @@ describe("Hub deployment bundle discovery", () => {
     {
       name: "unsupported workflow extension",
       arrange: async (cwd: string) => {
-        await mkdir(path.join(cwd, ".paseo", "workflows"), { recursive: true });
-        await writeFile(path.join(cwd, ".paseo", "hub.yml"), hubResource);
-        await writeFile(path.join(cwd, ".paseo", "workflows", "answer.yaml"), "name: answer\n");
+        await mkdir(path.join(cwd, ".rambla", "workflows"), { recursive: true });
+        await writeFile(path.join(cwd, ".rambla", "hub.yml"), hubResource);
+        await writeFile(path.join(cwd, ".rambla", "workflows", "answer.yaml"), "name: answer\n");
       },
       code: "HUB_WORKFLOW_EXTENSION_UNSUPPORTED",
       message: ".paseo/workflows/answer.yaml must use the .yml extension",
@@ -88,7 +88,7 @@ describe("Hub deployment bundle discovery", () => {
   it("rejects prompt partial traversal with a path-specific diagnostic", async () => {
     const cwd = await canonicalProject();
     await writeFile(
-      path.join(cwd, ".paseo", "workflows", "answer.yml"),
+      path.join(cwd, ".rambla", "workflows", "answer.yml"),
       workflow("answer", "codex-safe").replace(
         "      - text: ${{ paseo.prompt }}",
         "      - include: ../secret.md",
@@ -104,7 +104,7 @@ describe("Hub deployment bundle discovery", () => {
   it("reports a referenced partial that is missing from the bundle", async () => {
     const cwd = await canonicalProject();
     await writeFile(
-      path.join(cwd, ".paseo", "workflows", "answer.yml"),
+      path.join(cwd, ".rambla", "workflows", "answer.yml"),
       workflow("answer", "codex-safe").replace(
         "      - text: ${{ paseo.prompt }}",
         "      - include: partials/missing.md",
@@ -119,9 +119,9 @@ describe("Hub deployment bundle discovery", () => {
 
   it("rejects nested workflow files instead of discovering a second layout", async () => {
     const cwd = await canonicalProject();
-    await mkdir(path.join(cwd, ".paseo", "workflows", "nested"));
+    await mkdir(path.join(cwd, ".rambla", "workflows", "nested"));
     await writeFile(
-      path.join(cwd, ".paseo", "workflows", "nested", "other.yml"),
+      path.join(cwd, ".rambla", "workflows", "nested", "other.yml"),
       workflow("other", "codex-safe"),
     );
 
@@ -135,7 +135,7 @@ describe("Hub deployment bundle discovery", () => {
     const cwd = await canonicalProject();
     const outside = path.join(cwd, "outside.yml");
     await writeFile(outside, workflow("linked", "codex-safe"));
-    await symlink(outside, path.join(cwd, ".paseo", "workflows", "linked.yml"));
+    await symlink(outside, path.join(cwd, ".rambla", "workflows", "linked.yml"));
 
     await expect(discoverHubBundle({ cwd, project: "studio-api" })).rejects.toMatchObject({
       code: "HUB_BUNDLE_UNSAFE_PATH",
@@ -199,9 +199,9 @@ function workflow(name: string, agent: string, include = false): string {
 
 async function canonicalProject(): Promise<string> {
   const cwd = await temporaryDirectory();
-  const workflows = path.join(cwd, ".paseo", "workflows");
+  const workflows = path.join(cwd, ".rambla", "workflows");
   await mkdir(path.join(workflows, "partials"), { recursive: true });
-  await writeFile(path.join(cwd, ".paseo", "hub.yml"), hubResource);
+  await writeFile(path.join(cwd, ".rambla", "hub.yml"), hubResource);
   await writeFile(
     path.join(workflows, "answer.yml"),
     workflow("answer", "${{ paseo.inputs.agent }}", true),

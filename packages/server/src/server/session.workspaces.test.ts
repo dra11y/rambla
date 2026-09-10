@@ -4702,7 +4702,7 @@ test("open_project_request does not match a new child directory to an existing p
   const projects = new Map<string, ReturnType<typeof createPersistedProjectRecord>>();
   const workspaces = new Map<string, ReturnType<typeof createPersistedWorkspaceRecord>>();
   const home = path.resolve("/home/developer");
-  const worktree = path.join(home, ".paseo", "worktrees", "project-config-lifecycle-textarea");
+  const worktree = path.join(home, ".rambla", "worktrees", "project-config-lifecycle-textarea");
 
   projects.set(
     home,
@@ -4768,7 +4768,7 @@ test("open_project_request does not unarchive an archived parent workspace for a
   const projects = new Map<string, ReturnType<typeof createPersistedProjectRecord>>();
   const workspaces = new Map<string, ReturnType<typeof createPersistedWorkspaceRecord>>();
   const home = path.resolve("/home/developer");
-  const worktree = path.join(home, ".paseo", "worktrees", "project-config-lifecycle-textarea");
+  const worktree = path.join(home, ".rambla", "worktrees", "project-config-lifecycle-textarea");
   const archivedAt = "2026-04-24T08:00:00.000Z";
 
   projects.set(
@@ -4838,7 +4838,7 @@ test("open_project_request reclassifies an archived directory workspace when git
   const repoRoot = path.resolve("/home/developer/dev/paseo");
   const cwd = path.join(
     path.resolve("/home/developer"),
-    ".paseo",
+    ".rambla",
     "worktrees",
     "orchestrate",
     "desktop-daemon-settings",
@@ -4933,7 +4933,7 @@ test("open_project_request reclassifies an active directory workspace when git m
   const repoRoot = path.resolve("/home/developer/dev/paseo");
   const cwd = path.join(
     path.resolve("/home/developer"),
-    ".paseo",
+    ".rambla",
     "worktrees",
     "orchestrate",
     "desktop-daemon-settings",
@@ -5048,7 +5048,7 @@ test("open_project_request gives a plain git worktree its own exact-root project
   const repoRoot = path.resolve("/home/developer/dev/paseo");
   const cwd = path.join(
     path.resolve("/home/developer"),
-    ".paseo",
+    ".rambla",
     "worktrees",
     "orchestrate",
     "desktop-daemon-settings",
@@ -5974,7 +5974,7 @@ test("archive_workspace_request archives a worktree-kind workspace and removes t
     stdio: "pipe",
   });
 
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const worktree = await createWorktree({
     cwd: repoDir,
     worktreeSlug: "worktree-kind-archive",
@@ -6072,7 +6072,7 @@ test.skip("opening a new worktree reconciles older local workspaces into the rem
 
   const tempDir = realpathSync(mkdtempSync(path.join(tmpdir(), "session-workspace-reconcile-")));
   const mainWorkspaceId = path.join(tempDir, "inkwell");
-  const worktreeWorkspaceId = path.join(mainWorkspaceId, ".paseo", "worktrees", "feature-a");
+  const worktreeWorkspaceId = path.join(mainWorkspaceId, ".rambla", "worktrees", "feature-a");
   const localProjectId = mainWorkspaceId;
   const remoteProjectId = "remote:github.com/zimakki/inkwell";
 
@@ -6182,7 +6182,7 @@ test.skip("fetch_workspaces_request reconciles remote URL changes for existing w
 
   const tempDir = realpathSync(mkdtempSync(path.join(tmpdir(), "session-workspace-fetch-")));
   const mainWorkspaceId = path.join(tempDir, "inkwell");
-  const worktreeWorkspaceId = path.join(mainWorkspaceId, ".paseo", "worktrees", "feature-a");
+  const worktreeWorkspaceId = path.join(mainWorkspaceId, ".rambla", "worktrees", "feature-a");
   const oldProjectId = "remote:github.com/old-owner/inkwell";
   const newProjectId = "remote:github.com/new-owner/inkwell";
 
@@ -8906,7 +8906,7 @@ function createWorkspaceCreatePrRepo(): WorkspaceCreatePrRepoFixture {
   const tempDir = realpathSync(mkdtempSync(path.join(tmpdir(), "workspace-create-pr-")));
   const repoDir = path.join(tempDir, "repo");
   const remoteDir = path.join(tempDir, "origin.git");
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const prNumber = 123;
   const headRef = "feature/review-pr";
   const prFileName = "pr-123.txt";

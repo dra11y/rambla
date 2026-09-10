@@ -2326,7 +2326,7 @@ _This release only fixes an Android issue — desktop users don't need to update
 
 ### Improved
 
-- Improved desktop runtime behavior on Windows by suppressing console windows and defaulting app data to `~/.paseo`
+- Improved desktop runtime behavior on Windows by suppressing console windows and defaulting app data to `~/.rambla`
 - Added a Discord link to the website navigation
 
 ### Fixed

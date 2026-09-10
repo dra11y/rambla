@@ -60,7 +60,7 @@ test("creates a worktree and registers it in the source workspace project withou
       worktreeSlug: "feature-one",
       title: "Feature One",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -115,7 +115,7 @@ test("refreshes a source project that became Git while creating a worktree", asy
       cwd: repoDir,
       worktreeSlug: "project-became-git",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -149,7 +149,7 @@ test("repairs a legacy source workspace whose project record is missing", async 
       cwd: repoDir,
       worktreeSlug: "repaired-source",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -193,7 +193,7 @@ test("uses an equivalent source workspace path when creating a worktree", async 
       cwd: sourceDir,
       worktreeSlug: "equivalent-source",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -222,7 +222,7 @@ test("creates a worktree workspace at the selected project subdirectory", async 
       projectId: project.projectId,
       worktreeSlug: "selected-subdirectory",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -250,7 +250,7 @@ test("seeds an uncommitted exact-project config into the mapped worktree directo
       cwd: sourceDir,
       worktreeSlug: "seed-nested-config",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     createDeps(),
   );
@@ -278,7 +278,7 @@ test("does not overwrite a committed exact-project config with source checkout e
       cwd: sourceDir,
       worktreeSlug: "preserve-nested-config",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     createDeps(),
   );
@@ -301,7 +301,7 @@ test("removes a new worktree when its ref does not contain the selected project 
   writeFileSync(path.join(sourceDir, "package.json"), "{}\n");
   commitAll(repoDir, "add subproject");
   const deps = createDeps();
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const worktreePath = path.join(
     await getPaseoWorktreesRoot(repoDir, paseoHome),
     "missing-subproject",
@@ -333,7 +333,7 @@ test("removes a new worktree when its ref does not contain the selected project 
 test("removes a new worktree when workspace persistence fails", async () => {
   const { repoDir, tempDir } = createGitRepo();
   cleanupPaths.push(tempDir);
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const worktreePath = path.join(
     await getPaseoWorktreesRoot(repoDir, paseoHome),
     "persistence-failure",
@@ -363,7 +363,7 @@ test("removes a new worktree when workspace persistence fails", async () => {
 test("maps a nested cwd from an existing Paseo worktree into the next worktree", async () => {
   const { repoDir, tempDir } = createGitRepo();
   cleanupPaths.push(tempDir);
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const projectDir = path.join(repoDir, "packages", "app");
   mkdirSync(projectDir, { recursive: true });
   writeFileSync(path.join(projectDir, "package.json"), "{}\n");
@@ -397,7 +397,7 @@ test("maps a nested cwd from an existing Paseo worktree into the next worktree",
 test("rejects source checkout planning before creating a worktree", async () => {
   const { repoDir, tempDir } = createGitRepo();
   cleanupPaths.push(tempDir);
-  const paseoHome = path.join(tempDir, ".paseo");
+  const paseoHome = path.join(tempDir, ".rambla");
   const deps = createDeps();
   deps.workspaceGitService.getCheckout = async () => {
     throw new Error("source checkout unavailable");
@@ -444,7 +444,7 @@ test("registers a new worktree in the existing root project after the main check
       projectId: sourceProject.projectId,
       worktreeSlug: "second-worktree",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -473,7 +473,7 @@ test("an explicit project FK remains unchanged when its worktree comes from anot
       projectId: project.projectId,
       worktreeSlug: "attached-worktree",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -496,7 +496,7 @@ test.skipIf(isPlatform("win32"))(
   async () => {
     const { repoDir, tempDir } = createGitRepo();
     cleanupPaths.push(tempDir);
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
     const firstDeps = createDeps();
     const first = await createPaseoWorktree(
       {
@@ -542,7 +542,7 @@ test("renames an eligible unnamed branch-off worktree once on first agent contex
       cwd: repoDir,
       worktreeSlug: "dazzling-yak",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -611,7 +611,7 @@ test("falls back to a numeric suffix when the desired branch name already exists
       cwd: repoDir,
       worktreeSlug: "dazzling-yak",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     createDeps(),
   );
@@ -648,7 +648,7 @@ test("renames the branch even when the app supplies a random placeholder slug", 
       worktreeSlug: "dazzling-yak",
       firstAgentContext: { prompt: "Investigate the failing login flow" },
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -696,7 +696,7 @@ test("renames the branch from a github_pr attachment when no prompt is supplied"
         ],
       },
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     deps,
   );
@@ -741,7 +741,7 @@ test("leaves the branch alone when generated branch text is invalid", async () =
       worktreeSlug: "dazzling-yak",
       firstAgentContext: { prompt: "Name this branch" },
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     createDeps(),
   );
@@ -786,7 +786,7 @@ test("does not mark checkout branch worktrees as eligible for first-agent rename
       action: "checkout",
       refName: "dev",
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     createDeps(),
   );
@@ -825,7 +825,7 @@ test("does not mark GitHub PR checkout worktrees as eligible for first-agent ren
       action: "checkout",
       githubPrNumber: 123,
       runSetup: false,
-      paseoHome: path.join(tempDir, ".paseo"),
+      paseoHome: path.join(tempDir, ".rambla"),
     },
     createDeps(),
   );
@@ -862,7 +862,7 @@ test("does not mutate registries or broadcast when core worktree creation fails"
         cwd: tempDir,
         worktreeSlug: "not-git",
         runSetup: false,
-        paseoHome: path.join(tempDir, ".paseo"),
+        paseoHome: path.join(tempDir, ".rambla"),
       },
       deps,
     ),
@@ -879,7 +879,7 @@ test.skipIf(isPlatform("win32"))(
   async () => {
     const { repoDir, tempDir } = createGitRepo();
     cleanupPaths.push(tempDir);
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
 
     execFileSync("git", ["branch", "restore-me"], { cwd: repoDir, stdio: "pipe" });
 
@@ -938,7 +938,7 @@ test.skipIf(isPlatform("win32"))(
   async () => {
     const { repoDir, tempDir } = createGitRepo();
     cleanupPaths.push(tempDir);
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
 
     execFileSync("git", ["branch", "restore-me"], { cwd: repoDir, stdio: "pipe" });
 
@@ -1010,7 +1010,7 @@ test.skipIf(isPlatform("win32"))(
         worktreeSlug: "gone-branch",
         source: { kind: "checkout-branch", branchName: "gone-branch" },
         runSetup: false,
-        paseoHome: path.join(tempDir, ".paseo"),
+        paseoHome: path.join(tempDir, ".rambla"),
       }),
     ).rejects.toMatchObject({ name: "UnknownBranchError" });
   },
@@ -1021,7 +1021,7 @@ test.skipIf(isPlatform("win32"))(
   async () => {
     const { repoDir, tempDir } = createGitRepo();
     cleanupPaths.push(tempDir);
-    const paseoHome = path.join(tempDir, ".paseo");
+    const paseoHome = path.join(tempDir, ".rambla");
 
     execFileSync("git", ["branch", "busy-branch"], { cwd: repoDir, stdio: "pipe" });
     const first = await createWorktree({

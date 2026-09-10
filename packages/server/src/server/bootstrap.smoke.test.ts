@@ -82,7 +82,7 @@ describe("paseo daemon bootstrap", () => {
 
   test("keeps timeline activity in memory and removes obsolete timeline files at startup", async () => {
     const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-timeline-cleanup-"));
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const obsoleteTimelineDirectory = path.join(paseoHome, "agent-timelines");
     const agentCwd = await mkdtemp(path.join(os.tmpdir(), "paseo-timeline-agent-"));
     await mkdir(obsoleteTimelineDirectory, { recursive: true });
@@ -142,7 +142,7 @@ describe("paseo daemon bootstrap", () => {
 
   test("reload applies live HTTP, MCP, Git, provider, relay, and app policies", async () => {
     const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-config-reload-runtime-"));
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
     const agentCwd = await mkdtemp(path.join(os.tmpdir(), "paseo-config-reload-agent-"));
     await mkdir(paseoHome, { recursive: true });
@@ -433,7 +433,7 @@ describe("paseo daemon bootstrap", () => {
     }
 
     const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-standalone-rollback-"));
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
     await mkdir(paseoHome, { recursive: true });
     const config: PaseoDaemonConfig = {
@@ -501,7 +501,7 @@ describe("paseo daemon bootstrap", () => {
 
   test("relay config changes during Hub enrollment reach the live runtime", async () => {
     const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-relay-startup-"));
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
     await mkdir(paseoHome, { recursive: true });
     await writeFile(
@@ -664,7 +664,7 @@ describe("paseo daemon bootstrap", () => {
     await new Promise<void>((resolve) => occupiedMain.listen(mainPort, "127.0.0.1", resolve));
 
     const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-main-rollback-"));
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
     const pluginDirectory = path.join(paseoHomeRoot, "plugin");
     const pluginPidPath = path.join(pluginDirectory, "plugin.pid");
@@ -772,7 +772,7 @@ export default function contribute(plugin: unknown) {
 
   test("starts when OpenAI speech provider is configured without credentials", async () => {
     const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-openai-config-"));
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
     await mkdir(paseoHome, { recursive: true });
 
@@ -905,7 +905,7 @@ export default function contribute(plugin: unknown) {
     "generates a relay pairing offer for unix socket listeners",
     async () => {
       const paseoHomeRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-socket-relay-"));
-      const paseoHome = path.join(paseoHomeRoot, ".paseo");
+      const paseoHome = path.join(paseoHomeRoot, ".rambla");
       const staticDir = await mkdtemp(path.join(os.tmpdir(), "paseo-static-"));
       const socketPath = path.join(paseoHomeRoot, "run", "paseo.sock");
       await mkdir(path.dirname(socketPath), { recursive: true });

@@ -31,7 +31,7 @@ has_files() {
 }
 
 seed_worktree_paseo_home() {
-  local source_home="${PASEO_DEV_SEED_HOME:-$HOME/.paseo}"
+  local source_home="${PASEO_DEV_SEED_HOME:-$HOME/.rambla}"
   local target_home="$1"
 
   if [ ! -d "$source_home" ]; then

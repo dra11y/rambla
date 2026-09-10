@@ -66,7 +66,7 @@ function seedFixture(siblingCount = SIBLING_COUNT): {
   const repoRoot = join(fixtureRoot, "repo");
   const worktreesRoot = join(fixtureRoot, "siblings");
   const paseoHomeRoot = join(fixtureRoot, "home");
-  const projectsDir = join(paseoHomeRoot, ".paseo", "projects");
+  const projectsDir = join(paseoHomeRoot, ".rambla", "projects");
   mkdirSync(repoRoot, { recursive: true });
   mkdirSync(worktreesRoot, { recursive: true });
   mkdirSync(projectsDir, { recursive: true });

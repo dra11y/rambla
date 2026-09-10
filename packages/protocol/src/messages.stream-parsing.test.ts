@@ -102,14 +102,14 @@ describe("shared messages stream parsing", () => {
               status: "completed",
               detail: {
                 type: "worktree_setup",
-                worktreePath: "/repo/.paseo/worktrees/feature",
+                worktreePath: "/repo/.rambla/worktrees/feature",
                 branchName: "feature",
                 log: "setup complete",
                 commands: [
                   {
                     index: 1,
                     command: "npm install",
-                    cwd: "/repo/.paseo/worktrees/feature",
+                    cwd: "/repo/.rambla/worktrees/feature",
                     status: "completed",
                     exitCode: 0,
                     durationMs: 100,

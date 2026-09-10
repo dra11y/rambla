@@ -100,7 +100,7 @@ test("archiving the last workspace leaves the project parent with no workspaces"
     execSync("git add README.md", { cwd: repoRoot, stdio: "pipe" });
     execSync("git -c commit.gpgSign=false commit -m 'initial'", { cwd: repoRoot, stdio: "pipe" });
 
-    const paseoHome = path.join(paseoHomeRoot, ".paseo");
+    const paseoHome = path.join(paseoHomeRoot, ".rambla");
     const projectsPath = path.join(paseoHome, "projects", "projects.json");
 
     const daemon = await createTestPaseoDaemon({ paseoHomeRoot, cleanup: false });

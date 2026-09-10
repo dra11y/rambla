@@ -32,7 +32,7 @@ describe("bootstrapWorkspaceRegistries", () => {
     ARCHIVED_PROJECT = path.join(tmpDir, "archived-project");
     GIT_PROJECT = path.join(tmpDir, "legacy-git-project");
     GIT_WORKTREE = path.join(tmpDir, "legacy-git-project-feature");
-    paseoHome = path.join(tmpDir, ".paseo");
+    paseoHome = path.join(tmpDir, ".rambla");
     agentStorage = new AgentStorage(path.join(paseoHome, "agents"), logger);
     projectRegistry = new FileBackedProjectRegistry(
       path.join(paseoHome, "projects", "projects.json"),

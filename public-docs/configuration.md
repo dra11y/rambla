@@ -12,10 +12,10 @@ Paseo loads configuration from a single JSON file in your Paseo home directory, 
 
 ## Where config lives
 
-By default, Paseo uses `~/.paseo` as its home directory. The configuration file is:
+By default, Paseo uses `~/.rambla` as its home directory. The configuration file is:
 
 ```bash
-~/.paseo/config.json
+~/.rambla/config.json
 ```
 
 You can change the home directory by setting `PASEO_HOME` or passing `--home` to `paseo daemon start`.

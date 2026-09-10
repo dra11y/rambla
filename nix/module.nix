@@ -35,11 +35,11 @@ in
       default =
         if cfg.user == "paseo"
         then "/var/lib/paseo"
-        else "/home/${cfg.user}/.paseo";
+        else "/home/${cfg.user}/.rambla";
       defaultText = lib.literalExpression ''
         if cfg.user == "paseo"
         then "/var/lib/paseo"
-        else "/home/''${cfg.user}/.paseo"
+        else "/home/''${cfg.user}/.rambla"
       '';
       description = "Directory for Paseo state (PASEO_HOME). Stores agent data, config, and logs.";
     };

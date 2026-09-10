@@ -36,7 +36,7 @@ describe("bootstrap provider availability", () => {
       .trim();
     process.env.PATH = path.dirname(gitPath);
     expect(execFileSync("git", ["--version"], { encoding: "utf8" })).toMatch(/git version/i);
-    const paseoHome = path.join(root, ".paseo");
+    const paseoHome = path.join(root, ".rambla");
     const staticDir = path.join(root, "static");
     const agentStoragePath = path.join(paseoHome, "agents");
     const now = new Date("2026-04-16T00:00:00.000Z").toISOString();

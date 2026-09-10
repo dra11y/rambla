@@ -75,7 +75,7 @@ console.log("=== CLI IPC Target Helpers ===\n");
 
 {
   console.log("Test 5b: Windows absolute paths are NOT treated as unix sockets");
-  assert.strictEqual(normalizeDaemonHost("C:\\Users\\foo\\.paseo\\paseo.sock"), null);
+  assert.strictEqual(normalizeDaemonHost("C:\\Users\\foo\\.rambla\\paseo.sock"), null);
   assert.strictEqual(normalizeDaemonHost("D:\\project\\socket"), null);
   console.log("✓ Windows absolute paths are not treated as unix sockets\n");
 }

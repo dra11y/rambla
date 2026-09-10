@@ -820,8 +820,8 @@ describe("WorkspaceReconciliationService", () => {
   test("keeps legacy duplicate projects and workspace membership intact", async () => {
     const repoDir = createTempGitRepo("reconcile-duplicate-project-");
     tempDirs.push(repoDir);
-    const canonicalWorktreeDir = path.join(repoDir, ".paseo", "worktrees", "focused-bat");
-    const duplicateWorktreeDir = path.join(repoDir, ".paseo", "worktrees", "gigantic-blowfish");
+    const canonicalWorktreeDir = path.join(repoDir, ".rambla", "worktrees", "focused-bat");
+    const duplicateWorktreeDir = path.join(repoDir, ".rambla", "worktrees", "gigantic-blowfish");
     mkdirSync(canonicalWorktreeDir, { recursive: true });
     mkdirSync(duplicateWorktreeDir, { recursive: true });
     const { projects, workspaces, projectRegistry, workspaceRegistry } = createTestRegistries();

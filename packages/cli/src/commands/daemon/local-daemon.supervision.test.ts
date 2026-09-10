@@ -73,7 +73,7 @@ const tempRoots: string[] = [];
 async function createPaseoHome(config: unknown): Promise<string> {
   const root = await mkdtemp(path.join(os.tmpdir(), "paseo-local-daemon-"));
   tempRoots.push(root);
-  const paseoHome = path.join(root, ".paseo");
+  const paseoHome = path.join(root, ".rambla");
   await mkdir(paseoHome, { recursive: true });
   await writeFile(path.join(paseoHome, "config.json"), JSON.stringify(config, null, 2));
   return paseoHome;

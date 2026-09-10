@@ -406,7 +406,7 @@ Providers that can accept native tool definitions should set `supportsNativePase
 
 ## Storage
 
-`$PASEO_HOME` defaults to `~/.paseo`. The most important files:
+`$PASEO_HOME` defaults to `~/.rambla`. The most important files:
 
 ```
 $PASEO_HOME/

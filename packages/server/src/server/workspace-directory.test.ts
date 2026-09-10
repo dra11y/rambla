@@ -35,7 +35,7 @@ class WorkspaceStatus {
   private readonly worktreeWorkspace: PersistedWorkspaceRecord = {
     workspaceId: "workspace-worktree",
     projectId: this.project.projectId,
-    cwd: "/workspace/project/.paseo/worktrees/feature",
+    cwd: "/workspace/project/.rambla/worktrees/feature",
     kind: "worktree",
     displayName: "feature",
     createdAt: NOW,

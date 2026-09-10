@@ -52,7 +52,7 @@ buildNpmPackage {
       && !(lib.hasSuffix ".e2e.test.ts" baseName)
       && baseName != "node_modules"
       && baseName != ".git"
-      && baseName != ".paseo"
+      && baseName != ".rambla"
       && baseName != ".DS_Store"
       && baseName != "release";
   };
