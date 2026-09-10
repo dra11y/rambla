@@ -77,7 +77,7 @@ export function createCli(): Command {
   addJsonAndDaemonHostOptions(
     program
       .command("clone")
-      .description("Clone a GitHub repo and register it as a Paseo workspace")
+      .description("Clone a GitHub repo and register it as a Rambla workspace")
       .argument("<repo>", "GitHub repo in owner/repo format or a full git remote URL")
       .requiredOption("--dir <path>", "Parent directory to clone into (for example: ~/workspace)"),
   )
@@ -130,7 +130,7 @@ export function createCli(): Command {
       .command("status")
       .description('Show local daemon status (alias for "paseo daemon status")'),
   )
-    .option("--home <path>", "Paseo home directory (default: ~/.rambla)")
+    .option("--home <path>", "Rambla home directory (default: ~/.rambla)")
     .action(withOutput(runDaemonStatusCommand));
 
   addJsonAndDaemonHostOptions(
@@ -142,7 +142,7 @@ export function createCli(): Command {
       .command("restart")
       .description('Restart local daemon (alias for "paseo daemon restart")'),
   )
-    .option("--home <path>", "Paseo home directory (default: ~/.rambla)")
+    .option("--home <path>", "Rambla home directory (default: ~/.rambla)")
     .option("--timeout <seconds>", "Wait timeout before force step (default: 15)")
     .option("--force", "Send SIGKILL if graceful stop times out")
     .option(

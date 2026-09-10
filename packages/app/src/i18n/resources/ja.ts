@@ -1134,7 +1134,7 @@ export const ja: TranslationResources = {
       discord: "Discord",
       github: "GitHub Issueを作成",
       whatsNew: "新着情報",
-      appName: "Paseo",
+      appName: "Rambla",
     },
     sections: {
       sessions: "履歴",
@@ -1428,12 +1428,12 @@ export const ja: TranslationResources = {
     integrations: {
       cli: {
         statusFailed: "CLIのインストール状態を確認できません。",
-        installFailed: "Paseo CLIをインストールできません。",
+        installFailed: "Rambla CLIをインストールできません。",
       },
     },
   },
   rootError: {
-    title: "Paseo で問題が発生しました。",
+    title: "Rambla で問題が発生しました。",
     body: "アプリを再読み込みするにはもう一度お試しください。繰り返し発生する場合は、以下の詳細を添えて報告してください。",
     details: "詳細",
   },
@@ -1658,7 +1658,7 @@ export const ja: TranslationResources = {
     },
     remoteSsh: {
       title: "リモート SSH",
-      helper: "リモートホストで動作する Paseo デーモンに接続します。",
+      helper: "リモートホストで動作する Rambla デーモンに接続します。",
       fields: {
         target: "SSH ホスト",
       },
@@ -1716,13 +1716,13 @@ export const ja: TranslationResources = {
       enableDescription:
         "リレーを使うと、このデバイスからどこでも接続できます。ペアリング通信はエンドツーエンドで暗号化されます。",
       relayDocs: "リレーの仕組み",
-      relayDocsAccessibility: "Paseo リレーの仕組みを読む",
+      relayDocsAccessibility: "Rambla リレーの仕組みを読む",
       enableRelay: "リレーを有効にする",
       enablingRelay: "有効化中...",
       notNow: "今はしない",
       directConnectionHint:
         "リレーを使わない場合は、TCP、Tailscale、または別の VPN で直接接続してください。QR コードは作成されません。",
-      updateRequired: "Paseo Desktop からリレーを有効にするにはホストを更新してください。",
+      updateRequired: "Rambla Desktop からリレーを有効にするにはホストを更新してください。",
       unavailable: "ペアリングオファーが利用できません。",
       hint: "スマートフォンのPaseoでこのQRコードをスキャンするか、以下のリンクをコピーしてください。",
       securityWarning:
@@ -1962,7 +1962,7 @@ export const ja: TranslationResources = {
       send: "送信",
       sending: "送信中...",
       sentTitle: "テスト通知を送信しました",
-      sentDescription: "Paseo が通知をオペレーティングシステムに渡しました。",
+      sentDescription: "Rambla が通知をオペレーティングシステムに渡しました。",
       sendFailedTitle: "テスト通知を送信できません",
     },
     hostSections: {
@@ -1985,10 +1985,10 @@ export const ja: TranslationResources = {
       selection: "モデル選択",
       automatic: "自動",
       preferred: "手動",
-      automaticHint: "Paseo が利用可能な高速モデルを選択します",
-      preferredHint: "Paseo が使用するモデルを選択します",
+      automaticHint: "Rambla が利用可能な高速モデルを選択します",
+      preferredHint: "Rambla が使用するモデルを選択します",
       model: "モデル",
-      fallbackHint: "利用できない場合、Paseo は別の利用可能なモデルを使用します",
+      fallbackHint: "利用できない場合、Rambla は別の利用可能なモデルを使用します",
       docs: "ドキュメント",
       saveError: "メタデータ生成を更新できません",
     },

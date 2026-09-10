@@ -10,7 +10,7 @@ import {
 } from "~/components/mockup";
 
 const ALT =
-  "Paseo desktop app with coding agents, a conversation, and a code diff open side by side";
+  "Rambla desktop app with coding agents, a conversation, and a code diff open side by side";
 
 const ASPECT_STYLE = { aspectRatio: `${DESIGN_WIDTH} / ${DESIGN_HEIGHT}` };
 

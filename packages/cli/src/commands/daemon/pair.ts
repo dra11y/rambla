@@ -63,7 +63,7 @@ function createProcessOutput(): PairCommandOutput {
 
 export function pairCommand(): Command {
   return addJsonOption(new Command("pair").description("Print the daemon pairing QR code and link"))
-    .option("--home <path>", "Paseo home directory (default: ~/.rambla)")
+    .option("--home <path>", "Rambla home directory (default: ~/.rambla)")
     .option("--relay", "Enable relay without prompting")
     .action(async (_options: PairOptions, command: Command) => {
       await runPairCommand(command.optsWithGlobals());
@@ -117,11 +117,11 @@ async function resolveDaemonPairingOffer(
     const serverInfo = client.getLastServerInfoMessage();
     if (serverInfo?.serverId.trim() !== expectedServerId) {
       throw new Error(
-        "The reachable daemon belongs to a different Paseo home. Check --home or the daemon listen configuration.",
+        "The reachable daemon belongs to a different Rambla home. Check --home or the daemon listen configuration.",
       );
     }
     if (serverInfo?.features?.daemonStatusRpc !== true) {
-      throw new Error("Update the Paseo daemon before pairing from this command.");
+      throw new Error("Update the Rambla daemon before pairing from this command.");
     }
 
     let offer = await client.getDaemonPairingOffer({
@@ -129,7 +129,7 @@ async function resolveDaemonPairingOffer(
     });
     if (!offer.relayEnabled && enableRelay) {
       if (serverInfo.features.relayConfig !== true) {
-        throw new Error("Update the Paseo daemon before enabling relay from this command.");
+        throw new Error("Update the Rambla daemon before enabling relay from this command.");
       }
       await client.patchDaemonConfig({ relay: { enabled: true } });
       offer = await client.getDaemonPairingOffer({
@@ -147,7 +147,7 @@ async function resolveDaemonPairingOffer(
 }
 
 export async function confirmRelayPairing(): Promise<boolean> {
-  log.message("Your connection is end-to-end encrypted. Paseo cannot read your code or messages.");
+  log.message("Your connection is end-to-end encrypted. Rambla cannot read your code or messages.");
   log.message(`Learn how it works: ${RELAY_DOCS_URL}`);
   const answer = await confirm({
     message: "Enable relay to pair a device?",

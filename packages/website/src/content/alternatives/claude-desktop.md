@@ -1,29 +1,29 @@
 ---
 title: Open Source Claude Desktop Alternative With Native Mobile and Multi-Provider Support
-description: Paseo is an open source Claude Desktop alternative that runs on your machines without a required Paseo account, telemetry, or cloud service.
+description: Rambla is an open source Claude Desktop alternative that runs on your machines without a required Rambla account, telemetry, or cloud service.
 nav: Claude Desktop
 order: 55
 ---
 
-# Paseo vs Claude Desktop
+# Rambla vs Claude Desktop
 
 Claude Desktop is Anthropic's app for Claude Chat, Cowork, and Claude Code on macOS, Windows, and Linux.
 
-Paseo is an app for orchestrating coding agents, with native clients on desktop, mobile, web, and the CLI. Open source (Apache-2.0).
+Rambla is an app for orchestrating coding agents, with native clients on desktop, mobile, web, and the CLI. Open source (Apache-2.0).
 
-![Paseo desktop and mobile app](/hero-mockup.png)
+![Rambla desktop and mobile app](/hero-mockup.png)
 
 ## The main difference
 
 Claude Desktop is Anthropic's first-party interface for Claude and requires a Claude account. It can run Claude Code locally, over SSH, or on Anthropic's infrastructure.
 
-Paseo is an open source control plane that runs on machines you control. It does not require a Paseo account, collect telemetry, or depend on a Paseo cloud service. Connect directly from desktop, mobile, web, or the CLI, or use the optional end-to-end encrypted relay when the daemon is behind a firewall.
+Rambla is an open source control plane that runs on machines you control. It does not require a Rambla account, collect telemetry, or depend on a Rambla cloud service. Connect directly from desktop, mobile, web, or the CLI, or use the optional end-to-end encrypted relay when the daemon is behind a firewall.
 
-Paseo does not upload or store your code. The relay cannot read your code, messages, or agent output. You can also self-host the daemon, web client, and relay.
+Rambla does not upload or store your code. The relay cannot read your code, messages, or agent output. You can also self-host the daemon, web client, and relay.
 
 ## Architecture
 
-Paseo runs an independent daemon on your laptop, workstation, VM, home lab, or cloud machine. Its clients connect directly or through the optional end-to-end encrypted relay. The daemon launches your installed providers with their existing credentials, skills, MCP servers, and project configuration.
+Rambla runs an independent daemon on your laptop, workstation, VM, home lab, or cloud machine. Its clients connect directly or through the optional end-to-end encrypted relay. The daemon launches your installed providers with their existing credentials, skills, MCP servers, and project configuration.
 
 Claude Desktop is the Anthropic-controlled host application. Claude Code can run locally, connect over SSH, or use Anthropic-managed cloud sessions.
 
@@ -31,21 +31,21 @@ Claude Desktop is the Anthropic-controlled host application. Claude Code can run
 
 Claude Desktop runs Claude Code.
 
-Paseo runs Claude Code too, plus Codex, OpenCode, and Pi natively, plus 30+ more agents through the in-app catalog including GitHub Copilot, Cursor, Gemini CLI, and Amp. Paseo speaks the [Agent Client Protocol](https://agentclientprotocol.com), so any ACP agent works. Custom providers run any CLI agent. See [all supported providers](/agents).
+Rambla runs Claude Code too, plus Codex, OpenCode, and Pi natively, plus 30+ more agents through the in-app catalog including GitHub Copilot, Cursor, Gemini CLI, and Amp. Rambla speaks the [Agent Client Protocol](https://agentclientprotocol.com), so any ACP agent works. Custom providers run any CLI agent. See [all supported providers](/agents).
 
 ## Application plugins
 
-[Paseo plugins](/docs/plugins) extend Paseo itself. They can add server behavior and native client components such as workspace panels, sidebar items, composer attachments, themes, and Command Center items across desktop, browser, iOS, and Android.
+[Rambla plugins](/docs/plugins) extend Rambla itself. They can add server behavior and native client components such as workspace panels, sidebar items, composer attachments, themes, and Command Center items across desktop, browser, iOS, and Android.
 
 Claude Desktop does not document an application extension API for adding both server behavior and native client components.
 
 ## Desktop platforms
 
-Both Claude Desktop and Paseo are available on macOS, Windows, and Linux.
+Both Claude Desktop and Rambla are available on macOS, Windows, and Linux.
 
 ## Mobile
 
-Paseo ships native iOS and Android apps with the same agent workflow as the desktop app.
+Rambla ships native iOS and Android apps with the same agent workflow as the desktop app.
 
 Claude has iOS and Android apps. Dispatch can start local Claude Code work through an active Claude Desktop host or start a cloud session on Anthropic's infrastructure.
 
@@ -53,13 +53,13 @@ Claude has iOS and Android apps. Dispatch can start local Claude Code work throu
 
 Both tools support visual coding workflows around Claude Code.
 
-Paseo's app has split panes and tabs (⌘D for vertical, ⌘⇧D for horizontal). Panes include agents, terminals, a diff viewer, and a browser for testing running services.
+Rambla's app has split panes and tabs (⌘D for vertical, ⌘⇧D for horizontal). Panes include agents, terminals, a diff viewer, and a browser for testing running services.
 
 Claude Desktop has a graphical Code tab with sessions, integrated terminal, file editor, visual diff review, live app preview, PR monitoring, and scheduled tasks.
 
 ## GitHub
 
-Paseo's app handles commit, push, opening PRs, watching checks and reviews, and merging.
+Rambla's app handles commit, push, opening PRs, watching checks and reviews, and merging.
 
 Claude Desktop can monitor pull request status and can fix failures or merge when checks pass, depending on the workflow and permissions.
 
@@ -67,7 +67,7 @@ Claude Desktop can monitor pull request status and can fix failures or merge whe
 
 Claude Code has its own CLI, IDE integrations, web surface, scheduled tasks, and cloud sessions.
 
-Paseo's CLI controls the same daemon as the app:
+Rambla's CLI controls the same daemon as the app:
 
 ```bash
 paseo run --provider claude "implement OAuth"
@@ -84,21 +84,21 @@ paseo schedule create --cron "0 9 * * 1" "audit the codebase"
 
 Both tools support parallel coding sessions, including Git worktrees.
 
-Paseo also gives each worktree its own dev server URL. Two agents running their dev servers at the same time get `web.fix-auth.my-app.localhost` and `web.add-search.my-app.localhost` instead of port collisions.
+Rambla also gives each worktree its own dev server URL. Two agents running their dev servers at the same time get `web.fix-auth.my-app.localhost` and `web.add-search.my-app.localhost` instead of port collisions.
 
 ## Voice
 
-Paseo supports dictation and realtime voice mode. Speech-to-text and text-to-speech can run locally on your device.
+Rambla supports dictation and realtime voice mode. Speech-to-text and text-to-speech can run locally on your device.
 
 Claude supports voice in Claude's own mobile and app surfaces. Claude Code itself is available in Claude Desktop, terminal, IDE, web, and mobile Remote Control workflows.
 
 ## Comparison
 
-|                              | Paseo                                                           | Claude Desktop                       |
+|                              | Rambla                                                          | Claude Desktop                       |
 | ---------------------------- | --------------------------------------------------------------- | ------------------------------------ |
 | License                      | Open source (Apache-2.0)                                        | Not published as open source         |
 | Desktop platforms            | macOS, Linux, Windows                                           | macOS, Linux, Windows                |
-| Mobile coding workflow       | Native Paseo workspace on iOS and Android                       | Dispatch and Cowork in Claude mobile |
+| Mobile coding workflow       | Native Rambla workspace on iOS and Android                      | Dispatch and Cowork in Claude mobile |
 | Coding agents                | Claude Code, Codex, OpenCode, Pi + 30+ via ACP catalog + custom | Claude Code                          |
 | Product account required     | No                                                              | Claude account                       |
 | Cloud agent                  | Cloud waitlist                                                  | Claude Cowork and remote sessions    |
@@ -115,4 +115,4 @@ Claude supports voice in Claude's own mobile and app surfaces. Claude Code itsel
 | Application plugins          | Server code and native client components                        | No                                   |
 | Self-hosted control plane    | Daemon, web client, and relay                                   | No                                   |
 
-See also: [Paseo vs Codex App](/alternatives/codex-app), [Paseo vs OpenCode Desktop](/alternatives/opencode-desktop), [Paseo vs Conductor](/alternatives/conductor).
+See also: [Rambla vs Codex App](/alternatives/codex-app), [Rambla vs OpenCode Desktop](/alternatives/opencode-desktop), [Rambla vs Conductor](/alternatives/conductor).

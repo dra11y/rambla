@@ -94,13 +94,13 @@ export function GreetingSurface({ theme, layout }: PluginSurfaceProps) {
         accessibilityRole="button"
         accessibilityLabel="Create greeting"
         style={styles.button}
-        onPress={() => greeting.mutate({ name: "Paseo" })}
+        onPress={() => greeting.mutate({ name: "Rambla" })}
       >
         <Text style={styles.buttonText}>Create greeting</Text>
       </Pressable>
       <Pressable
         accessibilityRole="link"
-        accessibilityLabel="Open the Paseo website"
+        accessibilityLabel="Open the Rambla website"
         style={styles.button}
         onPress={() => openExternal("https://rambla.sh")}
       >

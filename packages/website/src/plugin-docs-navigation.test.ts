@@ -13,13 +13,13 @@ describe("versioned plugin documentation", () => {
         { type: "page", label: "Versions", href: "/docs/plugins" },
         {
           type: "group",
-          label: "Paseo v0.7 — Current",
+          label: "Rambla v0.7 — Current",
           href: "/docs/plugins/v0.7",
           children: [{ type: "page", label: "Reference", href: "/docs/plugins/v0.7/reference" }],
         },
         {
           type: "group",
-          label: "Paseo v0.8 — Beta",
+          label: "Rambla v0.8 — Beta",
           href: "/docs/plugins/v0.8",
           children: [
             { type: "page", label: "Provider plugins", href: "/docs/plugins/v0.8/providers" },

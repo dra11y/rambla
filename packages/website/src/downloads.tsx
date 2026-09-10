@@ -16,12 +16,12 @@ export function downloadUrls(release: ReleaseAssetInfo) {
   const { version, linuxAppImageAsset, windowsX64Asset, windowsArm64Asset } = release;
   const base = releaseBase(version);
   return {
-    macAppleSilicon: `${base}/Paseo-${version}-arm64.dmg`,
-    macIntel: `${base}/Paseo-${version}-x64.dmg`,
+    macAppleSilicon: `${base}/Rambla-${version}-arm64.dmg`,
+    macIntel: `${base}/Rambla-${version}-x64.dmg`,
     linuxAppImage: `${base}/${linuxAppImageAsset}`,
-    linuxDeb: `${base}/Paseo-${version}-amd64.deb`,
-    linuxRpm: `${base}/Paseo-${version}-x86_64.rpm`,
-    windowsExeX64: `${base}/${windowsX64Asset ?? `Paseo-Setup-${version}.exe`}`,
+    linuxDeb: `${base}/Rambla-${version}-amd64.deb`,
+    linuxRpm: `${base}/Rambla-${version}-x86_64.rpm`,
+    windowsExeX64: `${base}/${windowsX64Asset ?? `Rambla-Setup-${version}.exe`}`,
     windowsExeArm64: windowsArm64Asset ? `${base}/${windowsArm64Asset}` : null,
     androidApk: `${base}/paseo-v${version}-android.apk`,
   };

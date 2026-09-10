@@ -5,8 +5,8 @@ import { pageMeta } from "~/meta";
 export const Route = createFileRoute("/sponsor")({
   head: () =>
     pageMeta(
-      "Sponsor Paseo",
-      "Support the independent open-source project behind Paseo. Built by Mo, funded by the community.",
+      "Sponsor Rambla",
+      "Support the independent open-source project behind Rambla. Built by Mo, funded by the community.",
       "/sponsor",
     ),
   component: Sponsor,
@@ -33,12 +33,12 @@ function Sponsor() {
         </p>
 
         <p>
-          Paseo started as a personal project: I wanted to run coding agents from anywhere without
+          Rambla started as a personal project: I wanted to run coding agents from anywhere without
           giving up control of my code, my keys, or my workflow.
         </p>
 
         <p>
-          I work on Paseo full-time. It&apos;s an independent, self-funded open-source project. I
+          I work on Rambla full-time. It&apos;s an independent, self-funded open-source project. I
           don&apos;t have investors, a board, or a big team. I&apos;m just shipping software the
           best I know how and hope it&apos;s useful to other people.
         </p>
@@ -54,7 +54,7 @@ function Sponsor() {
 
       {/* Sponsor links */}
       <section className="mt-12 space-y-4">
-        <h2 className="text-xl font-medium">Support Paseo</h2>
+        <h2 className="text-xl font-medium">Support Rambla</h2>
 
         <div className="flex flex-col sm:flex-row gap-4">
           <a

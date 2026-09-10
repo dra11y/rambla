@@ -111,7 +111,7 @@ async function install(
   _command: Command,
 ): Promise<SingleResult<PluginListItem>> {
   process.stderr.write(
-    "Trusting plugin code: server code and Git build commands run unsandboxed on the daemon host; client code runs inside Paseo. Dependencies and future updates are part of the codebase you trust.\n",
+    "Trusting plugin code: server code and Git build commands run unsandboxed on the daemon host; client code runs inside Rambla. Dependencies and future updates are part of the codebase you trust.\n",
   );
   const isExplicitPath =
     path.isAbsolute(source) ||

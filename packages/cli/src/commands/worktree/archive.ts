@@ -101,7 +101,7 @@ export async function runArchiveCommandWithDeps(
     }
 
     // Archive the worktree. scope:"worktree" archives every active workspace on
-    // the directory and then removes the directory (Paseo-owned gated).
+    // the directory and then removes the directory (Rambla-owned gated).
     const response = await client.archivePaseoWorktree({
       worktreePath: worktree.worktreePath,
       scope: "worktree",

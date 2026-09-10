@@ -105,7 +105,7 @@ describe("plugin scaffold", () => {
     },
   );
 
-  it("typechecks client and server Paseo API access", async () => {
+  it("typechecks client and server Rambla API access", async () => {
     const parent = await mkdtemp(path.join(process.cwd(), ".plugin-scaffold-"));
     directories.push(parent);
     const directory = path.join(parent, "paseo-api-plugin");
@@ -154,7 +154,7 @@ export function Surface({ navigation }: PluginSurfaceProps) {
   navigation?.openAgent({ agentId: "agent-1" });
   navigation?.openWorkspace({ workspaceId: "workspace-1" });
   void createWorkspace;
-  return <><Icon name="Settings" size={18} color="#123456" /><Text onPress={() => toast.show("Ready")}>Paseo API</Text><Modal title="Example" icon={<Icon name="Settings" />} open={false} onOpenChange={() => {}}><Modal.Content><Text>Modal</Text></Modal.Content></Modal></>;
+  return <><Icon name="Settings" size={18} color="#123456" /><Text onPress={() => toast.show("Ready")}>Rambla API</Text><Modal title="Example" icon={<Icon name="Settings" />} open={false} onOpenChange={() => {}}><Modal.Content><Text>Modal</Text></Modal.Content></Modal></>;
 }
 
 export function AgentPanel({ workspaceId, agentId }: PluginAgentPanelProps) {
