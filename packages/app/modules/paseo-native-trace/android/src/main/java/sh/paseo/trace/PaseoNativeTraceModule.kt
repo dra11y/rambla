@@ -1,4 +1,4 @@
-package sh.paseo.trace
+package sh.rambla.trace
 
 import android.os.Trace
 import expo.modules.kotlin.modules.Module

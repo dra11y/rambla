@@ -1,5 +1,5 @@
 npmRebuild: false
-appId: sh.paseo.desktop
+appId: sh.rambla.desktop
 productName: Paseo
 executableName: Paseo
 protocols:

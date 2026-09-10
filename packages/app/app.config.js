@@ -67,7 +67,7 @@ function resolveSecretFile(params) {
 const variants = {
   production: {
     name: "Paseo",
-    packageId: "sh.paseo",
+    packageId: "sh.rambla",
     googleServicesFile: resolveSecretFile({
       envKey: "GOOGLE_SERVICES_FILE_PROD",
       fallbackRelativePath: "./.secrets/google-services.prod.json",
@@ -79,7 +79,7 @@ const variants = {
   },
   development: {
     name: "Paseo Debug",
-    packageId: "sh.paseo.debug",
+    packageId: "sh.rambla.debug",
     googleServicesFile: resolveSecretFile({
       envKey: "GOOGLE_SERVICES_FILE_DEBUG",
       fallbackRelativePath: "./.secrets/google-services.debug.json",

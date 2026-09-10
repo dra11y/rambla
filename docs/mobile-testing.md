@@ -7,7 +7,7 @@ Agent Device `.ad` scripts are the primary mobile E2E format. An agent discovers
 Record a flow while driving the app normally:
 
 ```bash
-agent-device open sh.paseo.debug \
+agent-device open sh.rambla.debug \
   --platform ios \
   --session terminal-author \
   --save-script ./packages/app/e2e/mobile/agent-device/terminal.ios.ad
@@ -44,7 +44,7 @@ ANDROID_SERIAL=emulator-5554 node packages/app/e2e/mobile/terminal-keyboard/andr
 
 Use a real docked software keyboard. The harness taps Ctrl, Esc, and Enter and checks Android's
 focused input identity and IME hide/show events. It saves screenshots and logs under
-`.dev/agent-device-artifacts/terminal-keyboard-android`. Set `PASEO_TERMINAL_KEYBOARD_APP_ID=sh.paseo`
+`.dev/agent-device-artifacts/terminal-keyboard-android`. Set `PASEO_TERMINAL_KEYBOARD_APP_ID=sh.rambla`
 to test an installed production build. It never submits a chat message.
 
 When replay diverges, read its ranked selector suggestions. Edit the script deliberately and rerun it from the beginning. `--update` is retained for compatibility but no longer rewrites scripts.
@@ -153,7 +153,7 @@ Two reusable flows handle Expo dev client screens after launch:
 `flows/land-in-chat.yaml` is the canonical "get into a chat" primitive. It `clearState`s, runs `launch.yaml`, taps the welcome screen's direct-connection option, types `127.0.0.1:6767`, submits, and waits for `message-input-root`. Compose any composer-level fixture on top of it:
 
 ```yaml
-appId: sh.paseo
+appId: sh.rambla
 ---
 - runFlow: flows/land-in-chat.yaml
 # ...your scenario here, starting from a ready composer
@@ -378,8 +378,8 @@ APP_VARIANT=development npx expo run:ios --device
 ```
 
 `APP_VARIANT=development` is required. The `ios` npm script does not set it, and `app.config.js` defaults
-to `production` — so a bare `npm run ios` builds `sh.paseo` and collides with the App Store install instead
-of the `sh.paseo.debug` dev client. Ignore prebuild's `--non-interactive is not supported` warning; use
+to `production` — so a bare `npm run ios` builds `sh.rambla` and collides with the App Store install instead
+of the `sh.rambla.debug` dev client. Ignore prebuild's `--non-interactive is not supported` warning; use
 `CI=1` if you need non-interactive.
 
 ### Signing needs a working Apple ID token in Xcode
