@@ -3773,7 +3773,7 @@ const x = 1;
       expect(isPaseoWorktreePath("/home/user/.rambla/worktrees/feature")).toBe(true);
     });
 
-    it("matches Windows .paseo\\worktrees\\ paths", () => {
+    it("matches Windows .rambla\\worktrees\\ paths", () => {
       expect(isPaseoWorktreePath("C:\\Users\\dev\\.rambla\\worktrees\\feature")).toBe(true);
     });
 
