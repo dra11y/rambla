@@ -25,8 +25,8 @@
         system:
         let
           pkgs = pkgsFor system;
-          paseo = pkgs.callPackage ./nix/package.nix { };
-          versionParts = pkgs.lib.splitString "." paseo.version;
+          rambla = pkgs.callPackage ./nix/package.nix { };
+          versionParts = pkgs.lib.splitString "." rambla.version;
           sourceRevision = if self ? revCount && self.revCount != null then self.revCount else 0;
           buildRevision = sourceRevision - (sourceRevision / 10000) * 10000;
           desktopBuildVersion = pkgs.lib.concatStringsSep "." [
@@ -36,21 +36,21 @@
           ];
         in
         {
-          default = paseo;
-          paseo = paseo;
+          default = rambla;
+          rambla = rambla;
           desktop = pkgs.callPackage ./nix/desktop-package.nix {
-            inherit paseo;
+            inherit rambla;
             buildVersion = desktopBuildVersion;
           };
         }
       );
 
-      nixosModules.default = self.nixosModules.paseo;
-      nixosModules.paseo =
+      nixosModules.default = self.nixosModules.rambla;
+      nixosModules.rambla =
         { pkgs, lib, ... }:
         {
           imports = [ ./nix/module.nix ];
-          services.paseo.package = lib.mkDefault self.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          services.rambla.package = lib.mkDefault self.packages.${pkgs.stdenv.hostPlatform.system}.default;
         };
 
       devShells = forAllSystems (

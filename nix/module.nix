@@ -6,39 +6,39 @@
 }:
 
 let
-  cfg = config.services.paseo;
+  cfg = config.services.rambla;
 in
 {
   imports = [
-    (lib.mkRenamedOptionModule [ "services" "paseo" "allowedHosts" ] [ "services" "paseo" "hostnames" ])
+    (lib.mkRenamedOptionModule [ "services" "rambla" "allowedHosts" ] [ "services" "rambla" "hostnames" ])
   ];
 
-  options.services.paseo = {
+  options.services.rambla = {
     enable = lib.mkEnableOption "Rambla, a self-hosted daemon for AI coding agents";
 
-    package = lib.mkPackageOption pkgs "paseo" { };
+    package = lib.mkPackageOption pkgs "rambla" { };
 
     user = lib.mkOption {
       type = lib.types.str;
-      default = "paseo";
+      default = "rambla";
       description = "User account under which Rambla runs.";
     };
 
     group = lib.mkOption {
       type = lib.types.str;
-      default = "paseo";
+      default = "rambla";
       description = "Group under which Rambla runs.";
     };
 
     dataDir = lib.mkOption {
       type = lib.types.str;
       default =
-        if cfg.user == "paseo"
-        then "/var/lib/paseo"
+        if cfg.user == "rambla"
+        then "/var/lib/rambla"
         else "/home/${cfg.user}/.rambla";
       defaultText = lib.literalExpression ''
-        if cfg.user == "paseo"
-        then "/var/lib/paseo"
+        if cfg.user == "rambla"
+        then "/var/lib/rambla"
         else "/home/''${cfg.user}/.rambla"
       '';
       description = "Directory for Rambla state (PASEO_HOME). Stores agent data, config, and logs.";
@@ -139,8 +139,8 @@ in
 
     inheritUserEnvironment = lib.mkOption {
       type = lib.types.bool;
-      default = cfg.user != "paseo";
-      defaultText = lib.literalExpression ''cfg.user != "paseo"'';
+      default = cfg.user != "rambla";
+      defaultText = lib.literalExpression ''cfg.user != "rambla"'';
       description = ''
         Whether to include the user's profile PATH in the service environment.
 
@@ -176,14 +176,14 @@ in
             label = "My Agent";
             command = { path = "/run/current-system/sw/bin/my-acp"; };
           };
-          log.file = { level = "info"; path = "/var/lib/paseo/daemon.log"; };
+          log.file = { level = "info"; path = "/var/lib/rambla/daemon.log"; };
         }
       '';
       description = ''
         Declarative content for `$PASEO_HOME/config.json`. Rendered to JSON
         and installed on every service start.
 
-        Runtime mutations to `config.json` (e.g. via `paseo daemon set-password`
+        Runtime mutations to `config.json` (e.g. via `rambla daemon set-password`
         or the mobile app toggling MCP injection / provider overrides) are
         overwritten on the next restart. Pick one: manage via this option, or
         manage via the CLI — not both.
@@ -196,31 +196,31 @@ in
 
   config = lib.mkIf cfg.enable (
     let
-      settingsFile = (pkgs.formats.json { }).generate "paseo-config.json" cfg.settings;
+      settingsFile = (pkgs.formats.json { }).generate "rambla-config.json" cfg.settings;
     in
     {
     assertions = [
       {
         assertion = !(cfg.relay.enable && cfg.relay.mode == "remote" && cfg.relay.host == "");
         message = ''
-          services.paseo.relay.host must be set when relay.mode = "remote".
+          services.rambla.relay.host must be set when relay.mode = "remote".
         '';
       }
     ];
 
-    users.users.${cfg.user} = lib.mkIf (cfg.user == "paseo") {
+    users.users.${cfg.user} = lib.mkIf (cfg.user == "rambla") {
       isSystemUser = true;
       group = cfg.group;
       home = cfg.dataDir;
     };
 
-    users.groups.${cfg.group} = lib.mkIf (cfg.group == "paseo") { };
+    users.groups.${cfg.group} = lib.mkIf (cfg.group == "rambla") { };
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0700 ${cfg.user} ${cfg.group} - -"
     ];
 
-    systemd.services.paseo = {
+    systemd.services.rambla = {
       description = "Rambla - self-hosted daemon for AI coding agents";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
@@ -244,7 +244,7 @@ in
           # so user-installed CLIs (claude, opencode, codex, ...) are reachable
           # by agent processes the daemon spawns.
           PATH = lib.mkForce (lib.concatStringsSep ":" (
-            lib.optionals (cfg.user != "paseo") [
+            lib.optionals (cfg.user != "rambla") [
               "${userHome}/.nix-profile/bin"
               "${userHome}/.local/state/nix/profile/bin"
             ]

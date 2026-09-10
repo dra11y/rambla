@@ -14,8 +14,8 @@
   # Reuse the daemon's prebuilt npm-deps FOD. Same lockfile, same content —
   # without this, the desktop drv produces a separately-named store path
   # (`rambla-desktop-<v>-npm-deps`) and refetches the entire registry. Override
-  # the upstream hash via `paseo.override { npmDepsHash = "..."; }`.
-  paseo,
+  # the upstream hash via `rambla.override { npmDepsHash = "..."; }`.
+  rambla,
 }:
 buildNpmPackage {
   pname = "rambla-desktop";
@@ -58,7 +58,7 @@ buildNpmPackage {
   };
 
   nodejs = nodejs_22;
-  inherit (paseo) npmDeps;
+  inherit (rambla) npmDeps;
 
   # Prevent onnxruntime-node's install script from running during automatic
   # npm rebuild. We manually rebuild only node-pty in buildPhase.
@@ -247,7 +247,7 @@ buildNpmPackage {
 
   meta = {
     description = "Rambla desktop app (Electron wrapper)";
-    homepage = "https://github.com/getpaseo/paseo";
+    homepage = "https://github.com/getrambla/rambla";
     license = lib.licenses.agpl3Plus;
     mainProgram = "rambla-desktop";
     platforms = lib.platforms.linux ++ lib.platforms.darwin;
