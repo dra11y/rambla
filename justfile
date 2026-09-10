@@ -129,7 +129,7 @@ install-service: systemctl-reload restart
     [Service]
     Type=simple
     WorkingDirectory={{justfile_dir()}}
-    ExecStart={{justfile_dir()}}/packages/cli/bin/paseo start --foreground
+    ExecStart={{justfile_dir()}}/packages/cli/bin/rambla start --foreground
     Restart=always
     RestartSec=5
 
