@@ -5,4 +5,4 @@ Before upgrading: desktop now requires macOS 13 or newer. Plugins written for 0.
 Added
 - Added answer forms for Codex questions asked while the agent continues working
 
-Full notes: https://paseo.sh/changelog
+Full notes: https://rambla.sh/changelog

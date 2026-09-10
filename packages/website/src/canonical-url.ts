@@ -1,4 +1,4 @@
-const CANONICAL_HOST = "paseo.sh";
+const CANONICAL_HOST = "rambla.sh";
 
 export function getCanonicalRedirect(
   url: URL,

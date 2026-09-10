@@ -11,10 +11,10 @@ Build or manage the requested plugin directly. Use the current public docs to ca
 
 ## Check current documentation
 
-Fetch [https://paseo.sh/llms.txt](https://paseo.sh/llms.txt) first. Select and fetch the current plugin Markdown pages from that index before changing a plugin:
+Fetch [https://rambla.sh/llms.txt](https://rambla.sh/llms.txt) first. Select and fetch the current plugin Markdown pages from that index before changing a plugin:
 
-- [Plugin quickstart](https://paseo.sh/docs/plugins.md) ([browser page](https://paseo.sh/docs/plugins))
-- [Plugin reference](https://paseo.sh/docs/plugins/v0.8/reference.md) ([browser page](https://paseo.sh/docs/plugins/v0.8/reference))
+- [Plugin quickstart](https://rambla.sh/docs/plugins.md) ([browser page](https://rambla.sh/docs/plugins))
+- [Plugin reference](https://rambla.sh/docs/plugins/v0.8/reference.md) ([browser page](https://rambla.sh/docs/plugins/v0.8/reference))
 
 Use the deployed docs when they disagree with this skill. Do not send the user away to read them instead of completing the work.
 
@@ -38,8 +38,8 @@ Pick the contribution that matches the request. Each row names the registration,
 | Attachment source         | `client.addAttachmentSource` + `server.handle`   | Let the user attach a searchable external resource, such as an issue, to a prompt                             | reference.md → Add a composer attachment source; `plugin-examples/linear`                          |
 | Theme                     | `addTheme`                                       | A light or dark palette under Settings → Appearance                                                           | reference.md → Contribute a theme; `plugin-examples/catppuccin`                                    |
 | Plugin RPC                | `defineRpc` + `server.handle` + `useRpc`         | Daemon-side work that is not a normal Paseo operation: vendor APIs, credentials, local files                  | reference.md → Add plugin-specific backend behavior                                                |
-| Lifecycle events          | `server.on`                                      | Observe agent/workspace lifecycle, inspect ended turns, and answer permission requests                        | [Lifecycle hooks](https://paseo.sh/docs/plugins/v0.8/reference.md#lifecycle-hooks)                 |
-| Creation and launch hooks | `server.before`                                  | Change agent config, provider options, MCP servers, environment, or workspace isolation before the operation  | [Before hooks](https://paseo.sh/docs/plugins/v0.8/reference.md#before-hooks)                       |
+| Lifecycle events          | `server.on`                                      | Observe agent/workspace lifecycle, inspect ended turns, and answer permission requests                        | [Lifecycle hooks](https://rambla.sh/docs/plugins/v0.8/reference.md#lifecycle-hooks)                |
+| Creation and launch hooks | `server.before`                                  | Change agent config, provider options, MCP servers, environment, or workspace isolation before the operation  | [Before hooks](https://rambla.sh/docs/plugins/v0.8/reference.md#before-hooks)                      |
 | Paseo SDK                 | `usePaseo()` / handler `{ paseo }`               | Normal Paseo operations: workspaces, agents, providers, config                                                | reference.md → Use the Paseo SDK                                                                   |
 
 | Lifecycle task                                                      | Example                                                                                                |
@@ -83,7 +83,7 @@ by the CLI version. Raise the minimum when adopting newer APIs; add an upper bou
 Paseo release is incompatible. Use npm semver ranges and explicitly include beta versions when
 targeting betas. Missing requirements mean `<0.8.0`; complete the 0.8 entry migration before adding
 `>=0.8.0`. Verify compatibility with both the daemon and the app running client contributions.
-See [requirements](https://paseo.sh/docs/plugins/v0.8/reference#requirements).
+See [requirements](https://rambla.sh/docs/plugins/v0.8/reference#requirements).
 
 Each runtime has its own optional entry. A plugin must have at least one. Both entries accept
 `.ts` or `.tsx`; use `.tsx` when an entry imports components.
@@ -245,7 +245,7 @@ export default function contribute(client: PluginClientContext) {
 Icons are Lucide icon names. `theme` is a typed `PluginTheme` on every surface and panel. Primary text uses `theme.colors.foreground`; labels use `theme.colors.foregroundMuted`; the root view uses `theme.colors.surface0`. `layout.compact` is true on mobile and narrow windows. Paseo owns the route, header, host picker, close action, error boundary, and per-installation query client.
 
 Before writing imports, classify each module as shared, client, or server. Follow the
-[SDK import boundaries](https://paseo.sh/docs/plugins/v0.8/reference.md#runtime-modules), including
+[SDK import boundaries](https://rambla.sh/docs/plugins/v0.8/reference.md#runtime-modules), including
 transitive and type dependencies. The root is shared-only; hooks and client contexts belong to
 `@getpaseo/plugin/client`, server contexts to `/server`, and host UI to `/client/react-native` or `/client/ui`.
 Install dependencies locally for typechecking; Paseo supplies host runtime modules. JSX uses the
@@ -306,7 +306,7 @@ function PullRequestAction() {
 }
 ```
 
-The API covers workspaces, agents, providers, and daemon config. It omits connection lifecycle because Paseo owns the connection. Consult the current [SDK reference](https://paseo.sh/docs/sdk/reference.md) for method details.
+The API covers workspaces, agents, providers, and daemon config. It omits connection lifecycle because Paseo owns the connection. Consult the current [SDK reference](https://rambla.sh/docs/sdk/reference.md) for method details.
 
 ### Add daemon-side behavior
 
@@ -614,7 +614,7 @@ Use `--host <url>` when managing a daemon other than the CLI default. A Git sour
 
 Do not restart the daemon to load source changes. Restarting it can kill the agent performing the work.
 
-For an old mixed entry, follow the standalone [v0.8 runtime-entry migration guide](https://paseo.sh/docs/plugins/v0.8/migration) mechanically.
+For an old mixed entry, follow the standalone [v0.8 runtime-entry migration guide](https://rambla.sh/docs/plugins/v0.8/migration) mechanically.
 
 ## Verify the outcome
 

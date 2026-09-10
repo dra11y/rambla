@@ -32,11 +32,11 @@
 <p align="center">Claude Code、Codex、Copilot、OpenCode 和 Pi agents 的统一界面。</p>
 
 <p align="center">
-  <img src="https://paseo.sh/hero-mockup.png" alt="Paseo app screenshot" width="100%">
+  <img src="https://rambla.sh/hero-mockup.png" alt="Paseo app screenshot" width="100%">
 </p>
 
 <p align="center">
-  <img src="https://paseo.sh/mobile-mockup.png" alt="Paseo mobile app" width="100%">
+  <img src="https://rambla.sh/mobile-mockup.png" alt="Paseo mobile app" width="100%">
 </p>
 
 > [!NOTE]
@@ -69,7 +69,7 @@ Paseo 会运行一个名为 daemon 的本地服务，用来管理你的 coding a
 
 ### 桌面 app（推荐）
 
-从 [paseo.sh/download](https://paseo.sh/download) 或 [GitHub releases 页面](https://github.com/getpaseo/paseo/releases)下载。打开 app 后 daemon 会自动启动，不需要再安装其他东西。
+从 [rambla.sh/download](https://rambla.sh/download) 或 [GitHub releases 页面](https://github.com/getpaseo/paseo/releases)下载。打开 app 后 daemon 会自动启动，不需要再安装其他东西。
 
 如果要从手机连接，在 Settings 中扫描显示的二维码。
 
@@ -86,8 +86,8 @@ paseo
 
 完整安装和配置见：
 
-- [文档](https://paseo.sh/docs)
-- [配置参考](https://paseo.sh/docs/configuration)
+- [文档](https://rambla.sh/docs)
+- [配置参考](https://rambla.sh/docs/configuration)
 
 ## CLI
 
@@ -105,7 +105,7 @@ paseo send abc123 "also add tests" # 发送后续任务
 paseo --host workstation.local:6767 run "run the full test suite"
 ```
 
-更多内容见[完整 CLI 参考](https://paseo.sh/docs/cli)。
+更多内容见[完整 CLI 参考](https://rambla.sh/docs/cli)。
 
 ## Skills
 
@@ -130,7 +130,7 @@ Monorepo 包结构速览：
 - `packages/cli`：用于 daemon 和 agent 工作流的 `paseo` CLI
 - `packages/desktop`：Electron 桌面 app
 - `packages/relay`：用于远程连接的 relay 包
-- `packages/website`：营销站点和文档（`paseo.sh`）
+- `packages/website`：营销站点和文档（`rambla.sh`）
 
 常用命令：
 

@@ -110,7 +110,7 @@ describe("daemon bearer auth", () => {
     try {
       const preflight = await fetch(`http://127.0.0.1:${daemonHandle.port}/api/files/download`, {
         method: "OPTIONS",
-        headers: { Origin: "https://app.paseo.sh" },
+        headers: { Origin: "https://app.rambla.sh" },
       });
       expect(preflight.status).toBe(204);
 

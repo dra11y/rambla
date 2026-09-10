@@ -5,7 +5,7 @@ import { runPairCommand, type PairCommandOutput, type PairingOffer } from "./pai
 const disabledOffer: PairingOffer = { relayEnabled: false, url: null, qr: null };
 const enabledOffer: PairingOffer = {
   relayEnabled: true,
-  url: "https://app.paseo.sh/#offer=test",
+  url: "https://app.rambla.sh/#offer=test",
   qr: null,
 };
 

@@ -680,7 +680,7 @@ describe("loadPersistedConfig", () => {
         configPath,
         `${JSON.stringify(
           {
-            $schema: "https://paseo.sh/schemas/paseo.config.v1.json",
+            $schema: "https://rambla.sh/schemas/paseo.config.v1.json",
             version: 1,
             daemon: {
               listen: "127.0.0.1:6767",

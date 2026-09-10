@@ -224,9 +224,9 @@ describe("test-daemon-connection connectToDaemon", () => {
 
     const plainResult = await connectToDaemon(
       {
-        id: "relay:relay.paseo.sh:443",
+        id: "relay:relay.rambla.sh:443",
         type: "relay",
-        relayEndpoint: "relay.paseo.sh:443",
+        relayEndpoint: "relay.rambla.sh:443",
         useTls: false,
         daemonPublicKeyB64: "pubkey",
       },

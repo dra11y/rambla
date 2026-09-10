@@ -43,7 +43,7 @@ describe("daemon managed process bootstrap", () => {
         agentClients: createTestAgentClients(),
         agentStoragePath: path.join(paseoHome, "agents"),
         relayEnabled: false,
-        appBaseUrl: "https://app.paseo.sh",
+        appBaseUrl: "https://app.rambla.sh",
         managedProcesses,
       } as PaseoDaemonConfig,
       pino({ level: "silent" }),

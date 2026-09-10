@@ -88,11 +88,11 @@ describe("Hub commands", () => {
     );
 
     assert.deepEqual(events, [
-      "progress:Logging in to https://hub.paseo.sh",
-      "authorize:https://hub.paseo.sh",
+      "progress:Logging in to https://hub.rambla.sh",
+      "authorize:https://hub.rambla.sh",
       "progress:Logged in",
     ]);
-    assert.equal(result.data.origin, "https://hub.paseo.sh");
+    assert.equal(result.data.origin, "https://hub.rambla.sh");
   });
 
   it("interactive login continues through the injected daemon and Hub guidance coordinator", async () => {
@@ -315,7 +315,7 @@ describe("Hub commands", () => {
   it("connect without authority reports the hosted destination and contacts nothing", async () => {
     const progress: string[] = [];
     const credentials = new MemoryCredentials();
-    const daemon = new FakeDaemonConnection(new FakeDaemon("https://hub.paseo.sh"));
+    const daemon = new FakeDaemonConnection(new FakeDaemon("https://hub.rambla.sh"));
     let hubRequests = 0;
 
     await assert.rejects(
@@ -338,11 +338,11 @@ describe("Hub commands", () => {
       {
         code: "HUB_API_KEY_REQUIRED",
         message:
-          "No stored Hub login matches https://hub.paseo.sh. Run `paseo hub login https://hub.paseo.sh`, pass --api-key <secret>, or set PASEO_HUB_API_KEY.",
+          "No stored Hub login matches https://hub.rambla.sh. Run `paseo hub login https://hub.rambla.sh`, pass --api-key <secret>, or set PASEO_HUB_API_KEY.",
       },
     );
 
-    assert.deepEqual(progress, ["Connecting this daemon to https://hub.paseo.sh"]);
+    assert.deepEqual(progress, ["Connecting this daemon to https://hub.rambla.sh"]);
     assert.equal(hubRequests, 0);
     assert.equal(daemon.connectionCount, 0);
   });

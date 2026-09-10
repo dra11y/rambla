@@ -32,11 +32,11 @@
 <p align="center">Claude Code、Codex、Copilot、OpenCode、Pi のエージェントを、ひとつのインターフェースで。</p>
 
 <p align="center">
-  <img src="https://paseo.sh/hero-mockup.png" alt="Paseo アプリのスクリーンショット" width="100%">
+  <img src="https://rambla.sh/hero-mockup.png" alt="Paseo アプリのスクリーンショット" width="100%">
 </p>
 
 <p align="center">
-  <img src="https://paseo.sh/mobile-mockup.png" alt="Paseo モバイルアプリ" width="100%">
+  <img src="https://rambla.sh/mobile-mockup.png" alt="Paseo モバイルアプリ" width="100%">
 </p>
 
 > [!NOTE]
@@ -69,7 +69,7 @@ Paseo はコーディングエージェントを管理するローカルサー�
 
 ### デスクトップアプリ（推奨）
 
-[paseo.sh/download](https://paseo.sh/download) または [GitHub のリリースページ](https://github.com/getpaseo/paseo/releases)からダウンロードしてください。アプリを開くとデーモンが自動的に起動します。追加のインストールは不要です。
+[rambla.sh/download](https://rambla.sh/download) または [GitHub のリリースページ](https://github.com/getpaseo/paseo/releases)からダウンロードしてください。アプリを開くとデーモンが自動的に起動します。追加のインストールは不要です。
 
 スマートフォンから接続するには、Settings 画面に表示される QR コードをスキャンしてください。
 
@@ -86,8 +86,8 @@ paseo
 
 詳しいセットアップと設定については以下を参照してください。
 
-- [ドキュメント](https://paseo.sh/docs)
-- [設定リファレンス](https://paseo.sh/docs/configuration)
+- [ドキュメント](https://rambla.sh/docs)
+- [設定リファレンス](https://rambla.sh/docs/configuration)
 
 ## CLI
 
@@ -105,7 +105,7 @@ paseo send abc123 "also add tests" # 追加タスクを送信
 paseo --host workstation.local:6767 run "run the full test suite"
 ```
 
-詳細は[完全な CLI リファレンス](https://paseo.sh/docs/cli)を参照してください。
+詳細は[完全な CLI リファレンス](https://rambla.sh/docs/cli)を参照してください。
 
 ## スキル
 
@@ -130,7 +130,7 @@ npx skills add getpaseo/paseo
 - `packages/cli`: デーモンおよびエージェントワークフロー向け `paseo` CLI
 - `packages/desktop`: Electron デスクトップアプリ
 - `packages/relay`: リモート接続用リレーパッケージ
-- `packages/website`: マーケティングサイトとドキュメント（`paseo.sh`）
+- `packages/website`: マーケティングサイトとドキュメント（`rambla.sh`）
 
 よく使うコマンド：
 

@@ -26,8 +26,8 @@ import { mergeHostnames, parseHostnamesEnv, type HostnamesConfig } from "./hostn
 import { resolveGitProcessPolicy } from "../utils/git-process-scheduler.js";
 
 const DEFAULT_PORT = 6767;
-const DEFAULT_RELAY_ENDPOINT = "relay.paseo.sh:443";
-const DEFAULT_APP_BASE_URL = "https://app.paseo.sh";
+const DEFAULT_RELAY_ENDPOINT = "relay.rambla.sh:443";
+const DEFAULT_APP_BASE_URL = "https://app.rambla.sh";
 const DEFAULT_TRUSTED_PROXIES = ["loopback"];
 
 interface ResolveBundledWebUiDistDirInput {

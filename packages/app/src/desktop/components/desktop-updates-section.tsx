@@ -469,7 +469,7 @@ export function LocalDaemonSection() {
   );
 }
 
-const ADVANCED_DAEMON_SETTINGS_URL = "https://paseo.sh/docs/configuration";
+const ADVANCED_DAEMON_SETTINGS_URL = "https://rambla.sh/docs/configuration";
 
 const styles = StyleSheet.create((theme) => ({
   actionGroup: {

@@ -32,11 +32,11 @@
 <p align="center">One interface for Claude Code, Codex, Copilot, OpenCode, and Pi agents.</p>
 
 <p align="center">
-  <img src="https://paseo.sh/hero-mockup.png" alt="Paseo app screenshot" width="100%">
+  <img src="https://rambla.sh/hero-mockup.png" alt="Paseo app screenshot" width="100%">
 </p>
 
 <p align="center">
-  <img src="https://paseo.sh/mobile-mockup.png" alt="Paseo mobile app" width="100%">
+  <img src="https://rambla.sh/mobile-mockup.png" alt="Paseo mobile app" width="100%">
 </p>
 
 Run agents in parallel on your own machines. Ship from your phone or your desk.
@@ -52,8 +52,8 @@ Run agents in parallel on your own machines. Ship from your phone or your desk.
 Add themes, workspace panels, commands, settings screens, and coding-agent providers with trusted
 TypeScript plugins. Install from a local directory or Git repository with `paseo plugin add <source>`.
 
-See the [plugin docs](https://paseo.sh/docs/plugins) for your Paseo version, or start with the
-[0.8 beta quickstart](https://paseo.sh/docs/plugins/v0.8). Plugins run with access to your daemon
+See the [plugin docs](https://rambla.sh/docs/plugins) for your Paseo version, or start with the
+[0.8 beta quickstart](https://rambla.sh/docs/plugins/v0.8). Plugins run with access to your daemon
 machine and inside connected clients; install only code you trust.
 
 ## Getting Started
@@ -72,7 +72,7 @@ You need at least one agent CLI installed and configured with your credentials:
 
 ### Desktop app (recommended)
 
-Download it from [paseo.sh/download](https://paseo.sh/download) or the [GitHub releases page](https://github.com/getpaseo/paseo/releases). Open the app and the daemon starts automatically. Nothing else to install.
+Download it from [rambla.sh/download](https://rambla.sh/download) or the [GitHub releases page](https://github.com/getpaseo/paseo/releases). Open the app and the daemon starts automatically. Nothing else to install.
 
 To connect from your phone, open **Settings → your host → Pair Device**.
 
@@ -89,9 +89,9 @@ Paseo starts locally, then asks whether to enable the end-to-end encrypted relay
 
 For full setup and configuration, see:
 
-- [Docs](https://paseo.sh/docs)
-- [Connectivity guide](https://paseo.sh/docs/connectivity)
-- [Configuration reference](https://paseo.sh/docs/configuration)
+- [Docs](https://rambla.sh/docs)
+- [Connectivity guide](https://rambla.sh/docs/connectivity)
+- [Configuration reference](https://rambla.sh/docs/configuration)
 
 ### Docker
 
@@ -124,7 +124,7 @@ paseo send abc123 "also add tests" # follow-up task
 paseo run --host workstation.local:6767 --cwd /workspace "run the full test suite"
 ```
 
-See the [full CLI reference](https://paseo.sh/docs/cli) for more.
+See the [full CLI reference](https://rambla.sh/docs/cli) for more.
 
 ## TypeScript SDK
 
@@ -148,7 +148,7 @@ console.log(result.lastMessage);
 await client.close();
 ```
 
-See the [SDK quickstart](https://paseo.sh/docs/sdk/quickstart), [recipes](https://paseo.sh/docs/sdk/recipes), and [API reference](https://paseo.sh/docs/sdk/reference).
+See the [SDK quickstart](https://rambla.sh/docs/sdk/quickstart), [recipes](https://rambla.sh/docs/sdk/recipes), and [API reference](https://rambla.sh/docs/sdk/reference).
 
 ## Skills
 
@@ -173,7 +173,7 @@ Quick monorepo package map:
 - `packages/cli`: `paseo` CLI for daemon and agent workflows
 - `packages/desktop`: Electron desktop app
 - `packages/relay`: Relay transport and encryption used by the daemon and clients
-- `packages/website`: Marketing site and documentation (`paseo.sh`)
+- `packages/website`: Marketing site and documentation (`rambla.sh`)
 
 Common commands:
 

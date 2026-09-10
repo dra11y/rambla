@@ -180,7 +180,7 @@ test("preserves a blockquoted notice ahead of the bullets", () => {
   const contents = formatFdroidChangelog([
     "> **Important update notice**",
     ">",
-    "> If you installed Paseo Desktop 0.1.108, you need to [reinstall manually](https://paseo.sh/download).",
+    "> If you installed Paseo Desktop 0.1.108, you need to [reinstall manually](https://rambla.sh/download).",
     "",
     "### Fixed",
     "",
@@ -243,7 +243,7 @@ test("renders the real 0.1.109 notice, which is the entry's whole point", () => 
     "",
     "> **Important update notice**",
     ">",
-    "> If you installed Paseo Desktop 0.1.108, you need to [download and reinstall Paseo manually](https://paseo.sh/download) to get this fix. The bug in 0.1.108 prevents its automatic updater from installing 0.1.109. Users on 0.1.107 or earlier can update normally.",
+    "> If you installed Paseo Desktop 0.1.108, you need to [download and reinstall Paseo manually](https://rambla.sh/download) to get this fix. The bug in 0.1.108 prevents its automatic updater from installing 0.1.109. Users on 0.1.107 or earlier can update normally.",
     "",
     "### Fixed",
     "",

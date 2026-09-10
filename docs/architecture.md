@@ -218,7 +218,7 @@ Agent browser_keypress -> guest sendInputEvent(skipIfUnhandled)
 
 ### `packages/website` — Marketing site
 
-TanStack Router + Cloudflare Workers. Serves paseo.sh.
+TanStack Router + Cloudflare Workers. Serves rambla.sh.
 
 ## WebSocket protocol
 
