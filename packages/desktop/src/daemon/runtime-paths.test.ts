@@ -54,8 +54,8 @@ describe("runtime-paths", () => {
     mocks.existsSync.mockReturnValue(true);
     setProcessRuntime({
       platform: "darwin",
-      execPath: "/Applications/Paseo.app/Contents/MacOS/Paseo",
-      resourcesPath: "/Applications/Paseo.app/Contents/Resources",
+      execPath: "/Applications/Rambla.app/Contents/MacOS/Rambla",
+      resourcesPath: "/Applications/Rambla.app/Contents/Resources",
     });
   });
 
@@ -70,7 +70,7 @@ describe("runtime-paths", () => {
 
   it("uses the macOS Helper executable for packaged daemon node launches", () => {
     expect(resolveNodeExecPath()).toBe(
-      "/Applications/Paseo.app/Contents/Frameworks/Paseo Helper.app/Contents/MacOS/Paseo Helper",
+      "/Applications/Rambla.app/Contents/Frameworks/Rambla Helper.app/Contents/MacOS/Rambla Helper",
     );
   });
 });

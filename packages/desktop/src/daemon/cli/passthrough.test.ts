@@ -28,7 +28,7 @@ describe("passthrough CLI", () => {
   it("returns null when no CLI args are provided", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/Applications/Paseo.app/Contents/MacOS/Paseo"],
+        argv: ["/Applications/Rambla.app/Contents/MacOS/Rambla"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -38,7 +38,7 @@ describe("passthrough CLI", () => {
   it("ignores macOS GUI launch arguments", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/Applications/Paseo.app/Contents/MacOS/Paseo", "-psn_0_12345"],
+        argv: ["/Applications/Rambla.app/Contents/MacOS/Rambla", "-psn_0_12345"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -48,7 +48,7 @@ describe("passthrough CLI", () => {
   it("ignores --no-sandbox injected by Linux wrapper", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/usr/bin/Paseo", "--no-sandbox", "status"],
+        argv: ["/usr/bin/Rambla", "--no-sandbox", "status"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -58,7 +58,7 @@ describe("passthrough CLI", () => {
   it("returns null when only --no-sandbox is present", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/usr/bin/Paseo", "--no-sandbox"],
+        argv: ["/usr/bin/Rambla", "--no-sandbox"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -70,9 +70,9 @@ describe("passthrough CLI", () => {
       parsePassthroughCliArgs({
         argv: [
           "/nix/store/electron/bin/electron",
-          "/nix/store/paseo-desktop/share/paseo-desktop/electron-app",
+          "/nix/store/rambla-desktop/share/rambla-desktop/electron-app",
           "--no-sandbox",
-          "--class=paseo-desktop",
+          "--class=rambla-desktop",
           "daemon",
           "status",
         ],
@@ -85,7 +85,7 @@ describe("passthrough CLI", () => {
   it("ignores Electron remote debugging switches", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/usr/bin/Paseo", "--remote-debugging-port=9233"],
+        argv: ["/usr/bin/Rambla", "--remote-debugging-port=9233"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -95,7 +95,7 @@ describe("passthrough CLI", () => {
   it("preserves CLI flags for direct app invocations", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/Applications/Paseo.app/Contents/MacOS/Paseo", "--version"],
+        argv: ["/Applications/Rambla.app/Contents/MacOS/Rambla", "--version"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -105,7 +105,7 @@ describe("passthrough CLI", () => {
   it("passes --open-project through as a normal CLI arg", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/Applications/Paseo.app/Contents/MacOS/Paseo", "--open-project", "/tmp/project"],
+        argv: ["/Applications/Rambla.app/Contents/MacOS/Rambla", "--open-project", "/tmp/project"],
         isDefaultApp: false,
         forceCli: false,
       }),
@@ -115,7 +115,7 @@ describe("passthrough CLI", () => {
   it("forces CLI mode for shim launches even without args", () => {
     expect(
       parsePassthroughCliArgs({
-        argv: ["/Applications/Paseo.app/Contents/MacOS/Paseo"],
+        argv: ["/Applications/Rambla.app/Contents/MacOS/Rambla"],
         isDefaultApp: false,
         forceCli: true,
       }),
@@ -128,7 +128,7 @@ describe("passthrough CLI", () => {
 
     expect(
       parsePassthroughCliArgsFromArgv([
-        "/Applications/Paseo.app/Contents/MacOS/Paseo",
+        "/Applications/Rambla.app/Contents/MacOS/Rambla",
         "daemon",
         "set-password",
       ]),

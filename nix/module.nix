@@ -273,7 +273,7 @@ in
         Group = cfg.group;
 
         ExecStart =
-          "${cfg.package}/bin/paseo-server"
+          "${cfg.package}/bin/rambla-server"
           + lib.optionalString (!cfg.relay.enable) " --no-relay";
 
         Restart = "on-failure";

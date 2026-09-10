@@ -18,7 +18,7 @@ describe("desktop updater diagnostics", () => {
   it("collects the staged version and existing ShipIt evidence", () => {
     testDirectory = mkdtempSync(path.join(tmpdir(), "paseo-updater-diagnostics-"));
     const shipItDirectory = path.join(testDirectory, "sh.rambla.desktop.ShipIt");
-    const updateBundlePath = path.join(shipItDirectory, "update.test", "Paseo.app");
+    const updateBundlePath = path.join(shipItDirectory, "update.test", "Rambla.app");
     mkdirSync(shipItDirectory, { recursive: true });
     writeFileSync(
       path.join(shipItDirectory, "ShipItState.plist"),
@@ -78,7 +78,7 @@ describe("desktop updater diagnostics", () => {
     mkdirSync(shipItDirectory, { recursive: true });
     writeFileSync(
       path.join(shipItDirectory, "ShipItState.plist"),
-      JSON.stringify({ updateBundleURL: pathToFileURL(path.join(shipItDirectory, "Paseo.app")) }),
+      JSON.stringify({ updateBundleURL: pathToFileURL(path.join(shipItDirectory, "Rambla.app")) }),
     );
 
     const diagnostics = collectDesktopUpdaterDiagnostics({

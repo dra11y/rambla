@@ -20,7 +20,7 @@
 }:
 
 buildNpmPackage rec {
-  pname = "paseo";
+  pname = "rambla";
   version = (builtins.fromJSON (builtins.readFile ../package.json)).version;
 
   src = lib.cleanSourceWith {
@@ -130,12 +130,12 @@ buildNpmPackage rec {
     # Create wrapper for the server entry point (for systemd / direct use)
     mkdir -p $out/bin
     # Keep Rambla's runtime mode separate from NODE_ENV, which belongs to spawned agents.
-    makeWrapper ${nodejs}/bin/node $out/bin/paseo-server \
+    makeWrapper ${nodejs}/bin/node $out/bin/rambla-server \
       --add-flags "$out/lib/paseo/packages/server/dist/scripts/supervisor-entrypoint.js" \
       --set PASEO_NODE_ENV production
 
     # Create wrapper for the CLI
-    makeWrapper ${nodejs}/bin/node $out/bin/paseo \
+    makeWrapper ${nodejs}/bin/node $out/bin/rambla \
       --add-flags "$out/lib/paseo/packages/cli/dist/index.js" \
       --set NODE_PATH "$out/lib/paseo/node_modules"
 
@@ -146,7 +146,7 @@ buildNpmPackage rec {
     description = "Self-hosted daemon for Claude Code, Codex, and OpenCode";
     homepage = "https://github.com/getrambla/rambla";
     license = lib.licenses.agpl3Plus;
-    mainProgram = "paseo";
+    mainProgram = "rambla";
     platforms = lib.platforms.linux ++ lib.platforms.darwin;
   };
 }

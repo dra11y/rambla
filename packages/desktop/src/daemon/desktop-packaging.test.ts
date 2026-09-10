@@ -25,23 +25,23 @@ function createFakeMacBundle(options: { includeHelper: boolean }): {
   shimPath: string;
 } {
   const root = mkdtempSync(join(tmpdir(), "paseo-cli-shim-test-"));
-  const appPath = join(root, "Paseo.app");
+  const appPath = join(root, "Rambla.app");
   const contentsPath = join(appPath, "Contents");
   const resourcesPath = join(contentsPath, "Resources");
   const shimPath = join(resourcesPath, "bin", "paseo");
-  const mainPath = join(contentsPath, "MacOS", "Paseo");
+  const mainPath = join(contentsPath, "MacOS", "Rambla");
   const helperPath = join(
     contentsPath,
     "Frameworks",
-    "Paseo Helper.app",
+    "Rambla Helper.app",
     "Contents",
     "MacOS",
-    "Paseo Helper",
+    "Rambla Helper",
   );
 
   mkdirSync(dirname(shimPath), { recursive: true });
   mkdirSync(dirname(mainPath), { recursive: true });
-  copyFileSync(join(packageRoot, "bin", "paseo"), shimPath);
+  copyFileSync(join(packageRoot, "bin", "rambla"), shimPath);
   chmodSync(shimPath, 0o755);
 
   writeExecutable(mainPath, "#!/bin/sh\necho main-executable\n");
@@ -119,15 +119,15 @@ describe("desktop packaging", () => {
     expect(runtimeTrace).toContain('"packages/server/dist/server/skills/**"');
   });
 
-  it("registers Paseo agent links with the operating system", () => {
+  it("registers Rambla agent links with the operating system", () => {
     const config = readFileSync(join(packageRoot, "electron-builder.yml"), "utf8");
 
-    expect(config).toContain("name: Paseo agent link");
+    expect(config).toContain("name: Rambla agent link");
     expect(config).toContain("- paseo");
   });
 
   // electron-builder packs production dependencies declared in package.json into
-  // app.asar. Runtime code in runtime-paths.ts and bin/paseo dynamically resolves
+  // app.asar. Runtime code in runtime-paths.ts and bin/rambla dynamically resolves
   // these workspace packages by string, so static analysis (TypeScript, Knip) cannot
   // see the link. If a runtime-required workspace dep is dropped from
   // dependencies, the build still succeeds but ships a broken bundle. This
@@ -170,7 +170,7 @@ describe("desktop packaging", () => {
       const result = spawnSync(bundle.shimPath, ["--version"], { encoding: "utf8" });
 
       expect(result.status).toBe(1);
-      expect(result.stderr).toContain("Bundled Paseo Helper executable not found");
+      expect(result.stderr).toContain("Bundled Rambla Helper executable not found");
       expect(result.stdout).not.toContain("main-executable");
     } finally {
       rmSync(bundle.root, { recursive: true, force: true });

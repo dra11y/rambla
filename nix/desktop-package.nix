@@ -13,12 +13,12 @@
   buildVersion,
   # Reuse the daemon's prebuilt npm-deps FOD. Same lockfile, same content —
   # without this, the desktop drv produces a separately-named store path
-  # (`paseo-desktop-<v>-npm-deps`) and refetches the entire registry. Override
+  # (`rambla-desktop-<v>-npm-deps`) and refetches the entire registry. Override
   # the upstream hash via `paseo.override { npmDepsHash = "..."; }`.
   paseo,
 }:
 buildNpmPackage {
-  pname = "paseo-desktop";
+  pname = "rambla-desktop";
   version = (builtins.fromJSON (builtins.readFile ../package.json)).version;
 
   src = lib.cleanSourceWith {
@@ -143,7 +143,7 @@ buildNpmPackage {
     mkdir -p $out/bin
 
     ${lib.optionalString stdenv.hostPlatform.isLinux ''
-      mkdir -p $out/share/paseo-desktop
+      mkdir -p $out/share/rambla-desktop
 
       # Materialize only the desktop and daemon runtime graphs. Copying the
       # complete monorepo used to ship every build-time dependency (including
@@ -153,51 +153,51 @@ buildNpmPackage {
 
       while IFS= read -r path; do
         [ -z "$path" ] && continue
-        mkdir -p "$out/share/paseo-desktop/$(dirname "$path")"
-        cp -a "$path" "$out/share/paseo-desktop/$path"
+        mkdir -p "$out/share/rambla-desktop/$(dirname "$path")"
+        cp -a "$path" "$out/share/rambla-desktop/$path"
       done < desktop-files.txt
 
       # Keep the same unpackaged monorepo layout expected by main.js.
-      cp package.json $out/share/paseo-desktop/
-      mkdir -p $out/share/paseo-desktop/packages/app
-      cp -a packages/app/dist $out/share/paseo-desktop/packages/app/
+      cp package.json $out/share/rambla-desktop/
+      mkdir -p $out/share/rambla-desktop/packages/app
+      cp -a packages/app/dist $out/share/rambla-desktop/packages/app/
 
       for runtime_path in \
         packages/desktop/dist/main.js \
         packages/desktop/dist/preload.js \
         packages/desktop/dist/features/browser-keyboard/guest-preload.js \
         packages/desktop/package.json; do
-        if [ ! -e "$out/share/paseo-desktop/$runtime_path" ]; then
+        if [ ! -e "$out/share/rambla-desktop/$runtime_path" ]; then
           echo "desktop runtime trace omitted $runtime_path" >&2
           exit 1
         fi
       done
 
-      if [ -e $out/share/paseo-desktop/node_modules/electron ]; then
+      if [ -e $out/share/rambla-desktop/node_modules/electron ]; then
         echo "desktop runtime trace included npm Electron" >&2
         exit 1
       fi
 
       # Hicolor icon for desktop environments
       install -Dm644 packages/desktop/assets/icon.png \
-        $out/share/icons/hicolor/512x512/apps/paseo-desktop.png
+        $out/share/icons/hicolor/512x512/apps/rambla-desktop.png
 
       # Electron derives Wayland's toplevel app_id from the package name in the
-      # app root it launches. Point it at a one-file app named "paseo-desktop"
+      # app root it launches. Point it at a one-file app named "rambla-desktop"
       # so shells can match the window to the desktop entry and hicolor icon.
-      mkdir -p $out/share/paseo-desktop/electron-app
-      printf '%s\n' "{ \"name\": \"paseo-desktop\", \"version\": \"$version\", \"main\": \"index.js\" }" \
-        > $out/share/paseo-desktop/electron-app/package.json
+      mkdir -p $out/share/rambla-desktop/electron-app
+      printf '%s\n' "{ \"name\": \"rambla-desktop\", \"version\": \"$version\", \"main\": \"index.js\" }" \
+        > $out/share/rambla-desktop/electron-app/package.json
       printf '%s\n' 'require("../packages/desktop/dist/main.js");' \
-        > $out/share/paseo-desktop/electron-app/index.js
+        > $out/share/rambla-desktop/electron-app/index.js
 
       # Chromium's setuid sandbox cannot live in the immutable Nix store.
-      makeWrapper ${electron}/bin/electron $out/bin/paseo-desktop \
-        --add-flags "$out/share/paseo-desktop/electron-app" \
+      makeWrapper ${electron}/bin/electron $out/bin/rambla-desktop \
+        --add-flags "$out/share/rambla-desktop/electron-app" \
         --add-flags "--no-sandbox" \
-        --add-flags "--class=paseo-desktop" \
+        --add-flags "--class=rambla-desktop" \
         --set EXPO_DEV_URL "paseo://app/" \
-        --set CHROME_DESKTOP "paseo-desktop.desktop"
+        --set CHROME_DESKTOP "rambla-desktop.desktop"
 
       copyDesktopItems
     ''}
@@ -210,7 +210,7 @@ buildNpmPackage {
       fi
       mkdir -p "$out/Applications"
       cp -R "$app" "$out/Applications/Rambla.app"
-      ln -s ../Applications/Rambla.app/Contents/MacOS/Rambla "$out/bin/paseo-desktop"
+      ln -s ../Applications/Rambla.app/Contents/MacOS/Rambla "$out/bin/rambla-desktop"
     ''}
 
     runHook postInstall
@@ -218,18 +218,18 @@ buildNpmPackage {
 
   desktopItems = lib.optionals stdenv.hostPlatform.isLinux [
     (makeDesktopItem {
-      name = "paseo-desktop";
+      name = "rambla-desktop";
       desktopName = "Rambla";
       genericName = "AI Coding Agents";
       comment = "Self-hosted daemon for AI coding agents";
-      exec = "paseo-desktop";
-      icon = "paseo-desktop";
+      exec = "rambla-desktop";
+      icon = "rambla-desktop";
       categories = ["Development"];
-      startupWMClass = "paseo-desktop";
+      startupWMClass = "rambla-desktop";
     })
     # Hidden alias entry. Which of the two names Electron ends up publishing as
     # the Wayland app_id depends on the Electron version: 41 uses the app-root
-    # package.json `name` ("paseo-desktop"), 38 uses the runtime app name that
+    # package.json `name` ("rambla-desktop"), 38 uses the runtime app name that
     # main.ts sets ("Rambla"). Ship a NoDisplay entry for the second spelling so
     # the icon resolves either way without a duplicate launcher item.
     (makeDesktopItem {
@@ -237,8 +237,8 @@ buildNpmPackage {
       desktopName = "Rambla";
       genericName = "AI Coding Agents";
       comment = "Self-hosted daemon for AI coding agents";
-      exec = "paseo-desktop";
-      icon = "paseo-desktop";
+      exec = "rambla-desktop";
+      icon = "rambla-desktop";
       categories = [ "Development" ];
       startupWMClass = "Rambla";
       noDisplay = true;
@@ -249,7 +249,7 @@ buildNpmPackage {
     description = "Rambla desktop app (Electron wrapper)";
     homepage = "https://github.com/getpaseo/paseo";
     license = lib.licenses.agpl3Plus;
-    mainProgram = "paseo-desktop";
+    mainProgram = "rambla-desktop";
     platforms = lib.platforms.linux ++ lib.platforms.darwin;
   };
 }
