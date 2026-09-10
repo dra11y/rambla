@@ -126,7 +126,7 @@ The finite enums let activation prove every environment and agent result. Runtim
 
 ## Provider-native controls
 
-Hub defines no common sandbox abstraction. Put provider-owned settings in a complete named agent under `.paseo/hub.yml`:
+Hub defines no common sandbox abstraction. Put provider-owned settings in a complete named agent under `.rambla/hub.yml`:
 
 ```yaml
 environments:

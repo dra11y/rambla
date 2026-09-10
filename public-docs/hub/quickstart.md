@@ -69,7 +69,7 @@ Providers must expose a selectable model and execution mode. If there is no defa
 Setup validates the trigger and writes:
 
 ```text
-.paseo/
+.rambla/
 └── triggers/
     └── slack-help.yml
 ```

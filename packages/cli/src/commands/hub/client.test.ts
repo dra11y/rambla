@@ -197,7 +197,7 @@ describe("Hub HTTP client", () => {
           requestId: "request-1",
           issues: [
             {
-              path: [".paseo/workflows/answer.yml", "steps", "work", "agent"],
+              path: [".rambla/workflows/answer.yml", "steps", "work", "agent"],
               message: "unknown named agent operator-secret",
             },
           ],
@@ -212,7 +212,7 @@ describe("Hub HTTP client", () => {
         origin,
         apiKey: "operator-secret",
         projectSlug: "studio",
-        files: [{ path: ".paseo/hub.yml", content: "sensitive bundle content" }],
+        files: [{ path: ".rambla/hub.yml", content: "sensitive bundle content" }],
       }),
       (error: unknown) => {
         assert.ok(error instanceof HubCommandError);
@@ -223,7 +223,7 @@ describe("Hub HTTP client", () => {
         assert.equal(error.details?.includes("sensitive bundle content"), false);
         assert.equal(
           error.details,
-          ".paseo/workflows/answer.yml: steps.work.agent: unknown named agent [redacted]",
+          ".rambla/workflows/answer.yml: steps.work.agent: unknown named agent [redacted]",
         );
         return true;
       },

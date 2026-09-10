@@ -11,7 +11,7 @@ category: Hub
 Each organization trigger is one self-contained YAML file. Keep triggers in your repository and deploy them with `paseo hub deploy`:
 
 ```text
-.paseo/
+.rambla/
 └── triggers/
     └── <trigger>.yml
 ```
@@ -23,7 +23,7 @@ Run `paseo hub init` from the repository the agent should work in. Setup selects
 For a Slack connection named `my-team`, the generated document looks like this:
 
 ```yaml
-# .paseo/triggers/slack-help.yml
+# .rambla/triggers/slack-help.yml
 name: slack-help
 enabled: true
 on:
@@ -74,7 +74,7 @@ paseo hub deploy --dry-run
 paseo hub deploy
 ```
 
-Both deploy commands discover direct `.paseo/triggers/*.yml` files in deterministic path order. The CLI rejects nested files, `.yaml` extensions, symlinked trigger paths, and unreadable files. It does not search parent directories.
+Both deploy commands discover direct `.rambla/triggers/*.yml` files in deterministic path order. The CLI rejects nested files, `.yaml` extensions, symlinked trigger paths, and unreadable files. It does not search parent directories.
 
 Dry-run validates each document against Hub without storing a revision. Deployment validates all documents first, then installs them one at a time through the organization trigger API. Installation creates or updates a trigger by its YAML `name`. If a later install fails, the error lists the files already installed; those revisions remain active. Errors name paths without printing file contents or credentials.
 
@@ -95,7 +95,7 @@ Flags and environment keys are not stored. Endpoint and credential behavior is u
 
 ## Legacy project bundles
 
-Existing project bundles use `.paseo/hub.yml`, direct `.paseo/workflows/*.yml` files, and referenced files below `.paseo/workflows/partials/`. `hub.yml` owns named environments and agents; each workflow owns its trigger and ordered steps.
+Existing project bundles use `.rambla/hub.yml`, direct `.rambla/workflows/*.yml` files, and referenced files below `.rambla/workflows/partials/`. `hub.yml` owns named environments and agents; each workflow owns its trigger and ordered steps.
 
 Select the legacy deployment path explicitly:
 

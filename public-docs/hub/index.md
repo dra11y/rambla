@@ -31,7 +31,7 @@ Your daemons keep running agents where they always did. Hub decides when to ask 
 `paseo hub init` creates one self-contained starter trigger:
 
 ```text
-.paseo/
+.rambla/
 └── triggers/
     └── slack-help.yml
 ```

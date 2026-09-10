@@ -8,11 +8,11 @@ category: Hub
 
 # GitHub triggers
 
-Use semantic GitHub events to start a workflow from one GitHub action. Add the workflow below to a repository whose `.paseo/hub.yml` defines the `dev` environment and `codex` agent, then activate the bundle.
+Use semantic GitHub events to start a workflow from one GitHub action. Add the workflow below to a repository whose `.rambla/hub.yml` defines the `dev` environment and `codex` agent, then activate the bundle.
 
 ## Triage new issues
 
-`.paseo/workflows/triage-issue.yml`:
+`.rambla/workflows/triage-issue.yml`:
 
 ```yaml
 name: triage-issue
@@ -44,7 +44,7 @@ steps:
 
 ## Review new pull requests
 
-`.paseo/workflows/review-pull-request.yml`:
+`.rambla/workflows/review-pull-request.yml`:
 
 ```yaml
 name: review-pull-request
@@ -76,7 +76,7 @@ steps:
 
 ## Respond to new comments
 
-`.paseo/workflows/respond-to-issue-comment.yml`:
+`.rambla/workflows/respond-to-issue-comment.yml`:
 
 ```yaml
 name: respond-to-issue-comment
@@ -106,7 +106,7 @@ steps:
           Call hub.finish_execution when done.
 ```
 
-`.paseo/workflows/respond-to-pull-request-comment.yml`:
+`.rambla/workflows/respond-to-pull-request-comment.yml`:
 
 ```yaml
 name: respond-to-pull-request-comment
@@ -142,7 +142,7 @@ For `github.issue_comment_created`, `github.pull_request_comment_created`, `gith
 
 ## Start work when an issue becomes ready
 
-`.paseo/workflows/implement-ready-issue.yml`:
+`.rambla/workflows/implement-ready-issue.yml`:
 
 ```yaml
 name: implement-ready-issue

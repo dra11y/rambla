@@ -615,7 +615,7 @@ async function writeScaffold(
 async function prepareScaffoldDestination(cwd: string, triggerPath: string): Promise<boolean> {
   const root = path.resolve(cwd);
   await requireSafeScaffoldDirectory(path.join(root, ".rambla"), ".rambla");
-  await requireSafeScaffoldDirectory(path.join(root, ".rambla", "triggers"), ".paseo/triggers");
+  await requireSafeScaffoldDirectory(path.join(root, ".rambla", "triggers"), ".rambla/triggers");
   const destination = path.join(root, triggerPath);
   try {
     const stats = await lstat(destination);

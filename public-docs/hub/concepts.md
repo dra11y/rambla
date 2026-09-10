@@ -33,7 +33,7 @@ GitHub / Slack / Discord / manual request
 - A **workflow** is the ordered set of steps that runs after a trigger matches.
 - A **step** starts one agent execution, with its own prompt, agent selection, credentials, reply capabilities, and limits.
 
-The configuration lives in `.paseo/hub.yml` plus convention-discovered `.paseo/workflows/*.yml` files when the project uses a GitHub source. A project has one active configuration revision at a time.
+The configuration lives in `.rambla/hub.yml` plus convention-discovered `.rambla/workflows/*.yml` files when the project uses a GitHub source. A project has one active configuration revision at a time.
 
 ## From event to agent
 
@@ -55,7 +55,7 @@ When Hub syncs the bundle, it validates every source file and resolves its refer
 - `environment.daemon` must match a registered daemon's friendly slug.
 - Step ids, expressions, input filters, output schemas, and durations must be valid.
 - Every finite environment or named-agent result must exist and validate.
-- Prompt partials must resolve below `.paseo/workflows/partials/` at the exact commit.
+- Prompt partials must resolve below `.rambla/workflows/partials/` at the exact commit.
 
 If activation fails, Hub keeps the previous active revision. The Configuration tab shows the failed sync and its validation error; Activity continues to reflect the last active revision.
 

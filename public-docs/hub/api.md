@@ -67,7 +67,7 @@ A valid key without the scope required by an endpoint returns `403` in the same 
 
 ## Trigger validation and installation
 
-`paseo hub deploy --dry-run` validates each `.paseo/triggers/*.yml` file through `POST /api/v1/triggers/validate`. `paseo hub deploy` validates all files first, then installs each through `POST /api/v1/triggers/install`.
+`paseo hub deploy --dry-run` validates each `.rambla/triggers/*.yml` file through `POST /api/v1/triggers/validate`. `paseo hub deploy` validates all files first, then installs each through `POST /api/v1/triggers/install`.
 
 Both endpoints accept one self-contained document:
 
@@ -139,22 +139,22 @@ Request body:
   "projectSlug": "my-project",
   "files": [
     {
-      "path": ".paseo/hub.yml",
+      "path": ".rambla/hub.yml",
       "content": "environments:\n  production:\n    kind: daemon\n    daemon: build-server\n    cwd: /workspace\nagents:\n  codex:\n    provider: codex\n"
     },
     {
-      "path": ".paseo/workflows/deploy.yml",
+      "path": ".rambla/workflows/deploy.yml",
       "content": "name: deploy\non: manual.run\nmax_runtime: 2h\nfilters:\n  from_users: [automation]\nsteps:\n  - id: deploy\n    environment: production\n    max_runtime: 90m\n    idle_timeout: 10m\n    agent: codex\n    prompt:\n      - include: partials/safety.md\n"
     },
     {
-      "path": ".paseo/workflows/partials/safety.md",
+      "path": ".rambla/workflows/partials/safety.md",
       "content": "Follow the safety checklist."
     }
   ]
 }
 ```
 
-`projectSlug` picks the target project; the bearer credential fixes the organization. `files` contains `.paseo/hub.yml`, every direct workflow `.yml`, and each referenced workflow partial. Hub rejects missing, extra, duplicate, unsafe, or noncanonical paths.
+`projectSlug` picks the target project; the bearer credential fixes the organization. `files` contains `.rambla/hub.yml`, every direct workflow `.yml`, and each referenced workflow partial. Hub rejects missing, extra, duplicate, unsafe, or noncanonical paths.
 
 Limits:
 

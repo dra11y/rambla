@@ -10,7 +10,7 @@ category: Hub
 
 `slack.mention` fires when the bot is mentioned in a channel where it is present. Direct messages, slash commands, and interactive components do not produce this trigger.
 
-`.paseo/workflows/slack-help.yml`:
+`.rambla/workflows/slack-help.yml`:
 
 ```yaml
 name: slack-help

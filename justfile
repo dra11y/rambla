@@ -5,6 +5,11 @@ desktop := home_dir() / ".local/share/applications/rambla.desktop"
 @list:
     just --list
 
+format:
+    npm run format
+
+alias fmt := format
+
 # Build rambla
 [script]
 build:

@@ -24,16 +24,16 @@ describe("Hub deployment bundle discovery", () => {
       projectSlug: "studio-api",
       workflowCount: 2,
       files: [
-        { path: ".paseo/hub.yml", content: hubResource },
+        { path: ".rambla/hub.yml", content: hubResource },
         {
-          path: ".paseo/workflows/answer.yml",
+          path: ".rambla/workflows/answer.yml",
           content: workflow("answer", "${{ paseo.inputs.agent }}", true),
         },
         {
-          path: ".paseo/workflows/partials/safety.md",
+          path: ".rambla/workflows/partials/safety.md",
           content: "Keep the request in paseo.prompt and evidence in paseo.context.\n",
         },
-        { path: ".paseo/workflows/z-last.yml", content: workflow("z-last", "codex-safe") },
+        { path: ".rambla/workflows/z-last.yml", content: workflow("z-last", "codex-safe") },
       ],
     });
   });
@@ -45,7 +45,7 @@ describe("Hub deployment bundle discovery", () => {
         await mkdir(path.join(cwd, ".rambla", "workflows"), { recursive: true });
       },
       code: "HUB_RESOURCE_MISSING",
-      message: ".paseo/hub.yml does not exist",
+      message: ".rambla/hub.yml does not exist",
     },
     {
       name: "missing workflow directory",
@@ -54,7 +54,7 @@ describe("Hub deployment bundle discovery", () => {
         await writeFile(path.join(cwd, ".rambla", "hub.yml"), hubResource);
       },
       code: "HUB_WORKFLOW_DIRECTORY_MISSING",
-      message: ".paseo/workflows does not exist",
+      message: ".rambla/workflows does not exist",
     },
     {
       name: "empty workflow directory",
@@ -63,7 +63,7 @@ describe("Hub deployment bundle discovery", () => {
         await writeFile(path.join(cwd, ".rambla", "hub.yml"), hubResource);
       },
       code: "HUB_WORKFLOW_MISSING",
-      message: ".paseo/workflows must contain at least one direct-child .yml workflow",
+      message: ".rambla/workflows must contain at least one direct-child .yml workflow",
     },
     {
       name: "unsupported workflow extension",
@@ -73,7 +73,7 @@ describe("Hub deployment bundle discovery", () => {
         await writeFile(path.join(cwd, ".rambla", "workflows", "answer.yaml"), "name: answer\n");
       },
       code: "HUB_WORKFLOW_EXTENSION_UNSUPPORTED",
-      message: ".paseo/workflows/answer.yaml must use the .yml extension",
+      message: ".rambla/workflows/answer.yaml must use the .yml extension",
     },
   ])("rejects $name before contacting Hub", async ({ arrange, code, message }) => {
     const cwd = await temporaryDirectory();
@@ -97,7 +97,7 @@ describe("Hub deployment bundle discovery", () => {
 
     await expect(discoverHubBundle({ cwd, project: "studio-api" })).rejects.toMatchObject({
       code: "HUB_PARTIAL_PATH_INVALID",
-      message: expect.stringContaining(".paseo/workflows/answer.yml"),
+      message: expect.stringContaining(".rambla/workflows/answer.yml"),
     });
   });
 
@@ -113,7 +113,7 @@ describe("Hub deployment bundle discovery", () => {
 
     await expect(discoverHubBundle({ cwd, project: "studio-api" })).rejects.toMatchObject({
       code: "HUB_BUNDLE_FILE_MISSING",
-      message: expect.stringContaining(".paseo/workflows/partials/missing.md"),
+      message: expect.stringContaining(".rambla/workflows/partials/missing.md"),
     });
   });
 
@@ -127,7 +127,7 @@ describe("Hub deployment bundle discovery", () => {
 
     await expect(discoverHubBundle({ cwd, project: "studio-api" })).rejects.toMatchObject({
       code: "HUB_WORKFLOW_PATH_UNSUPPORTED",
-      message: expect.stringContaining(".paseo/workflows/nested"),
+      message: expect.stringContaining(".rambla/workflows/nested"),
     });
   });
 
@@ -139,7 +139,7 @@ describe("Hub deployment bundle discovery", () => {
 
     await expect(discoverHubBundle({ cwd, project: "studio-api" })).rejects.toMatchObject({
       code: "HUB_BUNDLE_UNSAFE_PATH",
-      message: expect.stringContaining(".paseo/workflows/linked.yml"),
+      message: expect.stringContaining(".rambla/workflows/linked.yml"),
     });
   });
 

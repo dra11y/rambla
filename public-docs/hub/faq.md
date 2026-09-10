@@ -32,7 +32,7 @@ Yes. `filters.repo` can name any repository the organization can reach, so a pri
 
 ## Where do triggers go now?
 
-Each trigger and its ordered steps live in one direct `.paseo/workflows/*.yml` file. `hub.yml` contains only named environments and agents. Hub rejects monolithic `triggers` configuration instead of translating it.
+Each trigger and its ordered steps live in one direct `.rambla/workflows/*.yml` file. `hub.yml` contains only named environments and agents. Hub rejects monolithic `triggers` configuration instead of translating it.
 
 ## Can I edit configuration in the dashboard?
 

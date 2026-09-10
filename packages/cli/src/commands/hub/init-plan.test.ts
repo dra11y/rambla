@@ -63,7 +63,7 @@ describe("Hub init scaffold", () => {
         provider,
         providerFilters,
       });
-      expect(scaffold.triggerPath).toBe(`.paseo/triggers/${provider}-help.yml`);
+      expect(scaffold.triggerPath).toBe(`.rambla/triggers/${provider}-help.yml`);
       const parsed = YAML.parse(scaffold.trigger) as {
         name: string;
         enabled: boolean;

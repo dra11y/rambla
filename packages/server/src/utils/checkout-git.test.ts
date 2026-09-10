@@ -3769,7 +3769,7 @@ const x = 1;
   });
 
   describe("isPaseoWorktreePath", () => {
-    it("matches Unix .paseo/worktrees/ paths", () => {
+    it("matches Unix .rambla/worktrees/ paths", () => {
       expect(isPaseoWorktreePath("/home/user/.rambla/worktrees/feature")).toBe(true);
     });
 
@@ -3791,7 +3791,7 @@ const x = 1;
       ).toBe(true);
     });
 
-    it("rejects paths without .paseo/worktrees segment", () => {
+    it("rejects paths without .rambla/worktrees segment", () => {
       expect(isPaseoWorktreePath("/home/user/repo")).toBe(false);
       expect(isPaseoWorktreePath("C:\\Users\\dev\\repo")).toBe(false);
     });

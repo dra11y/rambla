@@ -174,7 +174,7 @@ describe("Hub guided setup continuation", () => {
 
     assert.equal(await readFile(triggerPath, "utf8"), "name: keep-me\n");
     assert.deepEqual(prompts.confirmations, [
-      "Replace the existing .paseo/triggers/slack-help.yml?",
+      "Replace the existing .rambla/triggers/slack-help.yml?",
     ]);
     assert.deepEqual(
       calls.map(({ operation }) => operation),

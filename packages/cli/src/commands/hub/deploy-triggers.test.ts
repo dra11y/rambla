@@ -20,8 +20,8 @@ describe("Hub trigger deployment discovery", () => {
     await writeFile(path.join(cwd, ".rambla", "triggers", "a.yml"), "name: a\n");
 
     await expect(discoverHubTriggers(cwd)).resolves.toEqual([
-      { path: ".paseo/triggers/a.yml", yaml: "name: a\n" },
-      { path: ".paseo/triggers/z.yml", yaml: "name: z\n" },
+      { path: ".rambla/triggers/a.yml", yaml: "name: a\n" },
+      { path: ".rambla/triggers/z.yml", yaml: "name: z\n" },
     ]);
   });
 
@@ -52,7 +52,7 @@ describe("Hub trigger deployment discovery", () => {
     await expect(discoverHubTriggers(cwd)).rejects.toMatchObject({
       code: "HUB_PROJECT_REQUIRED",
       message:
-        "This directory contains a legacy .paseo/hub.yml bundle. Pass --project <slug> to deploy it.",
+        "This directory contains a legacy .rambla/hub.yml bundle. Pass --project <slug> to deploy it.",
     });
   });
 });

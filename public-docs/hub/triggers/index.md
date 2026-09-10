@@ -10,7 +10,7 @@ category: Hub
 
 A trigger says which provider event can start a workflow. The [Hub workflows](/docs/hub/workflows) page covers the steps, inputs, routing, prompts, and deadlines that run after a match.
 
-`.paseo/workflows/github-issue.yml`:
+`.rambla/workflows/github-issue.yml`:
 
 ```yaml
 name: triage-issue

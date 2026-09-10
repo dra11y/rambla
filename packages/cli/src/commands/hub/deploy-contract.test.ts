@@ -57,7 +57,7 @@ describe("Hub deployment contract", () => {
           revisionId,
           version: 3,
           active: true,
-          path: ".paseo/triggers/slack-help.yml",
+          path: ".rambla/triggers/slack-help.yml",
           origin: hub.origin,
         },
       ],
@@ -84,7 +84,7 @@ describe("Hub deployment contract", () => {
         {
           name: "slack-help",
           valid: true,
-          path: ".paseo/triggers/slack-help.yml",
+          path: ".rambla/triggers/slack-help.yml",
           origin: hub.origin,
         },
       ],
@@ -118,9 +118,9 @@ describe("Hub deployment contract", () => {
       runHubDeploy({ hub: hub.origin, apiKey: "operator-secret" }, { cwd, env: {} }),
     ).rejects.toMatchObject({
       code: "HUB_TRIGGER_DEPLOY_PARTIAL",
-      message: "Could not deploy .paseo/triggers/z-help.yml after 1 trigger had been installed.",
+      message: "Could not deploy .rambla/triggers/z-help.yml after 1 trigger had been installed.",
       details:
-        "Hub trigger deployment failed with HTTP 500.\nInstalled before the failure:\n- .paseo/triggers/slack-help.yml",
+        "Hub trigger deployment failed with HTTP 500.\nInstalled before the failure:\n- .rambla/triggers/slack-help.yml",
     });
     expect((await hub.received).map(({ url }) => url)).toEqual([
       "/api/v1/triggers/validate",
@@ -267,9 +267,9 @@ const trigger = [
 
 function canonicalFiles() {
   return [
-    { path: ".paseo/hub.yml", content: resource },
-    { path: ".paseo/workflows/answer.yml", content: workflow },
-    { path: ".paseo/workflows/partials/safety.md", content: partial },
+    { path: ".rambla/hub.yml", content: resource },
+    { path: ".rambla/workflows/answer.yml", content: workflow },
+    { path: ".rambla/workflows/partials/safety.md", content: partial },
   ];
 }
 

@@ -10,7 +10,7 @@ category: Hub
 
 `discord.mention` fires when the bot or a managed role is mentioned in a guild channel or thread.
 
-`.paseo/workflows/discord-help.yml`:
+`.rambla/workflows/discord-help.yml`:
 
 ```yaml
 name: discord-help

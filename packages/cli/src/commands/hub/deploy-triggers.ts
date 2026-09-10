@@ -2,7 +2,7 @@ import { lstat, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { HubCommandError } from "./error.js";
 
-const TRIGGER_DIRECTORY = ".paseo/triggers";
+const TRIGGER_DIRECTORY = ".rambla/triggers";
 
 export interface HubDeployTrigger {
   path: string;
@@ -76,7 +76,7 @@ async function readTriggerDirectoryStats(
     if (await legacyBundleExists(root)) {
       throw new HubCommandError(
         "HUB_PROJECT_REQUIRED",
-        "This directory contains a legacy .paseo/hub.yml bundle. Pass --project <slug> to deploy it.",
+        "This directory contains a legacy .rambla/hub.yml bundle. Pass --project <slug> to deploy it.",
       );
     }
     throw new HubCommandError(
@@ -88,12 +88,12 @@ async function readTriggerDirectoryStats(
 
 async function legacyBundleExists(root: string): Promise<boolean> {
   try {
-    await lstat(path.join(root, ".paseo/hub.yml"));
+    await lstat(path.join(root, ".rambla/hub.yml"));
     return true;
   } catch (error) {
     if (errorCode(error) === "ENOENT") return false;
     if (!isExpectedReadError(error)) throw error;
-    throw unreadableTriggerPath(".paseo/hub.yml");
+    throw unreadableTriggerPath(".rambla/hub.yml");
   }
 }
 

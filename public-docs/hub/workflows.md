@@ -8,11 +8,11 @@ category: Hub
 
 # Hub workflows
 
-A workflow file contains one trigger and the ordered steps it starts. Files are discovered from `.paseo/workflows/*.yml`.
+A workflow file contains one trigger and the ordered steps it starts. Files are discovered from `.rambla/workflows/*.yml`.
 
 ## Your first workflow
 
-Assume `.paseo/hub.yml` defines an environment named `dev` and an agent named `codex`. Add `.paseo/workflows/slack-help.yml`:
+Assume `.rambla/hub.yml` defines an environment named `dev` and an agent named `codex`. Add `.rambla/workflows/slack-help.yml`:
 
 ```yaml
 name: slack-help
@@ -159,7 +159,7 @@ steps:
       - { type: discord.reply, max: 1, required: true }
 ```
 
-`.paseo/workflows/partials/classify.md`:
+`.rambla/workflows/partials/classify.md`:
 
 ```text
 Choose one configured repository environment and one complete named agent configuration.
