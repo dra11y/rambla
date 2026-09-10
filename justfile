@@ -1,8 +1,5 @@
-set unstable
-
 unit := home_dir() / ".config/systemd/user/rambla.service"
-
-e2e_skip := "03-daemon 15-provider"
+desktop := home_dir() / ".local/share/applications/rambla.desktop"
 
 # List recipes.
 @list:
@@ -89,10 +86,10 @@ ci-status:
 e2e: e2e-server e2e-cli e2e-app e2e-desktop
 
 e2e-server:
-    npm run test:integration -w @getpaseo/server
+    PORT=26767 npm run test:integration -w @getpaseo/server
 
 e2e-cli:
-    npm run test:local -w @getpaseo/cli
+    PORT=26768 npm run test:local -w @getpaseo/cli
 
 e2e-app:
     npm run test:e2e -w @getpaseo/app
@@ -124,20 +121,20 @@ install-daemon: && install-service
 [script]
 install-service: systemctl-reload restart
     mkdir -p "$(dirname "{{unit}}")"
-    {
-        echo "[Unit]"
-        echo "Description=Rambla daemon"
-        echo ""
-        echo "[Service]"
-        echo "Type=simple"
-        echo "WorkingDirectory={{justfile_dir()}}"
-        echo "ExecStart={{justfile_dir()}}/packages/cli/bin/paseo start --foreground"
-        echo "Restart=always"
-        echo "RestartSec=5"
-        echo ""
-        echo "[Install]"
-        echo "WantedBy=graphical-session.target"
-    } > "{{unit}}"
+    cat > {{unit}} <<EOF
+    [Unit]
+    Description=Rambla daemon
+
+    [Service]
+    Type=simple
+    WorkingDirectory={{justfile_dir()}}
+    ExecStart={{justfile_dir()}}/packages/cli/bin/paseo start --foreground
+    Restart=always
+    RestartSec=5
+
+    [Install]
+    WantedBy=graphical-session.target
+    EOF
 
 
 # # Incremental - Broken - Install dependencies, build, install rambla service unit.
@@ -183,8 +180,8 @@ install-app: && install-desktop
 [script]
 install-desktop:
     set -euo pipefail
-    mkdir -p ~/.local/share/applications
-    cat > ~/.local/share/applications/rambla.desktop <<EOF
+    mkdir -p "$(dirname "{{desktop}}")"
+    cat > {{desktop}} <<EOF
     [Desktop Entry]
     Type=Application
     Name=Rambla
