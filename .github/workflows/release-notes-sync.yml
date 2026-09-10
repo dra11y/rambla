@@ -22,7 +22,7 @@ on:
 
 concurrency:
   group: release-notes-sync-${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   sync-release-notes:

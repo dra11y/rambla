@@ -14,7 +14,7 @@ on:
 
 concurrency:
   group: desktop-rollout-${{ inputs.tag }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   SOURCE_TAG: ${{ inputs.tag }}
