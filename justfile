@@ -29,6 +29,7 @@ clean: stop
     rm -rf **/node_modules
     rm -rf packages/desktop/release packages/*/dist
     find . -name '*.tsbuildinfo' -not -path './node_modules/*' -delete
+    rm -rf packages/app/.expo/types
     echo "cleaned: all dist outputs and build state removed"
 
 # Check whether CI is green.
