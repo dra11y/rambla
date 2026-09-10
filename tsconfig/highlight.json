@@ -1,6 +1,6 @@
 {
   "extends": "../packages/highlight/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
+    "composite": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "extends": "../packages/relay/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
+    "composite": true
   }
 }

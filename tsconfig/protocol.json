@@ -1,6 +1,6 @@
 {
   "extends": "../packages/protocol/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
+    "composite": true
   }
 }

@@ -1,7 +1,7 @@
 {
   "extends": "../packages/client/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
+    "composite": true
   },
   "references": [
     {
