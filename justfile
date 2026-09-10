@@ -88,6 +88,49 @@ ci-status:
         echo "${OFF}"
     fi
 
+# Per-job status for the current commit. Answers now, does not wait for slow jobs.
+[script]
+ci-jobs:
+    set -euo pipefail
+    RED=$(tput -T xterm-256color setaf 1) YEL=$(tput -T xterm-256color setaf 3) GRN=$(tput -T xterm-256color setaf 2) OFF=$(tput -T xterm-256color sgr0)
+
+    sha="$(git rev-parse HEAD)"
+    echo "Commit ${sha:0:9} — $(git log -1 --pretty=%s)"
+
+    runs="$(gh run list -R getrambla/rambla --commit "$sha" --limit 20 --json databaseId --jq '.[].databaseId')"
+    if [ -z "$runs" ]; then
+        echo "${YEL}No workflow runs for this commit yet.${OFF}"
+        exit 0
+    fi
+
+    failed=0 running=0 passed=0
+    for run in $runs; do
+        while IFS=$'\t' read -r name status conclusion; do
+            case "$conclusion" in
+                success)  passed=$((passed + 1)) ;;
+                skipped)  ;;
+                "")       running=$((running + 1)); echo "  ${YEL}running${OFF}  $name" ;;
+                *)        failed=$((failed + 1)); echo "  ${RED}FAILED${OFF}   $name ($conclusion)  run $run" ;;
+            esac
+        done < <(gh api "repos/getrambla/rambla/actions/runs/$run/jobs" --paginate \
+            --jq '.jobs[] | [.name, .status, (.conclusion // "")] | @tsv')
+    done
+
+    echo
+    echo "${GRN}$passed passed${OFF}, ${RED}$failed failed${OFF}, ${YEL}$running still running${OFF}"
+
+    if [ "$failed" -gt 0 ]; then
+        echo
+        echo "Error lines:"
+        for run in $runs; do
+            gh run view "$run" -R getrambla/rambla --log-failed 2>/dev/null \
+                | grep -E '##\[error\]|error TS|npm error|fatal:|AssertionError' \
+                | sed 's/^[^ ]* [^ ]* [0-9T:.Z-]*Z //' \
+                | sort -u | head -10 || true
+        done
+        exit 1
+    fi
+
 # Headless e2e suites (no device). Stops at the first failure.
 e2e: e2e-server e2e-cli e2e-app e2e-desktop
 

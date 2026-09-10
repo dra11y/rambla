@@ -6,11 +6,11 @@ import { openWhatsNew, release, serveChangelog } from "../support/helpers/change
 const DISCORD_DESTINATION =
   /^https:\/\/(?:discord\.gg\/jz8T2uahpH|discord\.com\/invite\/jz8T2uahpH)(?:[/?#]|$)/;
 const GITHUB_ISSUE_DESTINATION =
-  /^https:\/\/github\.com\/(?:getpaseo\/paseo\/issues\/new(?:\/choose)?(?:[/?#]|$)|login\?return_to=https%3A%2F%2Fgithub\.com%2Fgetpaseo%2Fpaseo%2Fissues%2Fnew$)/;
+  /^https:\/\/github\.com\/(?:getrambla\/rambla\/issues\/new(?:\/choose)?(?:[/?#]|$)|login\?return_to=https%3A%2F%2Fgithub\.com%2Fgetrambla%2Frambla%2Fissues%2Fnew$)/;
 const CHANGELOG_DESTINATION = /^https:\/\/rambla\.sh\/changelog(?:[/?#]|$)/;
 // The name and the version are separate cells of a key/value row, so they meet with no space
 // between them in the row's text content.
-const APP_VERSION = /^Paseo\s*v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
+const APP_VERSION = /^Rambla\s*v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 
 async function openHelpMenu(page: Page): Promise<void> {
   await page.getByTestId("sidebar-help").click();
@@ -35,9 +35,16 @@ async function expectExternalPage(
   actionTestID: string,
   expectedUrl: RegExp,
 ): Promise<void> {
+  // Stub the destination. This asserts where the app sends you, not whether that
+  // site is reachable from CI — an outage is a separate signal, not a code failure.
+  await page.context().route(
+    (url) => expectedUrl.test(url.toString()),
+    (route) => route.fulfill({ status: 200, contentType: "text/html", body: "<html></html>" }),
+  );
   const popupPromise = page.waitForEvent("popup");
   await page.getByTestId(actionTestID).click();
   const popup = await popupPromise;
+  await popup.waitForLoadState("domcontentloaded");
   expect(popup.url()).toMatch(expectedUrl);
   await popup.close();
 }

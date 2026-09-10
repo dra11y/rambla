@@ -1,0 +1,31 @@
+name: Site Health
+
+# Manual only. This checks whether the live site is up, which is a separate
+# question from whether the code is correct. Add a `schedule:` trigger here to
+# turn it into real monitoring.
+on:
+  workflow_dispatch:
+
+jobs:
+  site-health:
+    name: site-health
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check rambla.sh
+        run: |
+          set -uo pipefail
+          failed=0
+          for url in \
+            "https://rambla.sh/" \
+            "https://rambla.sh/changelog" \
+            "https://rambla.sh/download"
+          do
+            code="$(curl -sS -o /dev/null -w '%{http_code}' -L --max-time 20 "$url" 2>&1)" || code="unreachable"
+            if [ "$code" = "200" ]; then
+              echo "ok        $url"
+            else
+              echo "FAILED    $url  ($code)"
+              failed=1
+            fi
+          done
+          exit "$failed"
