@@ -30,7 +30,7 @@ docker run -d --name paseo \
   -e PASEO_PASSWORD=change-me \
   -v "$PWD/paseo-home:/home/paseo" \
   -v "$PWD:/workspace" \
-  ghcr.io/getpaseo/paseo:latest
+  ghcr.io/getrambla/rambla:latest
 ```
 
 Then open:
@@ -57,7 +57,7 @@ Minimal example:
 ```yaml
 services:
   paseo:
-    image: ghcr.io/getpaseo/paseo:latest
+    image: ghcr.io/getrambla/rambla:latest
     restart: unless-stopped
     ports:
       - "6767:6767"
@@ -77,7 +77,7 @@ releases to third-party agent release cycles.
 Create a child image for the agents you use:
 
 ```Dockerfile
-FROM ghcr.io/getpaseo/paseo:latest
+FROM ghcr.io/getrambla/rambla:latest
 
 USER root
 RUN npm install -g @openai/codex @anthropic-ai/claude-code opencode-ai
@@ -205,9 +205,9 @@ docker build \
 
 The Docker workflow builds the image on pull requests and on `main` as a
 non-publishing check. Stable `vX.Y.Z` tag pushes publish
-`ghcr.io/getpaseo/paseo:X.Y.Z` and `ghcr.io/getpaseo/paseo:latest`. Beta tags
+`ghcr.io/getrambla/rambla:X.Y.Z` and `ghcr.io/getrambla/rambla:latest`. Beta tags
 publish only the exact prerelease tag, such as
-`ghcr.io/getpaseo/paseo:0.1.102-beta.1`, and do not update `latest`.
+`ghcr.io/getrambla/rambla:0.1.102-beta.1`, and do not update `latest`.
 
 To replace a Docker image in place without rebuilding desktop, APK, or EAS
 mobile release artifacts, dispatch the Docker workflow manually instead of

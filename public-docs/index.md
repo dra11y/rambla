@@ -12,7 +12,7 @@ Paseo runs your coding agents on your machine and gives you a mobile, desktop, w
 
 ## Desktop app (recommended)
 
-Download from [rambla.sh/download](https://rambla.sh/download) or the [GitHub releases page](https://github.com/getpaseo/paseo/releases). Open it and you're done.
+Download from [rambla.sh/download](https://rambla.sh/download) or the [GitHub releases page](https://github.com/getrambla/rambla/releases). Open it and you're done.
 
 The desktop app bundles its own daemon and starts it automatically, no separate install required. On first launch you'll see a brief startup screen, then connect from your phone using **Settings → your host → Pair Device**.
 
@@ -41,7 +41,7 @@ docker run -d --name paseo \
   -e PASEO_PASSWORD=change-me \
   -v "$PWD/paseo-home:/home/paseo" \
   -v "$PWD:/workspace" \
-  ghcr.io/getpaseo/paseo:latest
+  ghcr.io/getrambla/rambla:latest
 ```
 
 Then open `http://localhost:6767`.
@@ -58,8 +58,8 @@ The image runs the daemon and serves the bundled web UI. It does not bundle agen
 - [Plugins](/docs/plugins), add trusted local surfaces, sidebar actions, daemon behavior, and composer attachments.
 - [CLI reference](/docs/cli), every command.
 - [Self-hosting the web UI](/docs/web-ui), serve the browser app from your own daemon.
-- [GitHub repo](https://github.com/getpaseo/paseo)
-- [Report an issue](https://github.com/getpaseo/paseo/issues)
+- [GitHub repo](https://github.com/getrambla/rambla)
+- [Report an issue](https://github.com/getrambla/rambla/issues)
 
 ## Prerequisites
 

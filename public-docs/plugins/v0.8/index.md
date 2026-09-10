@@ -12,7 +12,7 @@ category: Plugins
 > if you run the stable release.
 
 > **Experimental:** The plugin API is still evolving, so expect breaking changes and updates to
-> your plugins as Paseo evolves. See the [plugin roadmap](https://github.com/getpaseo/paseo/labels/plugins)
+> your plugins as Paseo evolves. See the [plugin roadmap](https://github.com/getrambla/rambla/labels/plugins)
 > for planned contribution surfaces.
 
 A plugin is a TypeScript project installed into one Paseo daemon. It can add

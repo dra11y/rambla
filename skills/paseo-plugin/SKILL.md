@@ -42,11 +42,11 @@ Pick the contribution that matches the request. Each row names the registration,
 | Creation and launch hooks | `server.before`                                  | Change agent config, provider options, MCP servers, environment, or workspace isolation before the operation  | [Before hooks](https://rambla.sh/docs/plugins/v0.8/reference.md#before-hooks)                      |
 | Paseo SDK                 | `usePaseo()` / handler `{ paseo }`               | Normal Paseo operations: workspaces, agents, providers, config                                                | reference.md → Use the Paseo SDK                                                                   |
 
-| Lifecycle task                                                      | Example                                                                                                |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Log all eleven hooks                                                | [lifecycle-logger](https://github.com/getpaseo/paseo/tree/main/plugin-examples/lifecycle-logger)       |
-| Follow-ups, permissions, environment, provider switching, worktrees | [lifecycle-actions](https://github.com/getpaseo/paseo/tree/main/plugin-examples/lifecycle-actions)     |
-| Inject MCP servers and change Codex sandbox/approval options        | [agent-configuration](https://github.com/getpaseo/paseo/tree/main/plugin-examples/agent-configuration) |
+| Lifecycle task                                                      | Example                                                                                                  |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Log all eleven hooks                                                | [lifecycle-logger](https://github.com/getrambla/rambla/tree/main/plugin-examples/lifecycle-logger)       |
+| Follow-ups, permissions, environment, provider switching, worktrees | [lifecycle-actions](https://github.com/getrambla/rambla/tree/main/plugin-examples/lifecycle-actions)     |
+| Inject MCP servers and change Codex sandbox/approval options        | [agent-configuration](https://github.com/getrambla/rambla/tree/main/plugin-examples/agent-configuration) |
 
 ## Create the project
 

@@ -10,7 +10,7 @@ category: Getting started
 
 The official Paseo Docker image runs the daemon and serves the bundled browser UI from the same HTTP origin. It is meant for servers, dev boxes, NAS devices, homelab hosts, and other places where you want Paseo running without the desktop app.
 
-Docker images follow the stable Paseo release cadence. `ghcr.io/getpaseo/paseo:latest` points at the latest stable release, not an arbitrary `main` build.
+Docker images follow the stable Paseo release cadence. `ghcr.io/getrambla/rambla:latest` points at the latest stable release, not an arbitrary `main` build.
 
 ```bash
 docker run -d --name paseo \
@@ -18,7 +18,7 @@ docker run -d --name paseo \
   -e PASEO_PASSWORD=change-me \
   -v "$PWD/paseo-home:/home/paseo" \
   -v "$PWD:/workspace" \
-  ghcr.io/getpaseo/paseo:latest
+  ghcr.io/getrambla/rambla:latest
 ```
 
 Then open:
@@ -46,7 +46,7 @@ The image does not bundle agent CLIs such as Claude Code, Codex, OpenCode, Copil
 ```yaml
 services:
   paseo:
-    image: ghcr.io/getpaseo/paseo:latest
+    image: ghcr.io/getrambla/rambla:latest
     container_name: paseo
     restart: unless-stopped
     ports:
@@ -70,7 +70,7 @@ docker compose up -d
 Create a child image for the providers you want available:
 
 ```Dockerfile
-FROM ghcr.io/getpaseo/paseo:latest
+FROM ghcr.io/getrambla/rambla:latest
 
 USER root
 RUN npm install -g @openai/codex @anthropic-ai/claude-code opencode-ai
