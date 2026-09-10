@@ -64,7 +64,7 @@ describe("pid-lock ownership", () => {
     const replacementOwnerPid = process.pid + 10_000;
 
     try {
-      const pidPath = join(paseoHome, "paseo.pid");
+      const pidPath = join(paseoHome, "rambla.pid");
       await writeFile(
         pidPath,
         JSON.stringify({
@@ -97,7 +97,7 @@ describe("pid-lock ownership", () => {
     const replacementOwnerPid = process.pid + 10_000;
 
     try {
-      const pidPath = join(paseoHome, "paseo.pid");
+      const pidPath = join(paseoHome, "rambla.pid");
       await writeFile(
         pidPath,
         JSON.stringify({
@@ -128,7 +128,7 @@ describe("pid-lock ownership", () => {
 
   test("keeps a stale live lock written by a pre-heartbeat daemon", async () => {
     const paseoHome = await mkdtemp(join(tmpdir(), "paseo-pid-lock-legacy-live-"));
-    const pidPath = join(paseoHome, "paseo.pid");
+    const pidPath = join(paseoHome, "rambla.pid");
 
     try {
       await writeFile(
@@ -159,7 +159,7 @@ describe("pid-lock ownership", () => {
   test("reclaims a stale legacy desktop lock after desktop confirms the daemon is unreachable", async () => {
     const paseoHome = await mkdtemp(join(tmpdir(), "paseo-pid-lock-legacy-desktop-"));
     const replacementOwnerPid = process.pid + 10_000;
-    const pidPath = join(paseoHome, "paseo.pid");
+    const pidPath = join(paseoHome, "rambla.pid");
 
     try {
       await writeFile(
@@ -205,7 +205,7 @@ describe("pid-lock ownership", () => {
 
   test("retries a heartbeat refresh while its owner is rewriting the lock", async () => {
     const paseoHome = await mkdtemp(join(tmpdir(), "paseo-pid-lock-refresh-rewrite-"));
-    const pidPath = join(paseoHome, "paseo.pid");
+    const pidPath = join(paseoHome, "rambla.pid");
 
     try {
       await acquirePidLock(paseoHome, null, { ownerPid: process.pid });
@@ -231,7 +231,7 @@ describe("pid-lock ownership", () => {
 
     try {
       await writeFile(
-        join(paseoHome, "paseo.pid"),
+        join(paseoHome, "rambla.pid"),
         JSON.stringify({
           pid: process.pid,
           startedAt: new Date().toISOString(),

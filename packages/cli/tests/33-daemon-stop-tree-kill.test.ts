@@ -115,7 +115,7 @@ try {
 
   assert(ownerProcess.pid, "owner pid should exist");
   await writeFile(
-    join(paseoHome, "paseo.pid"),
+    join(paseoHome, "rambla.pid"),
     JSON.stringify({
       pid: ownerProcess.pid,
       listen: "127.0.0.1:1",

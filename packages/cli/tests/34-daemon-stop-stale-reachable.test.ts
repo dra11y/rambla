@@ -104,7 +104,7 @@ const port = await getAvailablePort();
 const paseoHome = await mkdtemp(join(tmpdir(), "paseo-stop-stale-reachable-"));
 const cliRoot = join(import.meta.dirname, "..");
 const host = `127.0.0.1:${port}`;
-const pidPath = join(paseoHome, "paseo.pid");
+const pidPath = join(paseoHome, "rambla.pid");
 const stalePid = findUnusedPid();
 
 let workerProcess: ChildProcess | null = null;

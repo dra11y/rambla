@@ -44,7 +44,7 @@ interface PidLockState {
 }
 
 async function readPidLockState(paseoHome: string): Promise<PidLockState> {
-  const pidPath = join(paseoHome, "paseo.pid");
+  const pidPath = join(paseoHome, "rambla.pid");
 
   try {
     const content = await readFile(pidPath, "utf-8");

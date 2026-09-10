@@ -29,7 +29,7 @@ export interface RealDaemonState {
 
 /**
  * Reads live state from the running E2E test daemon: version from the HTTP
- * status endpoint, PID from the paseo.pid lock file, log path from the
+ * status endpoint, PID from the rambla.pid lock file, log path from the
  * E2E_PASEO_HOME directory. Call this in Node test code (not in the browser).
  */
 export async function loadRealDaemonState(): Promise<RealDaemonState> {
@@ -42,12 +42,12 @@ export async function loadRealDaemonState(): Promise<RealDaemonState> {
 
   let pid: number | null = null;
   try {
-    const raw = readFileSync(`${paseoHome}/paseo.pid`, "utf8");
+    const raw = readFileSync(`${paseoHome}/rambla.pid`, "utf8");
     const pidContent: PidFileContent = JSON.parse(raw);
     pid = pidContent.pid ?? null;
   } catch (err) {
     // PID file may not be present yet on a very fresh daemon start
-    console.warn("[desktop-updates] paseo.pid not found:", err);
+    console.warn("[desktop-updates] rambla.pid not found:", err);
   }
 
   return { version: data.version, pid, logPath: `${paseoHome}/daemon.log` };

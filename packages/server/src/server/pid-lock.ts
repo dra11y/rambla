@@ -52,7 +52,7 @@ function isPidRunning(pid: number): boolean {
 }
 
 function getPidFilePath(paseoHome: string): string {
-  return join(paseoHome, "paseo.pid");
+  return join(paseoHome, "rambla.pid");
 }
 
 async function isPidLockFresh(pidPath: string): Promise<boolean> {

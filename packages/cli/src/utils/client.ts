@@ -32,7 +32,7 @@ export interface DaemonConnectionCommandError {
 
 const DEFAULT_HOST = "localhost:6767";
 const DEFAULT_TIMEOUT = 15000;
-const PID_FILENAME = "paseo.pid";
+const PID_FILENAME = "rambla.pid";
 
 type DaemonTarget =
   | {

@@ -124,7 +124,7 @@ function logFilePath(): string {
 
 export function isDesktopManagedDaemonRunningSync(): boolean {
   try {
-    const raw = readFileSync(path.join(getPaseoHome(), "paseo.pid"), "utf-8");
+    const raw = readFileSync(path.join(getPaseoHome(), "rambla.pid"), "utf-8");
     const lock = JSON.parse(raw) as { pid?: unknown; desktopManaged?: unknown };
     if (lock.desktopManaged !== true) return false;
     if (typeof lock.pid !== "number" || !Number.isInteger(lock.pid)) return false;
