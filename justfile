@@ -103,17 +103,18 @@ ci-jobs:
         exit 0
     fi
 
-    failed=0 running=0 passed=0
+    failed=0 running=0 passed=0 failed_jobs=""
     for run in $runs; do
-        while IFS=$'\t' read -r name status conclusion; do
+        while IFS=$'\t' read -r name conclusion job_id; do
             case "$conclusion" in
                 success)  passed=$((passed + 1)) ;;
                 skipped)  ;;
-                "")       running=$((running + 1)); echo "  ${YEL}running${OFF}  $name" ;;
-                *)        failed=$((failed + 1)); echo "  ${RED}FAILED${OFF}   $name ($conclusion)  run $run" ;;
+                pending) running=$((running + 1)); echo "  ${YEL}running${OFF}  $name" ;;
+                *)        failed=$((failed + 1)); failed_jobs="$failed_jobs $job_id"
+                          echo "  ${RED}FAILED${OFF}   $name ($conclusion)  run $run" ;;
             esac
         done < <(gh api "repos/getrambla/rambla/actions/runs/$run/jobs" --paginate \
-            --jq '.jobs[] | [.name, .status, (.conclusion // "")] | @tsv')
+            --jq '.jobs[] | [.name, (.conclusion // "pending"), (.id | tostring)] | @tsv')
     done
 
     echo
@@ -122,11 +123,14 @@ ci-jobs:
     if [ "$failed" -gt 0 ]; then
         echo
         echo "Error lines:"
-        for run in $runs; do
-            gh run view "$run" -R getrambla/rambla --log-failed 2>/dev/null \
-                | grep -E '##\[error\]|error TS|npm error|fatal:|AssertionError' \
-                | sed 's/^[^ ]* [^ ]* [0-9T:.Z-]*Z //' \
-                | sort -u | head -10 || true
+        for job in $failed_jobs; do
+            # gh refuses logs containing terminal escapes unless asked, and the
+            # colour codes have to come off before grep can match anything.
+            gh api "repos/getrambla/rambla/actions/jobs/$job/logs" \
+                --allow-escape-sequences 2>/dev/null \
+                | sed 's/\x1b\[[0-9;]*m//g; s/^[0-9T:.Z-]*Z //' \
+                | grep -E 'FAIL |AssertionError|Expected:|Received:|error TS|npm error code|fatal:' \
+                | sort -u | head -15 || true
         done
         exit 1
     fi

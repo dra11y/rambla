@@ -1391,7 +1391,7 @@ export default function contribute(server: { registerProvider(provider: Provider
     await runtime.stopAll();
   });
 
-  it("explains that an index.ts plugin was made for an older Paseo version", async () => {
+  it("explains that an index.ts plugin was made for an older Rambla version", async () => {
     const directory = await mkdtemp(path.join(tmpdir(), "paseo-plugin-"));
     temporaryDirectories.push(directory);
     await Promise.all([
@@ -1401,7 +1401,7 @@ export default function contribute(server: { registerProvider(provider: Provider
     const runtime = createTestRuntime();
 
     await expect(runtime.startPlugin("legacy", directory)).rejects.toThrow(
-      "This plugin was made for an older version of Paseo and cannot run on Paseo v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
+      "This plugin was made for an older version of Rambla and cannot run on Rambla v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
     );
   });
 
@@ -1501,8 +1501,8 @@ export default function contribute(server: any) {
     expect(catalog[0]?.clientBundle).toContain("Open review");
     expect(catalog[0]?.clientBundle).not.toContain("node:os");
     expect(catalog[0]?.clientBundle).not.toContain("get: () => from[key]");
-    await expect(runtime.invoke("hello", "greet", { name: "Paseo" })).resolves.toMatchObject({
-      message: "Hello, Paseo",
+    await expect(runtime.invoke("hello", "greet", { name: "Rambla" })).resolves.toMatchObject({
+      message: "Hello, Rambla",
     });
     await expect(runtime.invoke("hello", "greet", { name: 7 })).rejects.toThrow();
 

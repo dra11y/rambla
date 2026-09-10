@@ -86,7 +86,7 @@ it("marks pre-0.8 plugins failed on startup and recovers after migration and rel
   await writePlugin(root, ">=0.8.0");
   await expect(service.reloadPlugin("example")).resolves.toMatchObject({ status: "running" });
   await writePlugin(root, ">=0.9.0");
-  await expect(service.reloadPlugin("example")).rejects.toThrow("requires Paseo >=0.9.0");
+  await expect(service.reloadPlugin("example")).rejects.toThrow("requires Rambla >=0.9.0");
   expect(service.catalog()).toEqual([]);
 });
 
@@ -104,7 +104,7 @@ it("still requires entry migration when an old plugin adds a compatible requirem
 it("rejects Git install and update before build commands, preserving the running revision", async () => {
   const repository = await directory();
   await runGitCommand(["init", "-b", "main"], { cwd: repository });
-  await runGitCommand(["config", "user.name", "Paseo Tests"], { cwd: repository });
+  await runGitCommand(["config", "user.name", "Rambla Tests"], { cwd: repository });
   await runGitCommand(["config", "user.email", "tests@example.test"], { cwd: repository });
   const commit = async () => {
     await runGitCommand(["add", "-A"], { cwd: repository });
@@ -120,13 +120,13 @@ it("rejects Git install and update before build commands, preserving the running
     [process.execPath, "-e", 'require("node:fs").writeFileSync(process.argv[1], "ran")', marker],
   ]);
   await commit();
-  await expect(service.updateSources("example")).rejects.toThrow("requires Paseo >=0.9.0");
+  await expect(service.updateSources("example")).rejects.toThrow("requires Rambla >=0.9.0");
   expect(service.listPlugins()).toEqual([installed]);
   expect(service.catalog()).toHaveLength(1);
   expect(await readdir(path.join(home, "plugins", ".staging"))).toEqual([]);
   await expect(readFile(marker)).rejects.toMatchObject({ code: "ENOENT" });
   await expect(service.installSource({ source, id: "second" })).rejects.toThrow(
-    "requires Paseo >=0.9.0",
+    "requires Rambla >=0.9.0",
   );
   await expect(readFile(marker)).rejects.toMatchObject({ code: "ENOENT" });
   expect(service.listPlugins()).toEqual([installed]);

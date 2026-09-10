@@ -351,7 +351,7 @@ describe("PluginService", () => {
     const repository = await mkdtemp(path.join(tmpdir(), "paseo-plugin-repository-"));
     roots.push(repository);
     await runGitCommand(["init", "-b", "main"], { cwd: repository });
-    await runGitCommand(["config", "user.name", "Paseo Tests"], { cwd: repository });
+    await runGitCommand(["config", "user.name", "Rambla Tests"], { cwd: repository });
     await runGitCommand(["config", "user.email", "paseo@example.test"], { cwd: repository });
     await writeFile(
       path.join(repository, "paseo-plugin.json"),
@@ -413,7 +413,7 @@ describe("PluginService", () => {
     const repository = await mkdtemp(path.join(tmpdir(), "paseo-plugin-repository-"));
     roots.push(repository);
     await runGitCommand(["init", "-b", "main"], { cwd: repository });
-    await runGitCommand(["config", "user.name", "Paseo Tests"], { cwd: repository });
+    await runGitCommand(["config", "user.name", "Rambla Tests"], { cwd: repository });
     await runGitCommand(["config", "user.email", "paseo@example.test"], { cwd: repository });
     await writeFile(
       path.join(repository, "paseo-plugin.json"),
@@ -498,7 +498,7 @@ describe("PluginService", () => {
     const repository = await mkdtemp(path.join(tmpdir(), "paseo-plugin-repository-"));
     roots.push(repository);
     await runGitCommand(["init", "-b", "main"], { cwd: repository });
-    await runGitCommand(["config", "user.name", "Paseo Tests"], { cwd: repository });
+    await runGitCommand(["config", "user.name", "Rambla Tests"], { cwd: repository });
     await runGitCommand(["config", "user.email", "paseo@example.test"], { cwd: repository });
     await writeFile(
       path.join(repository, "paseo-plugin.json"),
@@ -761,7 +761,7 @@ export default function contribute(plugin: unknown) {
       "Plugin entry points are missing",
     );
     await expect(service.installDirectory({ path: legacy })).rejects.toThrow(
-      "This plugin was made for an older version of Paseo and cannot run on Paseo v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
+      "This plugin was made for an older version of Rambla and cannot run on Rambla v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
     );
     await expect(service.installDirectory({ path: startupFailure })).rejects.toThrow(
       "startup exploded",
@@ -771,7 +771,7 @@ export default function contribute(plugin: unknown) {
         id: "legacy-plugin",
         status: "failed",
         error:
-          "This plugin was made for an older version of Paseo and cannot run on Paseo v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
+          "This plugin was made for an older version of Rambla and cannot run on Rambla v0.8. Ask its author to update it. Plugin authors can follow the migration guide: https://rambla.sh/docs/plugins/v0.8/migration",
       }),
       expect.objectContaining({
         id: "missing-entry",

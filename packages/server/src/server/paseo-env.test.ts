@@ -19,7 +19,7 @@ describe("paseo env contract", () => {
     PASEO_DESKTOP_MANAGED: "1",
     [PASEO_NODE_ENV]: "production",
     PASEO_SUPERVISED: "1",
-    ESBUILD_BINARY_PATH: "/Applications/Paseo.app/Contents/Resources/app.asar.unpacked/esbuild",
+    ESBUILD_BINARY_PATH: "/Applications/Rambla.app/Contents/Resources/app.asar.unpacked/esbuild",
   };
   const runtimeControlEnvKeys = [
     "ELECTRON_RUN_AS_NODE",
@@ -111,7 +111,7 @@ describe("paseo env contract", () => {
     expect(env[ELECTRON_RUN_AS_NODE]).toBeUndefined();
   });
 
-  test("does not use user NODE_ENV as Paseo runtime mode", () => {
+  test("does not use user NODE_ENV as Rambla runtime mode", () => {
     expect(resolvePaseoNodeEnv({ NODE_ENV: "development" })).toBeUndefined();
     expect(resolvePaseoNodeEnv({ NODE_ENV: "development", PASEO_NODE_ENV: "production" })).toBe(
       "production",
