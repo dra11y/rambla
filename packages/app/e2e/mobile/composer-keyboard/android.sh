@@ -175,14 +175,14 @@ sleep 3
 
 adb shell am start \
   -a android.intent.action.VIEW \
-  -d "paseo://h/${SERVER_ID}/agent/${agent_id}" \
+  -d "rambla://h/${SERVER_ID}/agent/${agent_id}" \
   "${APP_ID}" >/dev/null
 sleep 5
 # The development-client bootstrap can consume the first link while Expo Router is mounting.
 # Deliver the target again after the root navigator is live.
 adb shell am start \
   -a android.intent.action.VIEW \
-  -d "paseo://h/${SERVER_ID}/agent/${agent_id}" \
+  -d "rambla://h/${SERVER_ID}/agent/${agent_id}" \
   "${APP_ID}" >/dev/null
 ad wait "text=\"${AGENT_TITLE}\"" 45000
 ad wait 'editable=true' 10000

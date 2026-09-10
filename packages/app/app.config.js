@@ -101,7 +101,7 @@ export default {
     version: nativeReleaseVersion.appVersion,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
-    scheme: "paseo",
+    scheme: "rambla",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
     ios: {

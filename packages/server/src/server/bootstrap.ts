@@ -715,8 +715,8 @@ export async function createPaseoDaemon(
 
   // CORS - allow same-origin + configured origins
   const fixedAllowedOrigins = [
-    // Packaged desktop renderers use the custom paseo:// protocol scheme.
-    "paseo://app",
+    // Packaged desktop renderers use the custom rambla:// protocol scheme.
+    "rambla://app",
     // For TCP, add localhost variants
     ...(listenTarget.type === "tcp"
       ? [

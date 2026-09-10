@@ -7,7 +7,7 @@ describe("desktop agent navigation", () => {
       parseAgentDeepLinkFromArgv([
         "/Applications/Rambla.app/Contents/MacOS/Rambla",
         "--no-sandbox",
-        "paseo://h/server-1/agent/agent-2",
+        "rambla://h/server-1/agent/agent-2",
       ]),
     ).toEqual({ serverId: "server-1", agentId: "agent-2" });
   });

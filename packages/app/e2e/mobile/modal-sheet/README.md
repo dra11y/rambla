@@ -6,11 +6,11 @@ Set `SHEET_QA_SERVER_ID` to that host's server ID, then run from the repository 
 
 ```sh
 agent-device test packages/app/e2e/mobile/modal-sheet/gestures.android.ad \
-  --env EXAMPLES_URL="paseo://h/${SHEET_QA_SERVER_ID}/plugin/modal-ui-example/surface/main" \
+  --env EXAMPLES_URL="rambla://h/${SHEET_QA_SERVER_ID}/plugin/modal-ui-example/surface/main" \
   --record-video --artifacts-dir .dev/sheet-qa/plugin
 
 agent-device test packages/app/e2e/mobile/modal-sheet/model.android.ad \
-  --env FORM_URL="paseo://new?serverId=${SHEET_QA_SERVER_ID}" \
+  --env FORM_URL="rambla://new?serverId=${SHEET_QA_SERVER_ID}" \
   --record-video --artifacts-dir .dev/sheet-qa/model
 ```
 

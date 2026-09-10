@@ -196,7 +196,7 @@ buildNpmPackage {
         --add-flags "$out/share/rambla-desktop/electron-app" \
         --add-flags "--no-sandbox" \
         --add-flags "--class=rambla-desktop" \
-        --set EXPO_DEV_URL "paseo://app/" \
+        --set EXPO_DEV_URL "rambla://app/" \
         --set CHROME_DESKTOP "rambla-desktop.desktop"
 
       copyDesktopItems
