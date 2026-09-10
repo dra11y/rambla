@@ -270,7 +270,7 @@ function printNextSteps(pairingUrl: string | null, paseoHome: string, richUi: bo
       ? "1. Open Rambla and scan the QR code above, or paste the pairing link."
       : "1. Open Rambla and connect to your daemon.",
     "2. Web app: https://app.rambla.sh",
-    "3. Desktop app: https://github.com/getpaseo/paseo/releases/latest",
+    "3. Desktop app: https://github.com/getrambla/rambla/releases/latest",
     "4. Docs: https://rambla.sh/docs",
     '5. Example: paseo run --output-schema schema.json "extract fields"',
   ];

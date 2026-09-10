@@ -826,7 +826,7 @@ const PLUGIN_CARD_LINKS: ReadonlyArray<ExtensibleCardLink> = [
 
 const FORK_CARD_LINKS: ReadonlyArray<ExtensibleCardLink> = [
   {
-    href: "https://github.com/getpaseo/paseo",
+    href: "https://github.com/getrambla/rambla",
     label: "View the repository",
     icon: GitHubIcon,
     external: true,

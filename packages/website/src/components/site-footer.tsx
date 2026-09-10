@@ -128,7 +128,7 @@ export function SiteFooter({ width = "default" }: SiteFooterProps) {
               Reddit
             </a>
             <a
-              href="https://github.com/getpaseo/paseo"
+              href="https://github.com/getrambla/rambla"
               target="_blank"
               rel="noopener noreferrer"
               className="block text-muted-foreground hover:text-foreground transition-colors"
@@ -157,7 +157,7 @@ export function SiteFooter({ width = "default" }: SiteFooterProps) {
               Google Play
             </a>
             <a
-              href="https://github.com/getpaseo/paseo/releases"
+              href="https://github.com/getrambla/rambla/releases"
               target="_blank"
               rel="noopener noreferrer"
               className="block text-muted-foreground hover:text-foreground transition-colors"

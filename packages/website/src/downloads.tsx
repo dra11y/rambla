@@ -2,7 +2,7 @@ import * as React from "react";
 import type { DesktopPlatform, MobilePlatform } from "~/platform";
 
 export function releaseBase(version: string) {
-  return `https://github.com/getpaseo/paseo/releases/download/v${version}`;
+  return `https://github.com/getrambla/rambla/releases/download/v${version}`;
 }
 
 export interface ReleaseAssetInfo {

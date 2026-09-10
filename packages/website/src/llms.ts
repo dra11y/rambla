@@ -14,7 +14,7 @@ A self-hosted daemon manages agent lifecycle, exposes a WebSocket API, and ships
 
 Rambla supports every major coding agent: Claude Code, Codex, GitHub Copilot, OpenCode, Cursor, Gemini, Cline, Goose, Amp, Aider, and 30+ others. Each agent runs as its own process; Rambla handles I/O, persistence, git worktree isolation, schedules, and skills.
 
-Distribution: native apps for Mac, Windows, Linux, iOS, and Android; web app; Homebrew; npm. Source: Apache-2.0 at https://github.com/getpaseo/paseo. Marketing site: https://rambla.sh.
+Distribution: native apps for Mac, Windows, Linux, iOS, and Android; web app; Homebrew; npm. Source: Apache-2.0 at https://github.com/getrambla/rambla. Marketing site: https://rambla.sh.
 `;
 
 function docLine(doc: Doc): string {
@@ -64,6 +64,6 @@ ${agents}
 - [Blog](${SITE_URL}/blog): Updates and technical posts from the Rambla team.
 - [Privacy](${SITE_URL}/privacy): Privacy policy.
 - [Terms](${SITE_URL}/terms): Terms for the official relay and hosted Hub.
-- [GitHub](https://github.com/getpaseo/paseo): Source code, issues, and releases.
+- [GitHub](https://github.com/getrambla/rambla): Source code, issues, and releases.
 `;
 }
