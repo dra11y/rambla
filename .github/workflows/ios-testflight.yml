@@ -23,7 +23,7 @@ on:
 
 concurrency:
   group: ios-testflight-${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: read
