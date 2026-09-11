@@ -28,8 +28,12 @@ platform :ios do
     api_key = rambla_asc_api_key
     sync_signing(readonly: true)
 
-    workspace = Dir.glob("ios/*.xcworkspace").first
-    UI.user_error!("No Xcode workspace in ios/; run `expo prebuild --platform ios` first") if workspace.nil?
+    # A lane body runs with the working directory set to the fastlane folder
+    # itself; only actions get chdir'd up to the project folder. Plain Ruby here
+    # has to anchor its own paths.
+    app_dir = File.expand_path("..")
+    workspace = Dir.glob(File.join(app_dir, "ios", "*.xcworkspace")).first
+    UI.user_error!("No Xcode workspace in #{app_dir}/ios; run `expo prebuild --platform ios` first") if workspace.nil?
 
     # Expo prebuild names the project, workspace, and scheme after the app.
     scheme = File.basename(workspace, ".xcworkspace")
