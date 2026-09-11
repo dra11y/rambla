@@ -1,0 +1,81 @@
+# Rambla's own fastlane lanes. Upstream's Fastfile imports this file and is
+# otherwise untouched, so every lane below is unambiguously this fork's.
+#
+# Self-contained on purpose: it defines its own constant rather than reusing
+# upstream's APP_IDENTIFIER, so a rename upstream cannot break it.
+
+RAMBLA_APP_IDENTIFIER = "sh.rambla"
+
+platform :ios do
+  desc "Create or fetch the App Store distribution certificate and provisioning profile"
+  lane :sync_signing do |options|
+    # Accepts both a real boolean (internal calls) and the string fastlane
+    # produces for `readonly:false` on the command line.
+    readonly = options[:readonly].to_s != "false"
+
+    setup_ci if is_ci
+
+    match(
+      type: "appstore",
+      api_key: rambla_asc_api_key,
+      app_identifier: RAMBLA_APP_IDENTIFIER,
+      readonly: readonly,
+    )
+  end
+
+  desc "Build the iOS app and upload it to TestFlight"
+  lane :beta do
+    api_key = rambla_asc_api_key
+    sync_signing(readonly: true)
+
+    workspace = Dir.glob("ios/*.xcworkspace").first
+    UI.user_error!("No Xcode workspace in ios/; run `expo prebuild --platform ios` first") if workspace.nil?
+
+    # Expo prebuild names the project, workspace, and scheme after the app.
+    scheme = File.basename(workspace, ".xcworkspace")
+    profile_name = ENV.fetch(
+      "sigh_#{RAMBLA_APP_IDENTIFIER}_appstore_profile-name",
+      "match AppStore #{RAMBLA_APP_IDENTIFIER}",
+    )
+
+    # Prebuild regenerates the project with automatic signing and no team, which
+    # cannot archive on a runner that has no Apple ID session.
+    update_code_signing_settings(
+      path: "ios/#{scheme}.xcodeproj",
+      use_automatic_signing: false,
+      team_id: ENV.fetch("APPLE_TEAM_ID"),
+      targets: [scheme],
+      bundle_identifier: RAMBLA_APP_IDENTIFIER,
+      code_sign_identity: "Apple Distribution",
+      profile_name: profile_name,
+    )
+
+    build_app(
+      workspace: workspace,
+      scheme: scheme,
+      configuration: "Release",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          RAMBLA_APP_IDENTIFIER => profile_name,
+        },
+      },
+    )
+
+    # submit_review polls App Store Connect for processing, so this job does not
+    # have to hold a runner open for it.
+    upload_to_testflight(
+      api_key: api_key,
+      app_identifier: RAMBLA_APP_IDENTIFIER,
+      skip_waiting_for_build_processing: true,
+    )
+  end
+
+  private_lane :rambla_asc_api_key do
+    app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: ENV.fetch("ASC_KEY_P8"),
+    )
+  end
+end

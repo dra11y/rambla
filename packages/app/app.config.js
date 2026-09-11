@@ -97,7 +97,7 @@ const nativeReleaseVersion = getNativeReleaseVersion(pkg.version);
 export default {
   expo: {
     name: variant.name,
-    slug: "voice-mobile",
+    slug: "rambla",
     version: nativeReleaseVersion.appVersion,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
@@ -188,9 +188,9 @@ export default {
       profileBuild: isProfileBuild,
       router: {},
       eas: {
-        projectId: "0e7f65ce-0367-46c8-a238-2b65963d235a",
+        projectId: "6e574066-1e6e-4293-801f-ccce60371dee",
       },
     },
-    owner: "getpaseo",
+    owner: "dra11y",
   },
 };

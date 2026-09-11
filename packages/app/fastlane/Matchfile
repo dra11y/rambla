@@ -1,0 +1,5 @@
+git_url(ENV.fetch("MATCH_REPO_URL"))
+storage_mode("git")
+type("appstore")
+app_identifier(["sh.rambla"])
+team_id(ENV.fetch("APPLE_TEAM_ID"))
