@@ -53,18 +53,50 @@ ci:
     fi
 
     failed=0 running=0 passed=0 failed_jobs=""
+    now=$(date +%s)
+
+    # Wall time between two ISO stamps. An empty end stamp means the job is still
+    # going, so measure against now; no start stamp at all means it is queued.
+    duration() {
+        started="$1"
+        ended="$2"
+        if [ -z "$started" ] || [ "$started" = "null" ]; then
+            echo "queued"
+            return
+        fi
+        began=$(date -d "$started" +%s 2>/dev/null) || { echo "?"; return; }
+        if [ -z "$ended" ] || [ "$ended" = "null" ]; then
+            finish=$now
+        else
+            finish=$(date -d "$ended" +%s 2>/dev/null) || finish=$now
+        fi
+        secs=$((finish - began))
+        [ "$secs" -lt 0 ] && secs=0
+        if [ "$secs" -ge 60 ]; then
+            echo "$((secs / 60))m $((secs % 60))s"
+        else
+            echo "${secs}s"
+        fi
+    }
+
+    finished_lines=() attention_lines=()
     for run in $runs; do
-        while IFS=$'\t' read -r name conclusion job_id; do
+        while IFS=$'\t' read -r name conclusion job_id started_at completed_at; do
             case "$conclusion" in
-                success)  passed=$((passed + 1)) ;;
+                success)  passed=$((passed + 1))
+                          finished_lines+=("  ${GRN}passed${OFF}   $name  $(duration "$started_at" "$completed_at")") ;;
                 skipped)  ;;
-                pending) running=$((running + 1)); echo "  ${YEL}running${OFF}  $name" ;;
+                pending) running=$((running + 1))
+                          attention_lines+=("  ${YEL}running${OFF}  $name  $(duration "$started_at" "")") ;;
                 *)        failed=$((failed + 1)); failed_jobs="$failed_jobs $job_id"
-                          echo "  ${RED}FAILED${OFF}   $name ($conclusion)  run $run" ;;
+                          attention_lines+=("  ${RED}FAILED${OFF}   $name ($conclusion)  $(duration "$started_at" "$completed_at")  run $run") ;;
             esac
         done < <(gh api "repos/getrambla/rambla/actions/runs/$run/jobs" --paginate \
-            --jq '.jobs[] | [.name, (.conclusion // "pending"), (.id | tostring)] | @tsv')
+            --jq '.jobs[] | [.name, (.conclusion // "pending"), (.id | tostring), (.started_at // ""), (.completed_at // "")] | @tsv')
     done
+
+    [ ${#finished_lines[@]} -gt 0 ] && printf '%s\n' "${finished_lines[@]}"
+    [ ${#attention_lines[@]} -gt 0 ] && printf '%s\n' "${attention_lines[@]}"
 
     echo
     echo "${GRN}$passed passed${OFF}, ${RED}$failed failed${OFF}, ${YEL}$running still running${OFF}"

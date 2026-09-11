@@ -54,14 +54,14 @@ function getExecutablePath(appPath) {
 
 function getCliShimPath(appPath) {
   if (process.platform === "darwin") {
-    return path.join(appPath, "Contents", "Resources", "bin", "paseo");
+    return path.join(appPath, "Contents", "Resources", "bin", "rambla");
   }
 
   if (process.platform === "win32") {
-    return path.join(appPath, "resources", "bin", "paseo.cmd");
+    return path.join(appPath, "resources", "bin", "rambla.cmd");
   }
 
-  return path.join(appPath, "resources", "bin", "paseo");
+  return path.join(appPath, "resources", "bin", "rambla");
 }
 
 function getMacMainExecutablePath(appPath) {
@@ -938,7 +938,7 @@ if (require.main === module) {
   const appIndex = process.argv.indexOf("--app");
   const appPath = appIndex >= 0 ? process.argv[appIndex + 1] : null;
   if (!appPath) {
-    process.stderr.write("Usage: node smoke-packaged-desktop-app.js --app <Paseo.app>\n");
+    process.stderr.write("Usage: node smoke-packaged-desktop-app.js --app <Rambla.app>\n");
     process.exit(2);
   }
 
