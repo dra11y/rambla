@@ -10,6 +10,11 @@ on:
         description: "Existing tag to build (e.g. v0.8.0-beta.1). Defaults to the current ref."
         required: false
         type: string
+      upload_to_testflight:
+        description: "Upload the built .ipa to TestFlight"
+        required: false
+        default: true
+        type: boolean
       submit_for_review:
         description: "Submit the uploaded build for App Store review"
         required: false
@@ -144,17 +149,78 @@ jobs:
         working-directory: packages/app/ios
         run: pod install
 
-      - name: Build and upload to TestFlight
+      - name: Build the signed .ipa
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_REPO_URL: ${{ secrets.MATCH_REPO_URL }}
-        run: bundle exec fastlane ios beta
+        run: bundle exec fastlane ios build_ipa
+
+      # Uploading to TestFlight is a separate job, so a rejected upload retries
+      # against this artifact instead of paying for an 18-minute rebuild.
+      - name: Upload the build artifact
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: |
+            packages/app/build/rambla.ipa
+            packages/app/build/rambla.app.dSYM.zip
+          if-no-files-found: warn
+          retention-days: 14
+
+  upload:
+    needs: [build]
+    if: ${{ inputs.upload_to_testflight }}
+    # macos-15 ships Xcode 16.4 / iOS 18.5 SDK; App Store Connect rejects
+    # uploads not built with the iOS 26 SDK or later.
+    runs-on: macos-26
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: packages/app
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BUILD_REF }}
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          working-directory: packages/app
+          bundler-cache: false
+
+      - name: Install fastlane
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Download the build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-build
+          path: ${{ runner.temp }}/ios-build
+
+      - name: Decode the App Store Connect API key
+        env:
+          ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$ASC_KEY_P8_BASE64" | openssl base64 -d -A > "$RUNNER_TEMP/asc.p8"
+          chmod 600 "$RUNNER_TEMP/asc.p8"
+          echo "ASC_KEY_P8=$RUNNER_TEMP/asc.p8" >> "$GITHUB_ENV"
+
+      # No match credentials here: uploading needs only the API key.
+      - name: Upload to TestFlight
+        env:
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+        run: bundle exec fastlane ios upload_ipa ipa:"$RUNNER_TEMP/ios-build/rambla.ipa"
 
   submit-review:
-    needs: [build]
+    needs: [build, upload]
     if: ${{ inputs.submit_for_review }}
     # macos-15 ships Xcode 16.4 / iOS 18.5 SDK; App Store Connect rejects
     # uploads not built with the iOS 26 SDK or later.

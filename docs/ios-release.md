@@ -9,6 +9,29 @@ Signing uses fastlane match. One Apple Distribution certificate and one App
 Store profile live encrypted in a private repo, so the runner stays stateless
 and renewal is a re-run instead of a rescue operation.
 
+## Jobs
+
+Building and uploading are separate jobs so a rejected upload does not cost
+another 18-minute archive.
+
+- `build` prebuilds the Xcode project, signs with match, and runs the
+  `build_ipa` lane, which writes `packages/app/build/rambla.ipa` and
+  `rambla.app.dSYM.zip`. Both go up as the `ios-build` artifact. That step runs
+  even when the build step failed, so whatever was produced is still downloadable.
+- `upload` downloads the artifact and runs `upload_ipa`. That lane calls neither
+  match nor `build_app`, so this job gets no SSH deploy key, no `MATCH_PASSWORD`,
+  and no `MATCH_REPO_URL` — the App Store Connect API key is all an upload needs.
+  Re-run this job alone to retry a failed upload against the same binary.
+- `submit-review` runs after `upload`.
+
+Untick `upload_to_testflight` on dispatch to produce the artifact without
+sending it to Apple.
+
+The lane paths are fixed rather than fastlane's default location because the
+workflow has to name the file in a later job. `build_ipa` passes
+`output_directory` and `output_name` to `build_app`; the `beta` lane still
+exists and calls both lanes back to back.
+
 ## Secrets
 
 All of these are repo secrets, except `GOOGLE_SERVICE_INFO_PLIST_PROD_BASE64`,
@@ -59,8 +82,8 @@ next beta rather than patching the workflow.
 
 ## App Store review
 
-Dispatch the workflow with `submit_for_review: true`. A second job reuses the
-`submit_review` lane, which polls App Store Connect until the build reaches
+Dispatch the workflow with `submit_for_review: true`. The `submit-review` job
+reuses the `submit_review` lane, which polls App Store Connect until the build reaches
 `VALID` and then submits it. It runs only when you tick that box.
 
 ## Overlap with EAS

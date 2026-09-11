@@ -6,6 +6,11 @@
 
 RAMBLA_APP_IDENTIFIER = "sh.rambla"
 
+# Where build_ipa leaves the artifact, relative to packages/app. Fixed so a
+# separate upload job can find the .ipa without rebuilding it.
+RAMBLA_BUILD_DIR = "build"
+RAMBLA_OUTPUT_NAME = "rambla"
+
 platform :ios do
   desc "Create or fetch the App Store distribution certificate and provisioning profile"
   lane :sync_signing do |options|
@@ -25,7 +30,12 @@ platform :ios do
 
   desc "Build the iOS app and upload it to TestFlight"
   lane :beta do
-    api_key = rambla_asc_api_key
+    ipa = build_ipa
+    upload_ipa(ipa: ipa)
+  end
+
+  desc "Build a signed App Store .ipa without uploading it"
+  lane :build_ipa do
     sync_signing(readonly: true)
 
     # A lane body runs with the working directory set to the fastlane folder
@@ -54,11 +64,15 @@ platform :ios do
       profile_name: profile_name,
     )
 
-    build_app(
+    # gym writes the dSYM zip as <output_name>.app.dSYM.zip beside the .ipa.
+    ipa_path = build_app(
       workspace: workspace,
       scheme: scheme,
       configuration: "Release",
       export_method: "app-store",
+      include_symbols: true,
+      output_directory: File.join(app_dir, RAMBLA_BUILD_DIR),
+      output_name: RAMBLA_OUTPUT_NAME,
       export_options: {
         provisioningProfiles: {
           RAMBLA_APP_IDENTIFIER => profile_name,
@@ -66,11 +80,23 @@ platform :ios do
       },
     )
 
+    UI.success("Built #{ipa_path}")
+    ipa_path
+  end
+
+  desc "Upload an already-built .ipa to TestFlight"
+  lane :upload_ipa do |options|
+    # No match, no signing, no build: uploading needs only the API key, so a
+    # failed upload retries without paying for the archive again.
+    ipa = options[:ipa] || File.expand_path(File.join("..", RAMBLA_BUILD_DIR, "#{RAMBLA_OUTPUT_NAME}.ipa"))
+    UI.user_error!("No .ipa at #{ipa}") unless File.exist?(ipa)
+
     # submit_review polls App Store Connect for processing, so this job does not
     # have to hold a runner open for it.
     upload_to_testflight(
-      api_key: api_key,
+      api_key: rambla_asc_api_key,
       app_identifier: RAMBLA_APP_IDENTIFIER,
+      ipa: ipa,
       skip_waiting_for_build_processing: true,
     )
   end
