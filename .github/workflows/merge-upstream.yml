@@ -41,13 +41,21 @@ jobs:
           git fetch upstream main
 
           if ! git merge upstream/main --no-edit; then
+            # Conflicts whose fork side is only a brand rename resolve without a
+            # judgment call. Anything else still stops the run.
+            if node scripts/resolve-brand-conflicts.mjs; then
+              git commit --no-edit
+            else
           {
-            echo "::error::Upstream merge conflicts — resolve locally with 'just merge-upstream'. Conflicted files:"
+            echo "::error::Upstream merge conflicts need a human. Still conflicted:"
             git diff --name-only --diff-filter=U
           } | tee /dev/stderr
             git merge --abort
             exit 1
+            fi
           fi
+
+          echo "branch=auto-merge/$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
       - name: Build server (gate before push)
         run: |
@@ -55,4 +63,4 @@ jobs:
           npm run build:server
 
       - name: Push
-        run: git push origin main
+        run: git push origin "HEAD:refs/heads/${{ steps.merge.outputs.branch }}"
