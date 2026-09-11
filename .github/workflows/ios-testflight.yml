@@ -167,7 +167,7 @@ jobs:
           name: ios-build
           path: |
             packages/app/build/rambla.ipa
-            packages/app/build/rambla.app.dSYM.zip
+            packages/app/build/*.dSYM.zip
           if-no-files-found: warn
           retention-days: 14
 
